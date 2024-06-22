@@ -1,0 +1,13 @@
+.nav {
+    background-color: #cecece;
+    font-weight: bolder;
+}
+
+.text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}

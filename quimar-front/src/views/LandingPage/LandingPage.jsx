@@ -1,5 +1,5 @@
 import React from "react";
-// import style from "./LandingPage.module.css"
+import style from "./LandingPage.module.css"
 // import { Link } from "react-router-dom";
 
 //COMPONENTES
@@ -9,7 +9,9 @@ import React from "react";
 const LandingPage = () => {
     return (
         <div>
-            <h3><strong>HOLA! SEAN BIENVENIDOS A LA PÁGINA DE QUIMAR</strong></h3>
+            <header><h3 className={style.text}><strong>HOLA! SEAN BIENVENIDOS A LA PÁGINA DE QUIMAR</strong></h3></header>
+            <section>
+            </section>
         </div>
     )
 };
