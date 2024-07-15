@@ -16,6 +16,7 @@ const NavBar = () => {
     return (
         <Navbar expand="lg" className={style.nav}>
             <Container>
+                <Navbar.Brand href="/">DIST.QUIMAR</Navbar.Brand>
                 <Navbar.Brand>
                     <img
                         src={logo}

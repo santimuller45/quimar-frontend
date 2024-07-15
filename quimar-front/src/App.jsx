@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import { useDispatch } from 'react-redux';
 
 // URL DE RESPUESTA DEL BACKEND ---->
-// import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3001";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001";
 //<-----------------------------------------------
 
 // VIEWS ------>
