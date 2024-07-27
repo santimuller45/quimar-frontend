@@ -18,7 +18,7 @@ const CardProduct = ({ codigo, name, price, imagen, category, descripcion }) => 
                 <Card.Text>{descripcion}</Card.Text>
                 <Card.Text>Subrubro: {category}</Card.Text>
                 <Card.Text>Precio: <strong>${price}</strong></Card.Text>
-                <Button variant="primary" className="align-self-start mt-auto" style={{ width: 'auto', fontSize: '0.8rem' }}>Agregar al Carrito</Button>
+                <Button variant="primary" className="align-self-start mt-auto" style={{ width: 'auto', fontSize: '0.8rem' }}>Agregar al Pedido</Button>
             </Card.Body>
         </Card>
 )};

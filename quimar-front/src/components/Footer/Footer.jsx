@@ -1,10 +1,46 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import style from './Footer.module.css';
+
+//LOGO ----->
+import logo from '../../assets/logo4.png'
+//-------<
+
+//FONT-AWESOME ------->
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
+// <-------------------
 
 const Footer = () => {
     return (
         <footer className={style.footer} >
-            <h4 className={style.text}>ESTE ES EL FOOTER</h4>
+            <div className={style.logoSection}>
+                <img
+                    src={logo}
+                    className={style.logo}
+                    alt="Quimar logo"
+                />
+                <h4><strong>Distribuidora Quimar</strong></h4>
+            </div>
+            <div className={style.menuSection}>
+                <h4>MENU</h4>
+                <nav aria-label="Footer Navigation">
+                    {/* CAMBIAR LAS DIRECCIONES DEL LINK */}
+                    <Link to={'/'} className={style.link}>Inicio</Link>
+                    <Link to={'/products'} className={style.link}>Productos</Link>
+                    <Link to={'/'} className={style.link}>Nosotros</Link>
+                    <Link to={'/'} className={style.link}>Contacto</Link>
+                </nav>
+            </div>
+            <div className={style.menuSection}>
+                <nav aria-label="Footer Navigation">
+                    <h6><FontAwesomeIcon icon={faWhatsapp}/> WHATSAPP</h6>
+                    <h6><FontAwesomeIcon icon={faEnvelope}/> EMAIL</h6>
+                    <h6><FontAwesomeIcon icon={faPhone}/> CEL</h6>
+                </nav>
+            </div>
         </footer>
     );
 };

@@ -1,13 +1,32 @@
 .nav {
-    background-color: #cecece;
-    font-weight: bolder;
+    background-color: #333;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.text {
+.navLink, .navDropdown .dropdown-toggle {
+    color: #0077B6 !important;
+}
+
+.navDropdown .dropdown-menu {
+    background-color: #333;
+}
+
+.navDropdown .dropdown-item {
+    color: #0077B6 !important;
+}
+
+.navDropdown .dropdown-item:hover {
+    background-color: #444;
+    color: #0077B6 !important;
+}
+
+.logoSection {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+}
+
+.logo {
+    width: 5rem;
+    height: auto;
+    margin-right: 0.5rem;
 }

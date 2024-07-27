@@ -1,18 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import CardProduct from "../Card/Card.jsx";
 import axios from "axios"
 
-//REACT-BOOSTRAP ---------->
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container'
-//<--------------------------
+// COMPONENTES ------->
+import CardProduct from "../Card/Card.jsx";
+// <-------------------
 
 const CardContainer = () => {
 
 //BORRADOR ------->
-
 const [productos, setProductos] = useState([]);
 
 const traerLosProductosPrueba = async () =>  {
@@ -26,12 +22,7 @@ const traerLosProductosPrueba = async () =>  {
 
 useEffect(() => {
     traerLosProductosPrueba();
-    setTimeout(() => {
-        {console.log(productos)}
-    },5000)
 },[])
-
-
 //----------------<
     
     return (
@@ -46,7 +37,7 @@ useEffect(() => {
                     price={product.price}
                     category={product.category}
                 />
-            ))};
+            ))}
         </div>
     )
 };

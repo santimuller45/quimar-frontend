@@ -1,9 +1,42 @@
-/* .backg{
-    background-color: #cecece;
-} */
-.footer{
+.footer {
     background-color: #333;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #0077B6;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.logo {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1rem;
+}
+
+.menuSection {
+    margin: 0.5rem;
+}
+
+.menuSection h4 {
+    margin-bottom: 0.5rem;
+}
+
+.link {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.link:hover {
+    color: #fff;
 }

@@ -10,7 +10,7 @@ axios.defaults.baseURL = "http://localhost:3001";
 //<-----------------------------------------------
 
 // VIEWS ------>
-import { LandingPage , AccountPanel , MyAccount } from './views/indexViews.js';
+import { LandingPage , AccountPanel , MyAccount, ProductsPage } from './views/indexViews.js';
 //<-------------
 
 // COMPONENTES ----->
@@ -26,6 +26,7 @@ function App() {
       </header>
       <Routes>
          <Route path='/' element={<LandingPage/>}></Route>
+         <Route path='/products' element={<ProductsPage/>}></Route>
          <Route path='/account' element={<MyAccount/>}></Route>
          <Route path='/account-panel' element={<AccountPanel/>}></Route>
       </Routes>
