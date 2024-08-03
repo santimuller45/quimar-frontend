@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios"
+import { useSelector } from "react-redux";
 
 // COMPONENTES ------->
 import CardProduct from "../Card/Card.jsx";
@@ -8,26 +7,11 @@ import CardProduct from "../Card/Card.jsx";
 
 const CardContainer = () => {
 
-//BORRADOR ------->
-const [productos, setProductos] = useState([]);
+    const allProductsDB = useSelector(state => state.allProducts);
 
-const traerLosProductosPrueba = async () =>  {
-    try {
-        let resultado = await axios.get('/productos');
-        setProductos(resultado.data);  // Establecer los datos en el estado
-    } catch (error) {
-        console.error('Error al obtener productos:', error);
-    }
-};
-
-useEffect(() => {
-    traerLosProductosPrueba();
-},[])
-//----------------<
-    
     return (
         <div>
-          {productos?.map((product,index) => (
+          {allProductsDB?.map((product,index) => (
                 <CardProduct 
                     key={index}
                     codigo={product.codigo}

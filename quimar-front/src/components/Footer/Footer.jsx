@@ -15,7 +15,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
     return (
-        <footer className={style.footer} >
+        <footer className={style.footer}>
             <div className={style.logoSection}>
                 <img
                     src={logo}
@@ -36,9 +36,9 @@ const Footer = () => {
             </div>
             <div className={style.menuSection}>
                 <nav aria-label="Footer Navigation">
-                    <h6><FontAwesomeIcon icon={faWhatsapp}/> WHATSAPP</h6>
-                    <h6><FontAwesomeIcon icon={faEnvelope}/> EMAIL</h6>
-                    <h6><FontAwesomeIcon icon={faPhone}/> CEL</h6>
+                    <h6><FontAwesomeIcon icon={faWhatsapp}/> WHATSAPP +5492914438409</h6>
+                    <h6><FontAwesomeIcon icon={faEnvelope}/> EMAIL: quimardistribuidora@hotmail.com</h6>
+                    <h6><FontAwesomeIcon icon={faPhone}/> CEL +5492914438409</h6>
                 </nav>
             </div>
         </footer>

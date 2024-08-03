@@ -25,16 +25,12 @@ const LandingPage = () => {
             <section className={style.section}>
                 <h2><strong>Nuestros Rubros</strong></h2>
                 <ul className={style.rubList}>
+                    <li>QUIMICOS Y DILUYENTES</li>
                     <li>ACCESORIOS PARA PINTURA</li>
                     <li>ARTICULOS DE LIMPIEZA Y VARIOS</li>
                     <li>ARTICULOS PARA LA CONSTRUCCION</li>
-                    <li>AUTOMOTOR</li>
                     <li>FERRETERIA</li>
-                    <li>INSECTICIDAS Y RATICIDAS</li>
                     <li>PINTURAS</li>
-                    <li>POLIETILENO Y AGROTILENO</li>
-                    <li>PRODUCTOS PARA PILETAS</li>
-                    <li>QUIMICOS Y DILUYENTES</li>
                     <li>ZINGUERIA</li>
                     <li>MÁS...</li>
                 </ul>

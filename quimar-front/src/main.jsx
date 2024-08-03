@@ -5,8 +5,8 @@ import './main.css';
 import { BrowserRouter } from "react-router-dom";
 
 // REDUX ----->
-// import { Provider } from "react-redux";
-// import store from "./redux/store.js";
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
 //<-----------
 
 // CONTEXT ----->
@@ -14,8 +14,10 @@ import { BrowserRouter } from "react-router-dom";
 //<---------------
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 

@@ -42,7 +42,7 @@ const NavBar = () => {
                     </Nav>
                     {/* ACC Y PEDIDOS */}
                     <Nav className="ms-auto">
-                        <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faCirclePlus}/> Pedido</span>} id="basic-nav-dropdown-pedido" className={style.navDropdown}>
+                        <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faCirclePlus}/> Mi Pedido</span>} id="basic-nav-dropdown-pedido" className={style.navDropdown}>
                             <NavDropdown.Item href="/">Ver Pedido</NavDropdown.Item>
                             <NavDropdown.Item href="/">Mis Pedidos</NavDropdown.Item>
                         </NavDropdown>
