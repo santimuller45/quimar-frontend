@@ -1,24 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Card.module.css";
 
 //REACT-BOOSTRAP ----->
-
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
+import { Card, Button } from "react-bootstrap";
 //<--------------------
 
 const CardProduct = ({ codigo, name, price, imagen, category, descripcion }) => {
     return (
-        <Card className="d-flex flex-row mb-3">
-            <Card.Img variant="top" src={imagen} alt={name} style={{ width: 'auto', height: '10rem', objectFit: 'cover' }} />
-            <Card.Body className="d-flex flex-column">
+        <Card className={style.cardProduct}>
+            <div className={style.imageContainer}>
+                <Card.Img 
+                    variant="top" 
+                    src={imagen} 
+                    alt={name} 
+                    className={style.image} 
+                />
+            </div>
+            <Card.Body className={style.cardBody}>
                 <Card.Title><strong>{name}</strong></Card.Title>
-                <Card.Text>Código del producto: <strong>{codigo}</strong></Card.Text>
-                <Card.Text>{descripcion}</Card.Text>
-                <Card.Text>Subrubro: {category}</Card.Text>
-                <Card.Text>Precio: <strong>${price}</strong></Card.Text>
-                <Button variant="primary" className="align-self-start mt-auto" style={{ width: 'auto', fontSize: '0.8rem' }}>Agregar al Pedido</Button>
+                <Card.Text className={style.cardText}>Código del producto: <strong>{codigo}</strong></Card.Text>
+                <Card.Text className={style.cardText}>{descripcion}</Card.Text>
+                <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
+                <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
+                <Button variant="primary" className={style.addButton}>Agregar al Pedido</Button>
             </Card.Body>
         </Card>
 )};
