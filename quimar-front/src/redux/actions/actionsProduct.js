@@ -19,7 +19,7 @@ export const getProductByNameDB = (name) => {
     return async function (dispatch) {
         try {
             let result = await axios.get(`/productos?name=${name}`);
-            if (result === null) throw Error('Menú no encontrado');
+            if (result === null) throw Error('Producto no encontrado');
             return dispatch ({
                 type: GET_PRODUCT_BY_NAME,
                 payload: result.data

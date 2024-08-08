@@ -1,9 +1,14 @@
 import React from "react";
 import style from './NavBar.module.css'
+import { useSelector } from "react-redux";
 
-//LOGO ----->
+// LOGO ----->
 import logo from '../../assets/logo4.png'
 //-------<
+
+// COMPONENTS ---------->
+import { SearchBox } from "../indexComponents.js";
+// <---------------------
 
 // REACT BOOSTRAP
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
@@ -16,6 +21,9 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 // <-------------------
 
 const NavBar = () => {
+
+    const listRubros = useSelector(state => state.allRubros);
+   
     return (
         <Navbar expand="lg" className={style.nav}>
             <Container>
@@ -30,16 +38,18 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/" className={style.navLink}>Inicio</Nav.Link>
-                        <Nav.Link href="/contact" className={style.navLink}>Contacto</Nav.Link>
-                        <Nav.Link href="/us" className={style.navLink}>Nosotros</Nav.Link>
-                        <NavDropdown title={<span className={style.navLink}>Rubros</span>} id="basic-nav-dropdown-rubros" className={style.navDropdown}>
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <Nav.Link href="/contact-us" className={style.navLink}>Contacto</Nav.Link>
+                        <Nav.Link href="/about-us" className={style.navLink}>Nosotros</Nav.Link>
+                        <NavDropdown title={<span className={style.navLink}>Productos</span>} id="basic-nav-dropdown-rubros" className={style.navDropdown}>
+                            <NavDropdown.Item href="/products">Ver todos los productos</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            { listRubros?.map((rubro,index) => (
+                                <NavDropdown.Item href="#action/3.4" value={rubro.name} key={index}> {rubro.name}</NavDropdown.Item>
+                            ))}
                         </NavDropdown>
                     </Nav>
+                    {/* SEARCHBAR */}
+                    <SearchBox/>
                     {/* ACC Y PEDIDOS */}
                     <Nav className="ms-auto">
                         <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faCirclePlus}/> Mi Pedido</span>} id="basic-nav-dropdown-pedido" className={style.navDropdown}>

@@ -4,25 +4,51 @@ import style from "./Pagination.module.css";
 // REACT BOOSTRAP ---->
 import { Pagination } from 'react-bootstrap';
 // <-------------------
-
-function PaginationComponent ({ productPerPage, allProductsDB , paginado , currentPage }) {
-    
+function PaginationComponent({ productPerPage, productsDB, paginado, currentPage }) {
+    const totalPages = Math.ceil(productsDB / productPerPage);
     const pageNumbers = [];
+    const maxPagesToShow = 6;
 
-    for (let i=1 ; i <= Math.ceil( allProductsDB / productPerPage ); i++) {
-        pageNumbers.push(i)
+    // Calcula los números de página a mostrar
+    let startPage, endPage;
+    if (totalPages <= maxPagesToShow) {
+        // Si hay menos de maxPagesToShow páginas, muestra todas
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        // Si hay más de maxPagesToShow páginas, calcula el rango de páginas a mostrar
+        const maxPagesBeforeCurrentPage = Math.floor(maxPagesToShow / 2);
+        const maxPagesAfterCurrentPage = Math.ceil(maxPagesToShow / 2) - 1;
+        if (currentPage <= maxPagesBeforeCurrentPage) {
+            // Caso: al principio
+            startPage = 1;
+            endPage = maxPagesToShow;
+        } else if (currentPage + maxPagesAfterCurrentPage >= totalPages) {
+            // Caso: al final
+            startPage = totalPages - maxPagesToShow + 1;
+            endPage = totalPages;
+        } else {
+            // Caso: en el medio
+            startPage = currentPage - maxPagesBeforeCurrentPage;
+            endPage = currentPage + maxPagesAfterCurrentPage;
+        }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
     }
 
     const nextPageHandler = () => {
-        const findCurrent = pageNumbers.find(num => num === currentPage)
-        if (findCurrent === pageNumbers.length ) return;
-        paginado(findCurrent + 1)
-    }
+        if (currentPage < totalPages) {
+            paginado(currentPage + 1);
+        }
+    };
+
     const prevPageHandler = () => {
-        const findCurrent = pageNumbers.find(num => num === currentPage)
-        if (findCurrent === 1 ) return;
-        paginado(findCurrent - 1)
-    }
+        if (currentPage > 1) {
+            paginado(currentPage - 1);
+        }
+    };
 
     return (
         <Pagination>
@@ -35,14 +61,17 @@ function PaginationComponent ({ productPerPage, allProductsDB , paginado , curre
                             active={number === currentPage}
                             onClick={() => paginado(number)}
                         >
-                        {number}
+                            {number}
                         </Pagination.Item>
                     ))}
+                    {endPage < totalPages && (
+                        <Pagination.Ellipsis disabled />
+                    )}
                     <Pagination.Next onClick={nextPageHandler} />
                 </>
             )}
-        </Pagination>     
+        </Pagination>
     );
-};
+}
 
 export default PaginationComponent;
