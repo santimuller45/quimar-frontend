@@ -34,11 +34,10 @@ const SearchBox = () => {
 
     const resetHandler = () => {
         dispatch(getAllProductsDB());
-        setProduct('');
     };
 
     return (
-        <Form inline onSubmit={searchBoxHandler}>
+        <Form onSubmit={searchBoxHandler}>
             <Row>
                 <Col xs="auto">
                     <Form.Control
