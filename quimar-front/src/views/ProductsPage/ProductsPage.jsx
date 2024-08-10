@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByRubroDB } from "../../redux/actions/actionsRubro.js";
+import { filterByRubroDB, getSubFromRubName } from "../../redux/actions/actionsRubro.js";
 
 // COMPONENTS ----->
 import { CardContainer, PaginationComponent, Filters } from "../../components/indexComponents.js";
@@ -28,7 +28,7 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
     
     const handleFilterRubro = (e) => {
-        dispatch(filterByRubroDB(e.target.value));
+        dispatch(getSubFromRubName(e.target.value));
         setCurrentPage(1);
     }
     const handleFilterRubro2 = (e) => {

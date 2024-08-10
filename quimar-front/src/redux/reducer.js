@@ -1,10 +1,11 @@
 import { GET_ALL_PRODUCTS , GET_PRODUCT_BY_NAME } from "./types/typesProduct.js";
-import { GET_ALL_RUBROS, GET_ALL_SUB_RUBROS, FILTER_BY_RUBRO } from "./types/typesRubros.js";
+import { GET_ALL_RUBROS, GET_SUB_FROM_RUBRO, GET_ALL_SUB_RUBROS, FILTER_BY_RUBRO } from "./types/typesRubros.js";
 
 const initialState = {
     allProducts: [],
     products: [],
     allRubros: [],
+    subFromRub: [],
     allSubRubros: [],
     allOrders:[],
     allUsers: [],
@@ -29,9 +30,16 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_RUBROS: {
             return {
                 ...state,
-                allRubros: action.payload
+                allRubros: action.payload,
+                
             }
         };
+        case GET_SUB_FROM_RUBRO : {
+            return {
+                ...state,
+                subFromRub: action.payload
+            }
+        }
         case GET_ALL_SUB_RUBROS: {
             return {
                 ...state,
@@ -45,8 +53,6 @@ const rootReducer = (state = initialState, action) => {
             if (action.payload === "all") {
                 filteredSource = state.allProducts;
             } else {
-                // filteredSource = state.allProducts.filter(object => object.category === action.payload.name);
-                // OPCIÓN 2
                 filteredSource = state.allProducts.filter(elem => (elem.category).includes(action.payload));
             }
 
