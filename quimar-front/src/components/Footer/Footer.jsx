@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import style from './Footer.module.css';
 
 //LOGO ----->
-import logo from '../../assets/logo4.png'
+import logo from '../../assets/logo.png'
 //-------<
 
 //FONT-AWESOME ------->

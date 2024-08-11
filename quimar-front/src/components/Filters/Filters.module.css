@@ -1,0 +1,44 @@
+/* Filters.module.css */
+.nav {
+    background-color: none; /* Color de fondo del navbar */
+    padding: 1rem; /* Espacio interno del navbar */
+    border-bottom: 1px solid #dee2e6; /* Borde inferior del navbar */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho del contenedor */
+}
+
+.navContainer {
+    max-width: 1200px; /* Ancho máximo del navbar */
+    margin: 0 auto; /* Centrar el navbar horizontalmente */
+}
+
+.nav .navbar-toggler {
+    border: none; /* Eliminar el borde del toggle button */
+}
+
+.nav .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,..."); /* Puedes personalizar el icono aquí */
+}
+
+.navDropdown {
+    margin: 0 1rem; /* Espacio entre los dropdowns */
+}
+
+.navDropdown .dropdown-toggle::after {
+    display: none; /* Eliminar la flecha por defecto del dropdown */
+}
+
+.navDropdown .dropdown-menu {
+    background-color: #fff; /* Color de fondo del menú desplegable */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde del menú desplegable */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra del menú desplegable */
+}
+
+.navDropdown .dropdown-item {
+    padding: 0.5rem 1rem; /* Espaciado interno de los items */
+    font-size: 0.875rem; /* Tamaño de fuente */
+}
+
+.navDropdown .dropdown-item:hover {
+    background-color: #e9ecef; /* Color de fondo en hover */
+}

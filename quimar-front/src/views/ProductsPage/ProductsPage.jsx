@@ -1,4 +1,5 @@
 import React from "react";
+import style from './ProductsPage.module.css';
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterByRubroDB, getSubFromRubName } from "../../redux/actions/actionsRubro.js";
@@ -27,30 +28,31 @@ const ProductsPage = () => {
 
     const dispatch = useDispatch();
     
-    const handleFilterRubro = (e) => {
-        dispatch(getSubFromRubName(e.target.value));
+    const handleFilterBySubRubro = (name) => {
+        dispatch(filterByRubroDB(name));
         setCurrentPage(1);
-    }
-    const handleFilterRubro2 = (e) => {
-        dispatch(filterByRubroDB(e.target.value));
-        setCurrentPage(1);
-    }
+    };
 
     return (
-        <Container>
-            <header className="text-center my-4">
-                <h3><strong>PÁGINA DE PRODUCTOS</strong></h3>
-            </header>
-            <Filters handleFilterRubro={handleFilterRubro} handleFilterRubro2={handleFilterRubro2}></Filters>
+        <Container fluid="lg">
+            <Filters handleFilterBySubRubro={handleFilterBySubRubro}></Filters>
             <section>
+                <h3><strong>Nuestros Productos</strong></h3>
                 <Row>
                     <Col>
-                        <CardContainer currenProducts={currentProducts} />
+                        <CardContainer 
+                            currenProducts={currentProducts} 
+                        />
                     </Col>
                 </Row>
                 <Row className="justify-content-center mt-4">
                     <Col xs="auto">
-                        <PaginationComponent productPerPage={productPerPage} productsDB={productsDB.length} paginado={paginado} currentPage={currentPage}/>
+                        <PaginationComponent 
+                            productPerPage={productPerPage} 
+                            productsDB={productsDB.length} 
+                            paginado={paginado} 
+                            currentPage={currentPage}
+                        />
                     </Col>
                 </Row>
             </section>

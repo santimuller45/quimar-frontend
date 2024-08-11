@@ -6,7 +6,7 @@ import style from "./Card.module.css";
 import { Card, Button } from "react-bootstrap";
 //<--------------------
 
-const CardProduct = ({ codigo, name, price, imagen, category, descripcion }) => {
+const CardProduct = ({ codigo, name, price, imagen, category }) => {
     return (
         <Card className={style.cardProduct}>
             <div className={style.imageContainer}>
@@ -20,7 +20,6 @@ const CardProduct = ({ codigo, name, price, imagen, category, descripcion }) => 
             <Card.Body className={style.cardBody}>
                 <Card.Title><strong>{name}</strong></Card.Title>
                 <Card.Text className={style.cardText}>Código del producto: <strong>{codigo}</strong></Card.Text>
-                <Card.Text className={style.cardText}>{descripcion}</Card.Text>
                 <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
                 <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
                 <Button variant="primary" className={style.addButton}>Agregar al Pedido</Button>

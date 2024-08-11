@@ -1,0 +1,25 @@
+.searchContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchInput {
+    width: 100%;
+    padding-right: 4rem;
+}
+
+.searchButton, .resetButton {
+    position: absolute;
+    right: 2.5rem;
+    background: none;
+    border: none;
+    color: #333;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.resetButton {
+    right: 0.5rem;
+}

@@ -1,35 +1,50 @@
 import React from "react";
+import style from './Filters.module.css';
 import { useSelector } from "react-redux";
 
-const Filters = ( { handleFilterRubro, handleFilterRubro2 } ) => {
+// REACT BOOSTRAP ------>
+import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
+// <---------------------
+
+const Filters = ( { handleFilterRubro, handleFilterBySubRubro } ) => {
 
     const listRubros = useSelector(state => state.allRubros);
-    const listSubFromRubros = useSelector(state => state.subFromRub);
-    // const listSubRubros = useSelector(state => state.allSubRubros);
 
     return (
-        <div>
-            <div className="div1">
-                <h1>ELIMINAR EL DE RUBRO</h1>
-                Rubros:
-                <select onChange={handleFilterRubro}>
-                    <option value='all'>Todos</option>
-                    { listRubros?.map((rubro,index) => (
-                        <option value={rubro.name} key={index}> {rubro.name}</option>
-                    ))}
-                </select>
-            </div>
+        <Navbar expand="lg" className={style.nav}>
+            <Container fluid="lg">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <NavDropdown title="Rubros" id="basic-nav-dropdown-rubro">
+                            {
+                                listRubros?.map(rubro => (
+                                    <React.Fragment>
+                                        <NavDropdown.Item disabled key={rubro.id}>{rubro.name}</NavDropdown.Item>
+                                        { rubro.subRubro?.map((sub, index) => (
+                                            <NavDropdown.Item key={index} onClick={() => handleFilterBySubRubro(sub)}>{sub}</NavDropdown.Item>
+                                        )) }
+                                        <NavDropdown.Divider />
+                                    </React.Fragment>
+                                ))
+                            }
+                        </NavDropdown>
 
-            <div className="div2">
-                SubfromRub:
-                <select onChange={handleFilterRubro2}>
-                    <option value=''>-</option>
-                    { listSubFromRubros?.map((elem,index) => (
-                        <option value={elem} key={index}> {elem}</option>
-                    ))}
-                </select>
-            </div>
-        </div>
+                    </Nav>
+                    {/* <Nav className="me-auto">
+                        { listRubros?.map((rubro, index) => (
+                            <NavDropdown key={index} title={rubro.name} id={`basic-nav-dropdown-rubro-${index}`} className={style.navDropdown}>
+                                {
+                                    rubro.subRubro?.map((sub, index2) => (
+                                        <NavDropdown.Item key={index2} onClick={() => handleFilterBySubRubro(sub)}>{sub}</NavDropdown.Item>
+                                    ))
+                                }
+                            </NavDropdown>
+                        ))}
+                    </Nav> */}
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 };
 

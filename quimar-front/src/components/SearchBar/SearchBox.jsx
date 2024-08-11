@@ -33,24 +33,26 @@ const SearchBox = () => {
     };
 
     const resetHandler = () => {
+        setProduct('');
         dispatch(getAllProductsDB());
     };
 
     return (
-        <Form onSubmit={searchBoxHandler}>
+        <Form onSubmit={searchBoxHandler} className={style.searchForm}>
             <Row>
-                <Col xs="auto">
-                    <Form.Control
-                        name="product"
-                        type="text"
-                        placeholder="Buscar..."
-                        className="mr-sm-2"
-                        onChange={productHandler}
-                    />
-                </Col>
-                <Col xs="auto">
-                    <Button type="submit" variant="link"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                    <Button onClick={resetHandler} variant="link"><FontAwesomeIcon icon={faCircleXmark} /></Button>
+                <Col>
+                    <div className={style.searchContainer}>
+                        <Form.Control
+                            name="product"
+                            type="text"
+                            placeholder="Buscar..."
+                            className={style.searchInput}
+                            value={product}
+                            onChange={productHandler}
+                        />
+                        <Button type="submit" className={style.searchButton}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+                        <Button onClick={resetHandler} className={style.resetButton}><FontAwesomeIcon icon={faCircleXmark} /></Button>
+                    </div>
                 </Col>
             </Row>
         </Form>
