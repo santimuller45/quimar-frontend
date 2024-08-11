@@ -1,11 +1,12 @@
 .nav {
     background-color: #333;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: #0077B6;
+    color: #0194DC;
 }
 
 .navLink {
-    color: #0077B6 !important;
+    color: #0194DC !important;
+    font-size: 1.2rem;
 }
 
 .logoSection {

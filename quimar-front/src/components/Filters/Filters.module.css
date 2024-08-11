@@ -1,44 +1,105 @@
 /* Filters.module.css */
-.nav {
-    background-color: none; /* Color de fondo del navbar */
-    padding: 1rem; /* Espacio interno del navbar */
-    border-bottom: 1px solid #dee2e6; /* Borde inferior del navbar */
-    width: 100%; /* Asegúrate de que ocupe todo el ancho del contenedor */
+
+/* Contenedor del filtro */
+.filtersContainer {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    max-width: 100%; /* Ajusta el ancho al 100% del contenedor padre */
+    box-sizing: border-box; /* Asegura que el padding y el borde estén incluidos en el ancho */
 }
 
-.navContainer {
-    max-width: 1200px; /* Ancho máximo del navbar */
-    margin: 0 auto; /* Centrar el navbar horizontalmente */
+/* Título del filtro */
+.filtersTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.nav .navbar-toggler {
-    border: none; /* Eliminar el borde del toggle button */
+/* Tarjeta del Accordion */
+.accordionCard {
+    background-color: transparent;
+    border: 1px solid #444;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
 }
 
-.nav .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,..."); /* Puedes personalizar el icono aquí */
+/* Botón del Accordion */
+.accordionButton {
+    color: #000;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-decoration: none; /* Elimina el subrayado */
 }
 
-.navDropdown {
-    margin: 0 1rem; /* Espacio entre los dropdowns */
+/* Efecto hover en el botón */
+.accordionButton:hover {
+    color: #fff;
+    background-color: #15408A;
 }
 
-.navDropdown .dropdown-toggle::after {
-    display: none; /* Eliminar la flecha por defecto del dropdown */
+/* Item dentro del Accordion */
+.subRubroItem {
+    padding-left: 1rem;
 }
 
-.navDropdown .dropdown-menu {
-    background-color: #fff; /* Color de fondo del menú desplegable */
-    border-radius: 0.25rem; /* Bordes redondeados */
-    border: 1px solid #ddd; /* Borde del menú desplegable */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra del menú desplegable */
+/* Estilo de los ítems */
+.item {
+    color: #15408A;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: block;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    text-decoration: none; /* Elimina el subrayado */
 }
 
-.navDropdown .dropdown-item {
-    padding: 0.5rem 1rem; /* Espaciado interno de los items */
-    font-size: 0.875rem; /* Tamaño de fuente */
+/* Efecto hover en los ítems */
+.item:hover {
+    color: #fff;
+    background-color: #0077B6;
+    border-radius: 0.25rem;
 }
 
-.navDropdown .dropdown-item:hover {
-    background-color: #e9ecef; /* Color de fondo en hover */
+/* Media queries para diferentes tamaños de pantalla */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .filtersTitle {
+        font-size: 1.25rem;
+    }
+
+    .accordionButton {
+        font-size: 1rem;
+    }
+
+    .item {
+        font-size: 0.875rem;
+    }
+}
+
+/* Móviles (hasta 768px) */
+@media (max-width: 768px) {
+    .filtersTitle {
+        font-size: 1rem;
+    }
+
+    .accordionButton {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .item {
+        font-size: 0.75rem;
+        padding: 0.5rem 0;
+    }
 }

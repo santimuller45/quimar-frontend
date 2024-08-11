@@ -18,7 +18,7 @@ const CardProduct = ({ codigo, name, price, imagen, category }) => {
                 />
             </div>
             <Card.Body className={style.cardBody}>
-                <Card.Title><strong>{name}</strong></Card.Title>
+                <Card.Title className={style.cardTitle}><strong>{name}</strong></Card.Title>
                 <Card.Text className={style.cardText}>Código del producto: <strong>{codigo}</strong></Card.Text>
                 <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
                 <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>

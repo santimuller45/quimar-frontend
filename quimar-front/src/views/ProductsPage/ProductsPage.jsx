@@ -35,27 +35,33 @@ const ProductsPage = () => {
 
     return (
         <Container fluid="lg">
-            <Filters handleFilterBySubRubro={handleFilterBySubRubro}></Filters>
-            <section>
-                <h3><strong>Nuestros Productos</strong></h3>
-                <Row>
-                    <Col>
-                        <CardContainer 
-                            currenProducts={currentProducts} 
-                        />
-                    </Col>
-                </Row>
-                <Row className="justify-content-center mt-4">
-                    <Col xs="auto">
-                        <PaginationComponent 
-                            productPerPage={productPerPage} 
-                            productsDB={productsDB.length} 
-                            paginado={paginado} 
-                            currentPage={currentPage}
-                        />
-                    </Col>
-                </Row>
-            </section>
+            <Row>
+                <Col md={3}>
+                    <Filters handleFilterBySubRubro={handleFilterBySubRubro}></Filters>
+                </Col>
+                <Col md={9}>
+                    <section>
+                        <h3 className={style.mainTitle}><strong>NUESTROS PRODUCTOS</strong></h3>
+                        <Row>
+                            <Col>
+                                <CardContainer 
+                                    currenProducts={currentProducts} 
+                                />
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-center mt-4">
+                            <Col xs="auto">
+                                <PaginationComponent 
+                                    productPerPage={productPerPage} 
+                                    productsDB={productsDB.length} 
+                                    paginado={paginado} 
+                                    currentPage={currentPage}
+                                />
+                            </Col>
+                        </Row>
+                    </section>
+                </Col>
+            </Row>
         </Container>
     )
 };

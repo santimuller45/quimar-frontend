@@ -2,50 +2,57 @@ import React from "react";
 import style from './Filters.module.css';
 import { useSelector } from "react-redux";
 
-// REACT BOOSTRAP ------>
-import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
-// <---------------------
+import { Accordion, Card, useAccordionButton } from 'react-bootstrap';
 
-const Filters = ( { handleFilterRubro, handleFilterBySubRubro } ) => {
 
-    const listRubros = useSelector(state => state.allRubros);
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleChevronDown, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+
+
+const Filters = ({ handleFilterBySubRubro }) => {
+    const listRubros = useSelector((state) => state.allRubros);
 
     return (
-        <Navbar expand="lg" className={style.nav}>
-            <Container fluid="lg">
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <NavDropdown title="Rubros" id="basic-nav-dropdown-rubro">
-                            {
-                                listRubros?.map(rubro => (
-                                    <React.Fragment>
-                                        <NavDropdown.Item disabled key={rubro.id}>{rubro.name}</NavDropdown.Item>
-                                        { rubro.subRubro?.map((sub, index) => (
-                                            <NavDropdown.Item key={index} onClick={() => handleFilterBySubRubro(sub)}>{sub}</NavDropdown.Item>
-                                        )) }
-                                        <NavDropdown.Divider />
-                                    </React.Fragment>
-                                ))
-                            }
-                        </NavDropdown>
-
-                    </Nav>
-                    {/* <Nav className="me-auto">
-                        { listRubros?.map((rubro, index) => (
-                            <NavDropdown key={index} title={rubro.name} id={`basic-nav-dropdown-rubro-${index}`} className={style.navDropdown}>
-                                {
-                                    rubro.subRubro?.map((sub, index2) => (
-                                        <NavDropdown.Item key={index2} onClick={() => handleFilterBySubRubro(sub)}>{sub}</NavDropdown.Item>
-                                    ))
-                                }
-                            </NavDropdown>
-                        ))}
-                    </Nav> */}
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    )
+        <div className={style.filtersContainer}>
+            <h5 className={style.filtersTitle}>RUBROS DE PRODUCTOS</h5>
+            <Accordion>
+                {listRubros?.map((rubro, index) => (
+                    <Card key={rubro.id} className={style.accordionCard}>
+                        <Card.Header>
+                            <CustomToggle eventKey={String(index)}><FontAwesomeIcon icon={faCircleChevronDown} /> {rubro.name}</CustomToggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={String(index)}>
+                            <Card.Body>
+                                {rubro.subRubro?.map((sub, index2) => (
+                                    <div key={index2} className={style.subRubroItem}>
+                                        <span 
+                                            className={style.item}
+                                            onClick={() => handleFilterBySubRubro(sub)}
+                                        >
+                                        <FontAwesomeIcon icon={faCircleChevronRight} /> {sub}
+                                        </span>
+                                    </div>
+                                ))}
+                            </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                ))}
+            </Accordion>
+        </div>
+    );
 };
+
+function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionButton(eventKey);
+    return (
+        <button
+            type="button"
+            className={`${style.accordionButton} btn btn-link`}
+            onClick={decoratedOnClick}
+        >
+            {children}
+        </button>
+    );
+}
 
 export default Filters;
