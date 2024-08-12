@@ -1,8 +1,8 @@
 .footer {
     background-color: #333;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: #0077B6;
-    padding: 1rem;
+    color: #0194DC ;
+    padding: 1.5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -19,7 +19,6 @@
 .logo {
     width: 8rem;
     height: 8rem;
-    margin-bottom: 1rem;
 }
 
 .menuSection {

@@ -1,22 +1,24 @@
 .nav {
     background-color: #333;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: #0194DC;
 }
 
 .navLink {
     color: #0194DC !important;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.2rem;
 }
 
 .logoSection {
+    width: 5rem;
+    height: 5rem;
     display: flex;
     align-items: center;
-    flex-direction: column;
 }
 
 .logo {
-    width: 5rem;
+    width: 100%;
     height: auto;
-    margin-right: 0.5rem;
+    max-height: 100%;
+    object-fit: cover;
 }

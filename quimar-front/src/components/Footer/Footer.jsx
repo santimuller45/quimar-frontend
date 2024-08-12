@@ -30,8 +30,8 @@ const Footer = () => {
                     {/* CAMBIAR LAS DIRECCIONES DEL LINK */}
                     <Link to={'/'} className={style.link}>Inicio</Link>
                     <Link to={'/products'} className={style.link}>Productos</Link>
-                    <Link to={'/'} className={style.link}>Nosotros</Link>
-                    <Link to={'/'} className={style.link}>Contacto</Link>
+                    <Link to={'/about-us'} className={style.link}>Nosotros</Link>
+                    <Link to={'/contact-us'} className={style.link}>Contacto</Link>
                 </nav>
             </div>
             <div className={style.menuSection}>

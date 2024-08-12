@@ -1,4 +1,6 @@
 .navLink {
     color: #0194DC !important;
     font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

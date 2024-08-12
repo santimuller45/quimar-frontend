@@ -15,7 +15,15 @@ axios.defaults.baseURL = "http://localhost:3001";
 //<-----------------------------------------------
 
 // VIEWS ------>
-import { LandingPage , AccountPanel , MyAccount, ProductsPage, AboutUs, Contact } from './views/indexViews.js';
+import { 
+  LandingPage, 
+  AccountPanel, 
+  MyAccount, 
+  ProductsPage, 
+  AboutUs, 
+  Contact, 
+  Detail 
+} from './views/indexViews.js';
 //<-------------
 
 // COMPONENTES ----->
@@ -44,6 +52,7 @@ function App() {
          <Route path='/account-panel' element={<AccountPanel/>}></Route>
          <Route path='/contact-us' element={<Contact/>}></Route>
          <Route path='/about-us' element={<AboutUs/>}></Route>
+         <Route path='/detail/:productID' element={<Detail/>} />
       </Routes>
       {/* FOOTER */}
       <Footer/>

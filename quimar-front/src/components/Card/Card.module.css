@@ -1,4 +1,3 @@
-/* CardProduct.module.css */
 .cardProduct {
     display: flex;
     flex-direction: row;
@@ -10,6 +9,7 @@
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     background-color: #fff;
     width: 100%;
+    min-height: 12rem; /* Establece una altura mínima para todas las tarjetas */
 }
 
 .imageContainer {
@@ -17,6 +17,7 @@
     height: 10rem;
     overflow: hidden;
     margin-right: 1rem;
+    flex-shrink: 0; /* Evita que la imagen se encoja si el contenido es largo */
 }
 
 .image {
@@ -30,12 +31,17 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    flex-grow: 1; /* Permite que el contenido crezca y ocupe todo el espacio disponible */
 }
 
 .cardTitle {
     color: #000;
     font-size: 1.4rem;
     font-weight: bold;
+    min-height: 3rem; /* Establece una altura mínima para el título */
+    line-height: 1.2; /* Controla la altura de la línea para manejar títulos largos */
+    overflow: hidden; /* Oculta el texto desbordado */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
 }
 
 .cardText {
@@ -44,9 +50,26 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* Custom button */
 .addButton {
     align-self: start;
     margin-top: auto;
-    width: auto;
+    padding: 0.5rem 1.5rem;
+    background: #15408A;
+    color: #fff;
     font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+}
+
+.addButton:hover {
+    background: #333;
+}
+
+.addButton:focus {
+    outline: none;
 }

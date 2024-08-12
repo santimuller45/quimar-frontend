@@ -12,6 +12,7 @@ const CardContainer = ( {currenProducts} ) => {
           {currenProducts?.map((product,index) => (
                 <CardProduct 
                     key={index}
+                    id={product.id}
                     codigo={product.codigo}
                     name={product.name}
                     imagen={product.imagen}
