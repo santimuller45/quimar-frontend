@@ -1,41 +1,57 @@
 .footer {
-    background-color: #333;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: #0194DC ;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.logoSection {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0.5rem;
+    justify-content: space-around;
+    padding: 2rem;
+    background-color: #333;
+    color: #0194DC;
+    text-align: center;
+}
+
+.logoSection {
+    margin-bottom: 2rem;
 }
 
 .logo {
-    width: 8rem;
-    height: 8rem;
+    width: 150px;
+    height: auto;
+    margin-bottom: 0.5rem;
 }
 
 .menuSection {
-    margin: 0.5rem;
-}
-
-.menuSection h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .link {
-    color: #ccc;
-    text-decoration: none;
     display: block;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .link:hover {
-    color: #fff;
+    color: #f0f0f0;
+}
+
+nav h6 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    .footer {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .logoSection,
+    .menuSection {
+        margin-bottom: 0;
+    }
+
+    .menuSection {
+        margin-right: 2rem;
+    }
 }

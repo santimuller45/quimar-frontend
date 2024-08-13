@@ -45,15 +45,17 @@ function App() {
       {/* HEADER */}
       <NavBar/>
       {/* HEADER */}
-      <Routes>
-         <Route path='/' element={<LandingPage/>}></Route>
-         <Route path='/products' element={<ProductsPage/>}></Route>
-         <Route path='/account' element={<MyAccount/>}></Route>
-         <Route path='/account-panel' element={<AccountPanel/>}></Route>
-         <Route path='/contact-us' element={<Contact/>}></Route>
-         <Route path='/about-us' element={<AboutUs/>}></Route>
-         <Route path='/detail/:productID' element={<Detail/>} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path='/' element={<LandingPage/>}></Route>
+          <Route path='/products' element={<ProductsPage/>}></Route>
+          <Route path='/account' element={<MyAccount/>}></Route>
+          <Route path='/account-panel' element={<AccountPanel/>}></Route>
+          <Route path='/contact-us' element={<Contact/>}></Route>
+          <Route path='/about-us' element={<AboutUs/>}></Route>
+          <Route path='/detail/:productID' element={<Detail/>} />
+        </Routes>
+      </div>
       {/* FOOTER */}
       <Footer/>
       {/* FOOTER */}
