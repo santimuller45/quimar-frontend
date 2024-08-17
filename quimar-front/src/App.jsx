@@ -22,7 +22,8 @@ import {
   ProductsPage, 
   AboutUs, 
   Contact, 
-  Detail 
+  Detail,
+  OrderTable 
 } from './views/indexViews.js';
 //<-------------
 
@@ -49,11 +50,12 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage/>}></Route>
           <Route path='/products' element={<ProductsPage/>}></Route>
+          <Route path='/detail/:productID' element={<Detail/>} />
           <Route path='/account' element={<MyAccount/>}></Route>
           <Route path='/account-panel' element={<AccountPanel/>}></Route>
           <Route path='/contact-us' element={<Contact/>}></Route>
           <Route path='/about-us' element={<AboutUs/>}></Route>
-          <Route path='/detail/:productID' element={<Detail/>} />
+          <Route path='/order' element={<OrderTable/>}></Route>
         </Routes>
       </div>
       {/* FOOTER */}

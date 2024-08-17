@@ -10,13 +10,15 @@ import store from "./redux/store.js";
 //<-----------
 
 // CONTEXT ----->
-// import { ShopProvider } from './context/Shop/shop.jsx';
+import { ShopProvider } from './context/Shop.jsx';
 //<---------------
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ShopProvider>
+        <App />
+      </ShopProvider>
     </BrowserRouter>
   </Provider>
 );

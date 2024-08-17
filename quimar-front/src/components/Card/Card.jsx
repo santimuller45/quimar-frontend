@@ -2,11 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
-//REACT-BOOSTRAP ----->
+// REACT-BOOSTRAP ----->
 import { Card } from "react-bootstrap";
 //<--------------------
 
-const CardProduct = ({ id, codigo, name, price, imagen, category }) => {
+// CUSTOM HOOK ---->
+import { useOrder } from "../../customHooks/useOrder.js";
+// <----------------
+
+const CardProduct = (product) => {
+
+    const { id, codigo, name, price, imagen, category } = product;
+
+    const { addToOrder } = useOrder();
+
     return (
         <Card className={style.cardProduct}>
             <div className={style.imageContainer}>
@@ -24,7 +33,7 @@ const CardProduct = ({ id, codigo, name, price, imagen, category }) => {
                 <Card.Text className={style.cardText}>Código del producto: <strong>{codigo}</strong></Card.Text>
                 <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
                 <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
-                <button className={style.addButton}>Agregar al Pedido</button>
+                <button className={style.addButton} onClick={() => addToOrder(product)}>Agregar al Pedido</button>
             </Card.Body>
         </Card>
 )};

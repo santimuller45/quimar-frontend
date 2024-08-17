@@ -5,5 +5,6 @@ import ProductsPage from "./ProductsPage/ProductsPage.jsx";
 import AboutUs from "./AboutUs/AboutUs.jsx";
 import Contact from "./Contact/Contact.jsx";
 import Detail from "./Detail/Detail.jsx";
+import OrderTable from "./OrderTable/OrderTable.jsx";
 
-export { LandingPage, AccountPanel, MyAccount, ProductsPage, AboutUs, Contact, Detail };
+export { LandingPage, AccountPanel, MyAccount, ProductsPage, AboutUs, Contact, Detail, OrderTable };
