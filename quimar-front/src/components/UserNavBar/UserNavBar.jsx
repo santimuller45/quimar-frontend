@@ -16,7 +16,6 @@ const UserNavBar = () => {
         <Nav className="ms-auto">
             <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faCirclePlus}/> Mi Pedido</span>} id="basic-nav-dropdown-pedido" className={style.navDropdown}>
                 <NavDropdown.Item href="/order">Ver Pedido</NavDropdown.Item>
-                <NavDropdown.Item href="/">Mis Pedidos</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account" className={style.navDropdown}> 
                 <NavDropdown.Item href="/account">Mi Cuenta</NavDropdown.Item>

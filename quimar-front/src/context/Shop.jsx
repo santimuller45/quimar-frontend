@@ -7,6 +7,7 @@ const initialState = JSON.parse(window.localStorage.getItem('order')) || [];
 
 const ORDER_ACTION_TYPES = {
     ADD_TO_ORDER : 'ADD_TO_ORDER',
+    DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
     REMOVE_FROM_ORDER : 'REMOVE_FROM_ORDER',
     CLEAN_ORDER : 'CLEAN_ORDER',
     TOTAL_ORDER: 'TOTAL_ORDER'
@@ -47,6 +48,24 @@ const reducer = ( state , action ) => {
             return newState;
         };
 
+        case ORDER_ACTION_TYPES.DECREMENT_QUANTITY: {
+            const { id } = actionPayload;
+            const productInOrder = state.findIndex(item => item.id === id);
+
+            if (productInOrder >= 0) {
+                const newOrderState = structuredClone(state);
+                if (newOrderState[productInOrder].quantity > 1) {
+                    newOrderState[productInOrder].quantity -= 1;
+                    newOrderState[productInOrder].total -= newOrderState[productInOrder].price;
+                } else {
+                    newOrderState.splice(productInOrder, 1);
+                }
+                updateOrderLocalStorage(newOrderState);
+                return newOrderState;
+            }
+            return state;
+        };
+
         case ORDER_ACTION_TYPES.REMOVE_FROM_ORDER: {
             
             const { id } = actionPayload;
@@ -79,6 +98,8 @@ export function ShopProvider ({ children }) {
 
     const addToOrder = product => dispatch({ type: ORDER_ACTION_TYPES.ADD_TO_ORDER, payload: product });
 
+    const decrementQuantity = product => dispatch({ type: ORDER_ACTION_TYPES.DECREMENT_QUANTITY, payload: product });
+
     const removeFromOrder = product => dispatch({ type: ORDER_ACTION_TYPES.REMOVE_FROM_ORDER, payload: product });
 
     const clearOrder = () => dispatch({ type: ORDER_ACTION_TYPES.CLEAN_ORDER });
@@ -86,7 +107,7 @@ export function ShopProvider ({ children }) {
     const getTotalAmount = () => orderState.reduce((sum, item) => sum + item.total, 0);
 
     return (
-        <ShopContext.Provider value={{ order : orderState , addToOrder, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>
+        <ShopContext.Provider value={{ order : orderState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>
             {children}
         </ShopContext.Provider>
     )
