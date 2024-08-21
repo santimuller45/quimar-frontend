@@ -1,65 +1,123 @@
 .container {
     text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-  
+
+.headerLand, .section {
+    background-color: #e9ecef;
+    color: #000;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 4rem;
+}
+
 .headerLand {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #000;
-    padding: 2rem;
-    margin: 2rem;
-    padding: 1rem;
-    background-color: #e9ecef;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
 }
-  
+
 .logo {
-    width: 12rem;
+    width: 10rem;
     height: auto;
+    margin-bottom: 1rem;
 }
-  
+
 .section {
-    padding: 2rem;
-    margin: 2rem;
-    background-color: #e9ecef;
-    color: #000;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 4rem;
 }
 
 .rubList {
     list-style: none;
     padding: 0;
 }
-  
+
 .rubList li {
-    margin: 10px 0;
-    padding: 10px;
+    margin: 8px 0; /* Reducido el margen de los ítems */
+    padding: 8px; /* Reducido el padding de los ítems */
     border-radius: 4px;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Reducido el tamaño del texto de la lista */
 }
 
 .footer {
-    color: black;
-    padding: 2rem;
+    color: #000;
+    padding: 1.5rem;
 }
 
 .textTitle {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: bold;
 }
 
 .textSubTitle {
     font-size: 2rem;
     font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid #000; /* Ajusta el grosor y color de la línea */
+    padding-bottom: 0.5rem; /* Espacio entre el texto y la línea */
+    margin-bottom: 1rem; /* Espacio entre la línea y el párrafo */
 }
 
 .text {
-    font-size: 1.5rem;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.4rem;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 1200px) {
+    .headerLand {
+        flex-direction: column; /* Cambia a columna en pantallas más pequeñas */
+    }
+
+    .logo {
+        width: 8rem; /* Reduce el tamaño del logo en pantallas más pequeñas */
+    }
+
+    .textTitle {
+        font-size: 2rem; /* Reduce el tamaño del título en pantallas más pequeñas */
+    }
+
+    .textSubTitle {
+        font-size: 1.6rem; /* Reduce el tamaño del subtítulo en pantallas más pequeñas */
+    }
+
+    .text {
+        font-size: 1.2rem; /* Reduce el tamaño del texto en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 768px) {
+    .headerLand {
+        padding: 1rem; /* Reduce el padding en pantallas muy pequeñas */
+    }
+
+    .section {
+        padding: 1rem; /* Reduce el padding de las secciones en pantallas muy pequeñas */
+        margin: 0.5rem; /* Reduce el margen de las secciones en pantallas muy pequeñas */
+    }
+
+    .logo {
+        width: 6rem; /* Reduce aún más el tamaño del logo en pantallas muy pequeñas */
+    }
+
+    .rubList li {
+        font-size: 1rem; /* Reduce el tamaño del texto de la lista en pantallas muy pequeñas */
+    }
+
+    .textTitle {
+        font-size: 1.8rem; /* Reduce el tamaño del título en pantallas muy pequeñas */
+    }
+
+    .textSubTitle {
+        font-size: 1.4rem; /* Reduce el tamaño del subtítulo en pantallas muy pequeñas */
+    }
+
+    .text {
+        font-size: 1rem; /* Reduce el tamaño del texto en pantallas muy pequeñas */
+    }
 }

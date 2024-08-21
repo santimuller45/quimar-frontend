@@ -1,0 +1,60 @@
+.alertContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050; /* Asegúrate de que el alert esté por encima de otros elementos */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.alertSuccess {
+    background-color: #28a745; /* Color de fondo verde para éxito */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    opacity: 0;
+    animation: slide-in 0.5s forwards; /* Animación de entrada */
+}
+
+.alertError {
+    background-color: #dc3545; /* Color de fondo verde para éxito */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    opacity: 0;
+    animation: slide-in 0.5s forwards; /* Animación de entrada */
+}
+
+.alertMessage {
+    font-size: 16px;
+    flex: 1; /* Permite que el mensaje ocupe todo el espacio disponible */
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}

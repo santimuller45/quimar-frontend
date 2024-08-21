@@ -3,10 +3,10 @@ import style from './Filters.module.css';
 import { useSelector } from "react-redux";
 
 import { Accordion, Card, useAccordionButton } from 'react-bootstrap';
-
+// import { Nav, NavDropdown } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleChevronDown, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faCircleChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 
 const Filters = ({ handleFilterBySubRubro }) => {
@@ -29,7 +29,7 @@ const Filters = ({ handleFilterBySubRubro }) => {
                                             className={style.item}
                                             onClick={() => handleFilterBySubRubro(sub)}
                                         >
-                                        <FontAwesomeIcon icon={faCircleChevronRight} /> {sub}
+                                        {sub}
                                         </span>
                                     </div>
                                 ))}
@@ -40,7 +40,7 @@ const Filters = ({ handleFilterBySubRubro }) => {
             </Accordion>
         </div>
     );
-};
+}
 
 function CustomToggle({ children, eventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey);
@@ -53,6 +53,37 @@ function CustomToggle({ children, eventKey }) {
             {children}
         </button>
     );
-}
+};
+
+// ----------- VER 2 -----------
+
+// const Filters = ({ handleFilterBySubRubro }) => {
+//     const listRubros = useSelector((state) => state.allRubros);
+
+//     return (
+//         <Nav className={style.filtersContainer}>
+//             <Nav.Item>
+//                 <Nav.Link className={style.filtersTitle}>RUBROS DE PRODUCTOS</Nav.Link>
+//             </Nav.Item>
+//             {listRubros?.map((rubro, index) => (
+//                 <NavDropdown
+//                     key={rubro.id}
+//                     title={<><FontAwesomeIcon icon={faCircleChevronDown} /> {rubro.name}</>}
+//                     className={style.navDropdown}
+//                 >
+//                     {rubro.subRubro?.map((sub, index2) => (
+//                         <NavDropdown.Item
+//                             key={index2}
+//                             className={style.subRubroItem}
+//                             onClick={() => handleFilterBySubRubro(sub)}
+//                         >
+//                             {sub}
+//                         </NavDropdown.Item>
+//                     ))}
+//                 </NavDropdown>
+//             ))}
+//         </Nav>
+//     );
+// }
 
 export default Filters;

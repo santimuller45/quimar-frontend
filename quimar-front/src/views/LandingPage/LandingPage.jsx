@@ -5,44 +5,41 @@ import style from "./LandingPage.module.css";
 import logo from '../../assets/logo.png';
 //-------<
 
-const LandingPage = () => {
-
-    return (
+const LandingPage = () => (
+    <>
         <div className={style.container}>
-            <div className={style.headerLand}>
+            <header className={style.headerLand}>
+                <img src={logo} alt="Quimar logo" className={style.logo}/>
                 <div>
-                    <img src={logo} alt="Quimar logo" className={style.logo}/>
+                    <h1 className={style.textTitle}>Distribuidora Quimar</h1>
+                    <p className={style.text}>Su socio confiable en el mundo de los artículos de ferretería</p>
                 </div>
-                <div>
-                    <h1 className={style.textTitle}><strong>Distribuidora Quimar</strong></h1>
-                    <p className={style.text}><strong>Su socio confiable en el mundo de los artículos de ferretería</strong></p>
-                </div>
-            </div>
+            </header>
             <section className={style.section}>
-                <h2 className={style.textSubTitle}><strong>Nuestra Misión</strong></h2>
-                    <p className={style.text}>En <strong>Quimar</strong>, nuestra misión es ofrecer una amplia gama de productos de ferretería que cumplan con los estándares más exigentes de calidad y rendimiento.</p>
-                    <p className={style.text}>Nos esforzamos por ser la primera opción para nuestros clientes, brindando soluciones integrales y un servicio excepcional.</p>
+                <h2 className={style.textSubTitle}>Nuestra Misión</h2>                
+                <p className={style.text}>En <strong>Quimar</strong>, nuestra misión es ofrecer una amplia gama de productos de ferretería</p>
+                <p className={style.text}>que cumplan con los estándares más exigentes de calidad y rendimiento.</p>
+                <p className={style.text}>Nos esforzamos por ser la primera opción para nuestros clientes, brindando soluciones integrales y un servicio excepcional.</p>
             </section>
             <section className={style.section}>
-                <h2 className={style.textSubTitle}><strong>Compromiso con la Calidad</strong></h2>
-                    <p className={style.text}>En <strong>Quimar</strong>, la calidad es nuestra prioridad. Trabajamos con marcas reconocidas y garantizamos que cada producto en nuestro catálogo cumple con estrictos controles de calidad.</p>
-                    <p className={style.text}>Nuestro compromiso es asegurar que nuestros clientes obtengan productos fiables y duraderos.</p>
+                <h2 className={style.textSubTitle}>Compromiso con la Calidad</h2>
+                <p className={style.text}>En <strong>Quimar</strong>, la calidad es nuestra prioridad.</p>
+                <p className={style.text}>Trabajamos con marcas reconocidas y garantizamos que cada producto en nuestro catálogo cumple con estrictos controles de calidad.</p>
+                <p className={style.text}>Nuestro compromiso es asegurar que nuestros clientes obtengan productos fiables y duraderos.</p>
             </section>
             <section className={style.section}>
-                <h2 className={style.textSubTitle}><strong>Servicio al Cliente</strong></h2>
-                <p className={style.text}>
-                    Nos enorgullecemos de ofrecer un servicio al cliente excepcional. Nuestro equipo de expertos está siempre disponible para asesorar y guiar a nuestros clientes en la elección de los productos adecuados para sus proyectos.
-                </p>
+                <h2 className={style.textSubTitle}>Servicio al Cliente</h2>                
+                <p className={style.text}>Nos enorgullecemos de ofrecer un servicio al cliente excepcional.</p>
+                <p className={style.text}>Nuestro equipo de expertos está siempre disponible para asesorar y guiar a nuestros clientes en la elección de los productos adecuados para sus proyectos.</p>
                 <p className={style.text}>En <strong>Quimar</strong>, valoramos cada interacción y nos esforzamos por construir relaciones duraderas basadas en la confianza y la satisfacción del cliente.</p>
             </section>
             <section className={style.section}>
-                <h2 className={style.textSubTitle}><strong>Visión de Futuro</strong></h2>
-                <p className={style.text}>
-                    Estamos comprometidos a seguir creciendo y evolucionando para adaptarnos a las cambiantes necesidades del mercado. Innovación, calidad y servicio son los pilares que guían nuestro camino hacia el futuro.
-                </p>
+                <h2 className={style.textSubTitle}>Visión de Futuro</h2>                
+                <p className={style.text}>Estamos comprometidos a seguir creciendo y evolucionando para adaptarnos a las cambiantes necesidades del mercado.</p>
+                <p className={style.text}>Innovación, calidad y servicio son los pilares que guían nuestro camino hacia el futuro.</p>
             </section>
             <section className={style.section}>
-                <h2 className={style.textSubTitle}><strong>Nuestros Rubros</strong></h2>
+                <h2 className={style.textSubTitle}>Nuestros Rubros</h2>
                 <ul className={style.rubList}>
                     <li>QUIMICOS Y DILUYENTES</li>
                     <li>ACCESORIOS PARA PINTURA</li>
@@ -58,6 +55,7 @@ const LandingPage = () => {
                 <h5>Gracias por elegir <strong>Quimar Distribuidora</strong>. Estamos aquí para ayudarle a hacer realidad sus proyectos con los mejores productos de ferretería.</h5>
             </div>
         </div>
-)};
+    </>
+);
 
 export default LandingPage;

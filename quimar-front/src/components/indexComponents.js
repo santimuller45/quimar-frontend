@@ -5,5 +5,6 @@ import CardContainer from "./CardContainer/CardContainer.jsx";
 import PaginationComponent from "./Pagination/PaginationComponent.jsx";
 import Filters from "./Filters/Filters.jsx";
 import UserNavBar from "./UserNavBar/UserNavBar.jsx";
+import CustomAlert from "./CustomAlert/CustomAlert.jsx";
 
-export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar };
+export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert };

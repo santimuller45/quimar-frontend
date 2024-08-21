@@ -5,7 +5,7 @@ import style from "./CardContainer.module.css";
 import CardProduct from "../Card/Card.jsx";
 // <-------------------
 
-const CardContainer = ( {currenProducts} ) => {
+const CardContainer = ( { currenProducts } ) => {
 
     return (
         <div className={style.cardContainer}>
@@ -19,6 +19,7 @@ const CardContainer = ( {currenProducts} ) => {
                     descripcion={product.descripcion}
                     price={product.price}
                     category={product.category}
+                    status={product.status}
                 />
             ))}
         </div>
