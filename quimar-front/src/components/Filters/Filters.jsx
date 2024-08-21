@@ -6,7 +6,7 @@ import { Accordion, Card, useAccordionButton } from 'react-bootstrap';
 // import { Nav, NavDropdown } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faCircleChevronDown, faCircle } from "@fortawesome/free-solid-svg-icons";
 
 
 const Filters = ({ handleFilterBySubRubro }) => {
@@ -29,7 +29,7 @@ const Filters = ({ handleFilterBySubRubro }) => {
                                             className={style.item}
                                             onClick={() => handleFilterBySubRubro(sub)}
                                         >
-                                        {sub}
+                                            <FontAwesomeIcon icon={faCircle} className={style.dot}/> {sub}
                                         </span>
                                     </div>
                                 ))}
