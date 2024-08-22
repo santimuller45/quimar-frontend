@@ -7,11 +7,15 @@ import logo from '../../assets/logo.png'
 //-------<
 
 //FONT-AWESOME ------->
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 // <-------------------
+
+
+// FALTA AGREGAR MIS DATOS EN EL FOOTER COMO CREADOR
 
 const Footer = () => {
     return (
@@ -38,6 +42,7 @@ const Footer = () => {
                     <h6><FontAwesomeIcon icon={faWhatsapp}/> WHATSAPP: +54 9 291 443-8409</h6>
                     <h6><FontAwesomeIcon icon={faEnvelope}/> EMAIL: quimardistribuidora@hotmail.com</h6>
                     <h6><FontAwesomeIcon icon={faPhone}/> TELÉFONO: +54 9 291 443-8409</h6>
+                    <h6><FontAwesomeIcon icon={faGithub}/> DESARROLLADOR WEB: <Link to={'https://github.com/santimuller45'} className={style.linkGitHub}>SANTIAGO MULLER</Link></h6>
                 </nav>
             </div>
         </footer>

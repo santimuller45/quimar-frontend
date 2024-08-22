@@ -23,7 +23,8 @@ import {
   AboutUs, 
   Contact, 
   Detail,
-  OrderTable 
+  OrderTable,
+  RegisterPage 
 } from './views/indexViews.js';
 //<-------------
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='/contact-us' element={<Contact/>}></Route>
           <Route path='/about-us' element={<AboutUs/>}></Route>
           <Route path='/order' element={<OrderTable/>}></Route>
+          <Route path='/register' element={<RegisterPage/>}></Route>
         </Routes>
       </div>
       {/* FOOTER */}

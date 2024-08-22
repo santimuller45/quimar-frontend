@@ -17,6 +17,7 @@ const UserNavBar = () => {
                 <span className={style.navLink}><FontAwesomeIcon icon={faCirclePlus}/> Mi Pedido</span>
             </Nav.Link>
             <NavDropdown title={<span className={style.navLink}><FontAwesomeIcon icon={faUser} /> Cuenta</span>} id="basic-nav-dropdown-account" className={style.navDropdown}> 
+                <NavDropdown.Item href="/register">Registrarse</NavDropdown.Item>
                 <NavDropdown.Item href="/account">Mi Cuenta</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/account-panel">Panel de cuenta</NavDropdown.Item>
