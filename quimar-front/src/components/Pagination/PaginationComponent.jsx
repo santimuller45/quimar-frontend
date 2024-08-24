@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Pagination.module.css";
+import style from "./PaginationComponent.module.css";
 
 // REACT BOOSTRAP ---->
 import { Pagination } from 'react-bootstrap';

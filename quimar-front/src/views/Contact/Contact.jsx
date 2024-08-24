@@ -2,7 +2,7 @@ import React from "react";
 import style from './Contact.module.css';
 
 //LOGO ----->
-import logo from '../../assets/logo.png'
+// import logo from '../../assets/logo.png';
 //-------<
 
 //FONT-AWESOME ------->

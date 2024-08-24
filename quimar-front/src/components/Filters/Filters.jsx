@@ -1,16 +1,23 @@
 import React from "react";
 import style from './Filters.module.css';
-import { useSelector } from "react-redux";
 
+// REACT BOOSTRAP ---->
 import { Accordion, Card, useAccordionButton } from 'react-bootstrap';
-// import { Nav, NavDropdown } from 'react-bootstrap';
+// <-------------------
 
+// CUSTOM HOOKS ----->
+import { useProducts } from "../../customHooks/useProducts.js";
+// <------------------
+
+// FONT AWESOME ----->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleChevronDown, faCircle } from "@fortawesome/free-solid-svg-icons";
+// <------------------
 
 
 const Filters = ({ handleFilterBySubRubro }) => {
-    const listRubros = useSelector((state) => state.allRubros);
+    const { state } = useProducts();
+    const listRubros = state.rubros;
 
     return (
         <div className={style.filtersContainer}>

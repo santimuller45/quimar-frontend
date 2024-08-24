@@ -4,22 +4,22 @@ import App from './App.jsx';
 import './main.css';
 import { BrowserRouter } from "react-router-dom";
 
-// REDUX ----->
-import { Provider } from "react-redux";
-import store from "./redux/store.js";
-//<-----------
-
 // CONTEXT ----->
 import { ShopProvider } from './context/Shop.jsx';
+import { UserProvider } from './context/User.jsx';
+import { ProductProvider } from './context/Products.jsx';
 //<---------------
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+const Root = () => (
     <BrowserRouter>
-      <ShopProvider>
-        <App />
-      </ShopProvider>
+      <ProductProvider>
+        <ShopProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </ShopProvider>
+      </ProductProvider>
     </BrowserRouter>
-  </Provider>
 );
 
+ReactDOM.createRoot(document.getElementById('root')).render(<Root />);

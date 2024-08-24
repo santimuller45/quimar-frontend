@@ -15,7 +15,7 @@ const ORDER_ACTION_TYPES = {
 
 const updateOrderLocalStorage = (state) => window.localStorage.setItem('order', JSON.stringify(state));
 
-const reducer = ( state , action ) => {
+const orderReducer = ( state , action ) => {
 
     const { type: actionType , payload: actionPayload } = action;
 
@@ -93,7 +93,7 @@ const reducer = ( state , action ) => {
 
 export function ShopProvider ({ children }) {
     
-   const [ orderState , dispatch ] = useReducer( reducer, initialState);
+   const [ orderState , dispatch ] = useReducer( orderReducer, initialState);
 
 
     const addToOrder = product => dispatch({ type: ORDER_ACTION_TYPES.ADD_TO_ORDER, payload: product });

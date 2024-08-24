@@ -7,5 +7,7 @@ import Contact from "./Contact/Contact.jsx";
 import Detail from "./Detail/Detail.jsx";
 import OrderTable from "./OrderTable/OrderTable.jsx";
 import RegisterPage from "./RegisterPage/RegisterPage.jsx";
+import LoginUser from "./LoginUser/LoginUser.jsx";
+import ForgotPassword from "./ForgotPassword/ForgotPassword.jsx";
 
-export { LandingPage, AccountPanel, MyAccount, ProductsPage, AboutUs, Contact, Detail, OrderTable, RegisterPage };
+export { LandingPage, AccountPanel, MyAccount, ProductsPage, AboutUs, Contact, Detail, OrderTable, RegisterPage, LoginUser, ForgotPassword };

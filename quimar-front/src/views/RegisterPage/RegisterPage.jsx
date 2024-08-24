@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import style from './RegisterPage.module.css';
 
 // REACT BOOSTRAP --------->
 import { Button, Form, Row, Col } from "react-bootstrap";
 // <------------------------
+
+// CUSTOM HOOK ---->
+import { useUser } from "../../customHooks/useUser.js";
+// <----------------
 
 // VALIDATE JS ----->
 import registerValidate from "./validate/RegisterValidate.js";
@@ -14,6 +17,7 @@ import registerValidate from "./validate/RegisterValidate.js";
 const RegisterPage = () => {
 
     const navigate = useNavigate();
+    const { registerUser } = useUser();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -49,14 +53,8 @@ const RegisterPage = () => {
 
     const handlerSubmitRegister = (e) => {
         e.preventDefault();
-        
-            // Enviar los datos del formulario
-            axios.post('/users', formData)
-            .then(res => {
-                navigate('/');
-            })
-            .catch(error => alert(error.message));
-        
+        registerUser(formData);
+        navigate('/');
     };
 
 

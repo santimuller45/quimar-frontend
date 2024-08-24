@@ -1,13 +1,11 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// EJECUTO LA ACTION PARA TRAER TODOS LOS PRODUCTOS AL REDUX ----->
-import { useDispatch } from 'react-redux';
-import { getAllProductsDB } from './redux/actions/actionsProduct.js';
-import { getAllRubrosDB, getAllSubRubrosDB } from './redux/actions/actionsRubro.js';
-import { useEffect } from 'react';
-// <-----------------------------------------------------------------
+// CUSTOM HOOK ---->
+import { useProducts } from './customHooks/useProducts.js';
+// <----------------
 
 // URL DE RESPUESTA DEL BACKEND ---->
 import axios from "axios";
@@ -24,7 +22,9 @@ import {
   Contact, 
   Detail,
   OrderTable,
-  RegisterPage 
+  RegisterPage,
+  LoginUser,
+  ForgotPassword 
 } from './views/indexViews.js';
 //<-------------
 
@@ -34,13 +34,12 @@ import { NavBar, Footer } from './components/indexComponents.js'
 
 function App() {
 
-  const dispatch = useDispatch();
+  const { getAllProducts, getAllRubros } = useProducts();
 
   useEffect(() => {
-    dispatch(getAllProductsDB());
-    dispatch(getAllRubrosDB());
-    dispatch(getAllSubRubrosDB());
-  },[dispatch]);
+    getAllProducts();
+    getAllRubros();
+  },[]);
 
   return (
     <div className="App">
@@ -58,6 +57,8 @@ function App() {
           <Route path='/about-us' element={<AboutUs/>}></Route>
           <Route path='/order' element={<OrderTable/>}></Route>
           <Route path='/register' element={<RegisterPage/>}></Route>
+          <Route path='/log-in' element={<LoginUser/>}></Route>
+          <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
         </Routes>
       </div>
       {/* FOOTER */}

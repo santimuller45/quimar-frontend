@@ -1,12 +1,14 @@
 import React from "react";
 import style from './ProductsPage.module.css';
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { filterByRubroDB, getSubFromRubName } from "../../redux/actions/actionsRubro.js";
 
 // COMPONENTS ----->
 import { CardContainer, PaginationComponent, Filters } from "../../components/indexComponents.js";
 // <----------------
+
+// CUSTOM HOOKS ---->
+import { useProducts } from "../../customHooks/useProducts.js";
+// <-----------------
 
 // REACT BOOSTRAP ------>
 import { Container, Row, Col } from 'react-bootstrap';
@@ -14,7 +16,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const ProductsPage = () => {
 
-    const productsDB = useSelector(state => state.products);
+    const { state, filterByRubro } = useProducts();
+    
+    const productsDB = state.products;
 
     const [currentPage , setCurrentPage ] = useState(1);
     const productPerPage = 12;
@@ -25,11 +29,9 @@ const ProductsPage = () => {
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
-    const dispatch = useDispatch();
     
     const handleFilterBySubRubro = (name) => {
-        dispatch(filterByRubroDB(name));
+        filterByRubro(name);
         setCurrentPage(1);
     };
 

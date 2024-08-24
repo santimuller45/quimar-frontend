@@ -2,8 +2,10 @@ import React from "react";
 import style from './SearchBox.module.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getProductByNameDB, getAllProductsDB } from '../../redux/actions/actionsProduct.js';
+
+// CUSTOM HOOK ---->
+import { useProducts } from "../../customHooks/useProducts.js";
+// <----------------
 
 // REACT BOOSTRAP
 import { Form, Col, Row, Button } from 'react-bootstrap';
@@ -18,23 +20,22 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 const SearchBox = () => {
 
     const [ product , setProduct ] = useState('');
-    const dispatch = useDispatch();
+    const { getProductByName, getAllProducts } = useProducts();
     const navigate = useNavigate();
 
     const productHandler = (e) => {
-        e.preventDefault();
         setProduct(e.target.value);
     };
 
-    const searchBoxHandler = (e) => {
+    const searchBoxHandler = async (e) => {
         e.preventDefault();
         navigate('/products');
-        if (product) dispatch(getProductByNameDB(product));
+        await getProductByName(product);
     };
 
-    const resetHandler = () => {
+    const resetHandler = async () => {
         setProduct('');
-        dispatch(getAllProductsDB());
+        await getAllProducts();
     };
 
     return (
