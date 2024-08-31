@@ -21,10 +21,11 @@ import {
   AboutUs, 
   Contact, 
   Detail,
-  OrderTable,
   RegisterPage,
   LoginUser,
-  ForgotPassword 
+  ForgotPassword,
+  OrderTable,
+  OrderCheckout 
 } from './views/indexViews.js';
 //<-------------
 
@@ -55,10 +56,11 @@ function App() {
           <Route path='/account-panel' element={<AccountPanel/>}></Route>
           <Route path='/contact-us' element={<Contact/>}></Route>
           <Route path='/about-us' element={<AboutUs/>}></Route>
-          <Route path='/order' element={<OrderTable/>}></Route>
           <Route path='/register' element={<RegisterPage/>}></Route>
           <Route path='/log-in' element={<LoginUser/>}></Route>
           <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
+          <Route path='/order' element={<OrderTable/>}></Route>
+          <Route path='/order-checkout' element={<OrderCheckout/>}></Route>
         </Routes>
       </div>
       {/* FOOTER */}

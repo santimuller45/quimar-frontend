@@ -13,13 +13,13 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
-import { useOrder } from "../../customHooks/useOrder.js";
+import { useShop } from "../../customHooks/useShop.js";
 // <----------------
 
 const OrderTable = () => {
 
     const navigate = useNavigate();
-    const { order, addToOrder, decrementQuantity, removeFromOrder, clearOrder, totalOrderAmount } = useOrder();
+    const { shop, addToOrder, decrementQuantity, removeFromOrder, clearOrder, totalOrderAmount } = useShop();
 
     return (
         <div className={style.container}>
@@ -36,12 +36,12 @@ const OrderTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {order.length === 0 ? (
+                    {shop.length === 0 ? (
                         <tr>
                             <td colSpan="6" className="text-center">No hay productos en el carrito</td>
                         </tr>
                     ) : (
-                        order.map(elem => (
+                        shop.map(elem => (
                             <tr className="text-center" key={elem.id}>
                                 <td>{elem.codigo}</td>
                                 <td>{elem.name}</td>
@@ -67,7 +67,7 @@ const OrderTable = () => {
                 </tbody>
             </Table>
 
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="dark" size="sm">
                 <thead>
                     <tr className="text-center">
                         <th>TOTAL</th>
@@ -81,8 +81,8 @@ const OrderTable = () => {
             </Table>
 
             <div className={style.endButtons}>
-                <Button variant="success" onClick={() => navigate(-1)}>Finalizar Pedido</Button>
-                <Button variant="danger" onClick={() => clearOrder()}>Limpiar Pedido</Button>
+                <Button variant="danger" onClick={() => clearOrder()}>Limpiar todo</Button>
+                <Button variant="success" onClick={() => navigate('/order-checkout')}>Continuar</Button>
             </div>
         </div>
     );

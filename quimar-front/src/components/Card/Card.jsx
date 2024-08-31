@@ -17,14 +17,14 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icon
 // <-------------------
 
 // CUSTOM HOOK ---->
-import { useOrder } from "../../customHooks/useOrder.js";
+import { useShop } from "../../customHooks/useShop.js";
 // <----------------
 
 const CardProduct = (product) => {
 
     const { id, codigo, name, price, imagen, category, status } = product;
 
-    const { addToOrder } = useOrder();
+    const { addToOrder } = useShop();
 
     const [showAlert, setShowAlert] = useState(false);
 

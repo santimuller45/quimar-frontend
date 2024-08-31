@@ -8,15 +8,18 @@ import { BrowserRouter } from "react-router-dom";
 import { ShopProvider } from './context/Shop.jsx';
 import { UserProvider } from './context/User.jsx';
 import { ProductProvider } from './context/Products.jsx';
+import { OrderProvider } from './context/Orders.jsx';
 //<---------------
 
 const Root = () => (
     <BrowserRouter>
       <ProductProvider>
         <ShopProvider>
-          <UserProvider>
+          <OrderProvider>
+            <UserProvider>
             <App />
-          </UserProvider>
+            </UserProvider>
+          </OrderProvider>
         </ShopProvider>
       </ProductProvider>
     </BrowserRouter>

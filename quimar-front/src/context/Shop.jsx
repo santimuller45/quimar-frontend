@@ -10,7 +10,7 @@ const ORDER_ACTION_TYPES = {
     DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
     REMOVE_FROM_ORDER : 'REMOVE_FROM_ORDER',
     CLEAN_ORDER : 'CLEAN_ORDER',
-    TOTAL_ORDER: 'TOTAL_ORDER'
+    TOTAL_ORDER: 'TOTAL_ORDER',
 };
 
 const updateOrderLocalStorage = (state) => window.localStorage.setItem('order', JSON.stringify(state));
@@ -83,7 +83,7 @@ const orderReducer = ( state , action ) => {
         case ORDER_ACTION_TYPES.TOTAL_ORDER: {
             const total = state.reduce((sum, item) => sum + item.total, 0);
             return { ...state, total };
-        }
+        };
         
         default: {
             return state;
@@ -93,7 +93,7 @@ const orderReducer = ( state , action ) => {
 
 export function ShopProvider ({ children }) {
     
-   const [ orderState , dispatch ] = useReducer( orderReducer, initialState);
+   const [ shopState , dispatch ] = useReducer( orderReducer, initialState);
 
 
     const addToOrder = product => dispatch({ type: ORDER_ACTION_TYPES.ADD_TO_ORDER, payload: product });
@@ -104,10 +104,10 @@ export function ShopProvider ({ children }) {
 
     const clearOrder = () => dispatch({ type: ORDER_ACTION_TYPES.CLEAN_ORDER });
 
-    const getTotalAmount = () => orderState.reduce((sum, item) => sum + item.total, 0);
+    const getTotalAmount = () => shopState.reduce((sum, item) => sum + item.total, 0);
 
     return (
-        <ShopContext.Provider value={{ order : orderState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>
+        <ShopContext.Provider value={{ shop : shopState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>
             {children}
         </ShopContext.Provider>
     )
