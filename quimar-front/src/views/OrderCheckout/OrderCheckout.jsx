@@ -1,16 +1,16 @@
 import React from "react";
 import style from './OrderCheckout.module.css';
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // REACT-BOOSTRAP ------>
-import { Button, Table, Form } from "react-bootstrap";
+import { Button, Table, Form, Row, Col } from "react-bootstrap";
 // <---------------------
 
 //FONT-AWESOME ------->
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+// import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
@@ -25,56 +25,78 @@ const OrderCheckout = () => {
     const { shop, totalOrderAmount, clearOrder } = useShop();
     const { setNewOrder } = useOrders();
     const { state } = useUser();
+
     const localUser = state.user || {};
+    const [comments, setComments] = useState(""); // Nuevo estado para comentarios
+
+    const handleCommentsChange = (e) => {
+        setComments(e.target.value); // Actualiza el estado con el valor del textarea
+    };
 
     const enviarPedido = async () => {
         const pedido = {
             listaPedido: shop.map(elem => `codigo:${elem.codigo} cantidad:${elem.quantity} producto:${elem.name}`),
             amount: totalOrderAmount,
             totalAmount: totalOrderAmount,
-            comentary: "ESTE ES UN COMENTARIO",
+            comentary: comments,
             orderStatus: "PENDIENTE",
             userEmail: localUser.email
         };
         await setNewOrder(pedido);
         clearOrder();
         navigate('/');
-    }
+    };
 
     useEffect(() => {
         !localUser.email && navigate('/log-in');
-    },[localUser])
+    },[localUser]);
 
     return (
-        <div>
-            <h1 className={style.title}>Datos</h1>
-            <Table striped bordered hover variant="dark" responsive="lg">
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>CUIT</th>
-                        <th>Dirección</th>
-                        <th>Localidad</th>
-                        <th>Provincia</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{localUser.email}</td>
-                        <td>{localUser.firstname}</td>
-                        <td>{localUser.lastname}</td>
-                        <td>{localUser.cuit}</td>
-                        <td>{localUser.address}</td>
-                        <td>{localUser.city}</td>
-                        <td>{localUser.state}</td>
-                        <td>{localUser.phone}</td>
-                    </tr>
-                </tbody>
-            </Table>
-            <h1 className={style.title}>Pedido</h1>
+        <div className="container">
+            <h2 className={style.title}>DATOS</h2>
+            <Form>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="6" controlId="formEmail">
+                        <Form.Label className={style.labelUserInfo}>Email</Form.Label>
+                        <Form.Control type="email" value={localUser.email} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formFirstname">
+                        <Form.Label className={style.labelUserInfo}>Nombre</Form.Label>
+                        <Form.Control type="text" value={localUser.firstname} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="6" controlId="formLastname">
+                        <Form.Label className={style.labelUserInfo}>Apellido</Form.Label>
+                        <Form.Control type="text" value={localUser.lastname} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formCuit">
+                        <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
+                        <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="6" controlId="formAddress">
+                        <Form.Label className={style.labelUserInfo}>Dirección</Form.Label>
+                        <Form.Control type="text" value={localUser.address} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="3" controlId="formCity">
+                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
+                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="3" controlId="formState">
+                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
+                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="6" controlId="formPhone">
+                        <Form.Label className={style.userInfo}>Teléfono</Form.Label>
+                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                </Row>
+            </Form>
+            <h2 className={style.title}>DETALLE DEL PEDIDO</h2>
             <Table striped bordered hover variant="dark" responsive="lg">
                 <thead>
                     <tr>
@@ -105,15 +127,17 @@ const OrderCheckout = () => {
             </Table>
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Comentarios para el pedido</Form.Label>
+                    <Form.Label className={style.labelUserInfo} >Comentarios para el pedido</Form.Label>
                     <Form.Control 
                         as="textarea" rows={3}
+                        value={comments}
+                        onChange={handleCommentsChange}
                     />
                 </Form.Group>
             </Form>
             <div className={style.endButtons}>
-                <Button variant="danger" onClick={() => navigate(-1)}>Volver</Button>
-                <Button variant="success" onClick={enviarPedido}>Enviar</Button>
+                <Button className={style.button} variant="danger" onClick={() => navigate(-1)}>Volver</Button>
+                <Button className={style.button} variant="success" onClick={enviarPedido}>Enviar</Button>
             </div>
         </div>
     );

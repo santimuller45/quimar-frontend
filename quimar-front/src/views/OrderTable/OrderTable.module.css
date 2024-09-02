@@ -43,6 +43,11 @@
     justify-content: center; /* Centrar los botones horizontalmente */
 }
 
+.button {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 /* Table Customization */
 .table th, .table td {
     text-align: center; /* Centrar el texto en las celdas de la tabla */

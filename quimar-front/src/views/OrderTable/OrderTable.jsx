@@ -23,7 +23,7 @@ const OrderTable = () => {
 
     return (
         <div className={style.container}>
-            <h1 className={style.title}>Pedido</h1>
+            <h1 className={style.title}>PEDIDO</h1>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr>
@@ -81,8 +81,8 @@ const OrderTable = () => {
             </Table>
 
             <div className={style.endButtons}>
-                <Button variant="danger" onClick={() => clearOrder()}>Limpiar todo</Button>
-                <Button variant="success" onClick={() => navigate('/order-checkout')}>Continuar</Button>
+                <Button className={style.button} variant="danger" onClick={() => clearOrder()}>Limpiar pedido</Button>
+                <Button className={style.button} variant="success" onClick={() => navigate('/order-checkout')}>Continuar</Button>
             </div>
         </div>
     );

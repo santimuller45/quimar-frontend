@@ -43,7 +43,7 @@ const ProductsPage = () => {
                 </Col>
                 <Col md={9}>
                     <section>
-                        <h3 className={style.mainTitle}><strong>NUESTROS PRODUCTOS</strong></h3>
+                        <h2 className={style.mainTitle}><strong>NUESTROS PRODUCTOS</strong></h2>
                         <Row>
                             <Col>
                                 <CardContainer 

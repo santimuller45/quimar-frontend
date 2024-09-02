@@ -1,12 +1,10 @@
-.container {
-    border: 2px solid #000;
-    padding: 1rem;
-}
-
 .title {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
     font-size: 2.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 700; /* Utilizar font-weight 700 para un texto más destacado */
@@ -14,8 +12,15 @@
     margin-bottom: 2rem; /* Espacio debajo del título */
 }
 
-.userInfo {
+.labelUserInfo {
     font-size: 1.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700; /* Utilizar font-weight 700 para un texto más destacado */
+    color: #000; /* Color blanco para contraste sobre fondo oscuro */
+}
+
+.userInfo {
+    font-size: 1rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 700; /* Utilizar font-weight 700 para un texto más destacado */
     color: #000; /* Color blanco para contraste sobre fondo oscuro */
@@ -27,4 +32,9 @@
     gap: 1rem; /* Espacio entre los botones */
     margin-top: 2rem; /* Espacio arriba del contenedor de botones */
     justify-content: center; /* Centrar los botones horizontalmente */
+}
+
+.button {
+    font-size: 1rem;
+    font-weight: bold;
 }
