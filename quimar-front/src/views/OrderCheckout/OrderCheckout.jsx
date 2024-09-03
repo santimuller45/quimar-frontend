@@ -62,14 +62,10 @@ const OrderCheckout = () => {
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="formFirstname">
                         <Form.Label className={style.labelUserInfo}>Nombre</Form.Label>
-                        <Form.Control type="text" value={localUser.firstname} className={style.userInfo} readOnly/>
+                        <Form.Control type="text" value={localUser.name} className={style.userInfo} readOnly/>
                     </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formLastname">
-                        <Form.Label className={style.labelUserInfo}>Apellido</Form.Label>
-                        <Form.Control type="text" value={localUser.lastname} className={style.userInfo} readOnly/>
-                    </Form.Group>
                     <Form.Group as={Col} md="6" controlId="formCuit">
                         <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
                         <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>

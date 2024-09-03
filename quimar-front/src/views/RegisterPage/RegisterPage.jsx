@@ -23,8 +23,7 @@ const RegisterPage = () => {
         email: "",
         password: "",
         repeatPassword: "",
-        firstname: "",
-        lastname: "",
+        name: "",
         phone: "",
         cuit: "",
         address: "",
@@ -109,35 +108,18 @@ const RegisterPage = () => {
 
                 <Row>
                     <Col>
-                        <Form.Group className="mb-3" controlId="formBasicFirstname">
+                        <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label className={style.label}>Nombre</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="firstname"
+                                name="name"
                                 placeholder="Ingrese su nombre"
-                                value={formData.firstname}
+                                value={formData.name}
                                 onChange={handlerInputChange}
-                                isInvalid={!!errors.firstname}
+                                isInvalid={!!errors.name}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.firstname}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicLastname">
-                            <Form.Label className={style.label}>Apellido</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="lastname"
-                                placeholder="Ingrese su apellido"
-                                value={formData.lastname}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.lastname}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.lastname}
+                                {errors.name}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>

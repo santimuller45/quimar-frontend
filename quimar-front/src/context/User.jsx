@@ -4,7 +4,7 @@ import axios from "axios";
 export const UserContext = createContext();
 
 const initialState = {
-    user: JSON.parse(window.localStorage.getItem('user')) || null,
+    user: JSON.parse(window.localStorage.getItem('user')) || {},
     allUsers: [],
     error: null
 };
@@ -39,7 +39,7 @@ const userReducer = ( state , action ) => {
         case USER_ACTION_TYPES.LOGOUT_USER: {
             return {
                 ...state,
-                user: null,
+                user: {},
                 error: null
             };
         };

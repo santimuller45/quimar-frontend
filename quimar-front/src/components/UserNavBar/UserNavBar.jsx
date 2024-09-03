@@ -23,8 +23,8 @@ const UserNavBar = () => {
 
     const logoutHandler = async () => {
         try {
-            await userLogOut();
             navigate('/');
+            userLogOut();
         } catch (error) {
             console.error("Error logging out:", error);
         }

@@ -27,8 +27,7 @@ const AccountPanel = () => {
                     allUsersDB?.map((item, index) => (
                         <div key={index} className={style.container}>
                             <h4>{item.email}</h4>
-                            <h4>{item.firstname}</h4>
-                            <h4>{item.lastname}</h4>
+                            <h4>{item.name}</h4>
                             <h4>{item.cuit}</h4>
                             <h4>{item.address}</h4>
                             <h4>{item.state}</h4>
