@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
 
 export const UserContext = createContext();
@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const USER_ACTION_TYPES = {
-    REGISTER_USER : 'REGISTER_USER',
     LOGIN_USER: 'LOGIN_USER',
     LOGOUT_USER : 'LOGOUT_USER',
     GET_ALL_USERS : 'GET_ALL_USERS',
@@ -23,10 +22,6 @@ const updateUserLocalStorage = (user) => window.localStorage.setItem('user', JSO
 const userReducer = ( state , action ) => {
 
     switch ( action.type ) {
-
-        case USER_ACTION_TYPES.REGISTER_USER: {
-            return state;
-        }
 
         case USER_ACTION_TYPES.LOGIN_USER: {
             return {
@@ -69,44 +64,47 @@ export const UserProvider = ({ children }) => {
 
     const [ state, dispatch] = useReducer( userReducer, initialState);
 
+    // Efecto para actualizar el localStorage cuando el estado cambia
+    useEffect(() => {
+        updateUserLocalStorage(state.user);
+    }, [state.user]);
+
+    // Registrar un nuevo usuario
     const registerUser = async ( form ) => {
         try {
-            const response = (await axios.post('/users/register', form)).data;
-            dispatch({ 
-                type: USER_ACTION_TYPES.REGISTER_USER, 
-                payload: response 
-            });
+            await axios.post('/users/register', form);
         } catch (error) {
             dispatch({ 
                 type: USER_ACTION_TYPES.SET_ERROR, 
-                payload: error.message 
+                payload: error.response ? error.response.data.error : error.message, 
             });
         }
-    }
+    };
 
+    // Iniciar sesión del usuario
     const userLogin = async ( user ) => {
         try {
-            const response = (await axios.post('/users/login', user )).data;
-            updateUserLocalStorage(response);
+            const response = await axios.post('/users/login', user );
             dispatch({ 
                 type: USER_ACTION_TYPES.LOGIN_USER, 
-                payload: response 
+                payload: response.data 
             });
         } catch (error) {
+            const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
             dispatch({ 
                 type: USER_ACTION_TYPES.SET_ERROR, 
-                payload: error.message
+                payload: errorMessage,
             });
         }
     };
 
+    // Cerrar sesión del usuario
     const userLogOut = () => {
         window.localStorage.removeItem('user');
-        dispatch({ 
-            type: USER_ACTION_TYPES.LOGOUT_USER 
-        });
+        dispatch({ type: USER_ACTION_TYPES.LOGOUT_USER });
     };
 
+    // Obtener todos los usuarios
     const getAllUsers = async () => {
         try {
             const response = (await axios('/users')).data;
@@ -117,7 +115,7 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
             dispatch({ 
                 type: USER_ACTION_TYPES.SET_ERROR, 
-                payload: error.message 
+                payload: error.response ? error.response.data.error : error.message,
             });
         }
     };

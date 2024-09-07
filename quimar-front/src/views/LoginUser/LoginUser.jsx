@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from './LoginUser.module.css';
 import { useNavigate, Link } from "react-router-dom";
 
@@ -31,7 +31,6 @@ const LoginUser = () => {
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
-        confirm: false
     });
 
     const handlerInputChange = (e) => {
@@ -41,26 +40,42 @@ const LoginUser = () => {
         });
     };
 
+    useEffect(() => {
+        if (state.error) {
+            setMessageAlert(state.error);
+            setTypeAlert(false);
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            },3000)
+        }
+    }, [state.error]);
+
     const submitLoginHandler = async (e) => {
         e.preventDefault();
-        try {   
+        // Limpiar errores anteriores antes de enviar el formulario
+        setMessageAlert('');
+        setTypeAlert(false);
+    
+        try {
             await userLogin(formLogin);
+            // Verifica si hay un error en el estado después de intentar iniciar sesión
             if (state.error) {
                 setMessageAlert(state.error);
-                setTypeAlert(false);
+                setTypeAlert(false); // Tipo de alerta para error
                 setShowAlert(true);
             } else {
                 setMessageAlert("¡Usuario logueado correctamente!");
-                setTypeAlert(true);
+                setTypeAlert(true); // Tipo de alerta para éxito
                 setShowAlert(true);
                 setTimeout(() => {
-                    setShowAlert(false)
                     navigate('/account');
-                }, 1000);
+                },2000);
             }
         } catch (error) {
-            setMessageAlert(error.message);
-            setTypeAlert(false);
+            // Captura errores inesperados
+            setMessageAlert(error.message || "Error desconocido");
+            setTypeAlert(false); // Tipo de alerta para error
             setShowAlert(true);
         }
     };
@@ -69,6 +84,7 @@ const LoginUser = () => {
         <div className={style.container}>
             <h2 className={style.title}>Iniciar Sesión</h2>
             <Form onSubmit={submitLoginHandler}>
+
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className={style.label}>Email</Form.Label>
                     <Form.Control
@@ -79,6 +95,7 @@ const LoginUser = () => {
                         onChange={handlerInputChange}
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className={style.label}>Contraseña</Form.Label>
                     <Form.Control
@@ -91,20 +108,11 @@ const LoginUser = () => {
                 </Form.Group>
 
                 <Row>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check
-                            type="checkbox"
-                            name="confirm"
-                            label="Confirmar"
-                            checked={formLogin.confirm}
-                            onChange={handlerInputChange}
-                        />
-                    </Form.Group>
-                    <Button type="submit" disabled={formLogin.confirm === false}>
+                    <Button type="submit">
                         Enviar
                     </Button>
                 </Row>
-                <Row><Link to={'/forgot-password'}>Olvido su contraseña ?</Link></Row>
+                <Row><Link to={'/forgot-password'}>Olvidé mi contraseña</Link></Row>
             </Form>
             { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>

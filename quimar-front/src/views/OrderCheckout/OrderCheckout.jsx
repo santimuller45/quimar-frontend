@@ -60,7 +60,7 @@ const OrderCheckout = () => {
                         <Form.Label className={style.labelUserInfo}>Email</Form.Label>
                         <Form.Control type="email" value={localUser.email} className={style.userInfo} readOnly/>
                     </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="formFirstname">
+                    <Form.Group as={Col} md="6" controlId="formName">
                         <Form.Label className={style.labelUserInfo}>Nombre</Form.Label>
                         <Form.Control type="text" value={localUser.name} className={style.userInfo} readOnly/>
                     </Form.Group>
@@ -70,25 +70,29 @@ const OrderCheckout = () => {
                         <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
                         <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>
                     </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formPhone">
+                        <Form.Label className={style.labelUserInfo}>Teléfono</Form.Label>
+                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
+                    </Form.Group>
                 </Row>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="formAddress">
                         <Form.Label className={style.labelUserInfo}>Dirección</Form.Label>
                         <Form.Control type="text" value={localUser.address} className={style.userInfo} readOnly/>
                     </Form.Group>
-                    <Form.Group as={Col} md="3" controlId="formCity">
-                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
-                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="3" controlId="formState">
-                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
-                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
+                    <Form.Group as={Col} md="6" controlId="formPostalCode">
+                        <Form.Label className={style.labelUserInfo}>Código Postal</Form.Label>
+                        <Form.Control type="text" value={localUser.postalCode} className={style.userInfo} readOnly/>
                     </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formPhone">
-                        <Form.Label className={style.userInfo}>Teléfono</Form.Label>
-                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
+                    <Form.Group as={Col} md="6" controlId="formCity">
+                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
+                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formState">
+                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
+                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
                     </Form.Group>
                 </Row>
             </Form>
@@ -123,7 +127,7 @@ const OrderCheckout = () => {
             </Table>
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label className={style.labelUserInfo} >Comentarios para el pedido</Form.Label>
+                    <Form.Label className={style.labelUserInfo}>Observación para el pedido</Form.Label>
                     <Form.Control 
                         as="textarea" rows={3}
                         value={comments}

@@ -21,8 +21,6 @@ const RegisterPage = () => {
 
     const [formData, setFormData] = useState({
         email: "",
-        password: "",
-        repeatPassword: "",
         name: "",
         phone: "",
         cuit: "",
@@ -73,36 +71,6 @@ const RegisterPage = () => {
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.email}
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className={style.label}>Contraseña</Form.Label>
-                    <Form.Control
-                        type="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        value={formData.password}
-                        onChange={handlerInputChange}
-                        isInvalid={!!errors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicRepeatPassword">
-                    <Form.Label className={style.label}>Repetir Contraseña</Form.Label>
-                    <Form.Control
-                        type="password"
-                        name="repeatPassword"
-                        placeholder="Repetir Contraseña"
-                        value={formData.repeatPassword}
-                        onChange={handlerInputChange}
-                        isInvalid={!!errors.repeatPassword}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.repeatPassword}
                     </Form.Control.Feedback>
                 </Form.Group>
 

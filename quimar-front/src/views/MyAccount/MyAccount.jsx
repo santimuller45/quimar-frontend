@@ -20,7 +20,7 @@ const MyAccount = () => {
 
     useEffect(() => {
         !localUser.email && navigate('/');
-    },[state,localUser])
+    },[]);
 
     return (
         <div className="container">
@@ -41,25 +41,29 @@ const MyAccount = () => {
                         <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
                         <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>
                     </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formPhone">
+                        <Form.Label className={style.labelUserInfo}>Teléfono</Form.Label>
+                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
+                    </Form.Group>
                 </Row>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="formAddress">
                         <Form.Label className={style.labelUserInfo}>Dirección</Form.Label>
                         <Form.Control type="text" value={localUser.address} className={style.userInfo} readOnly/>
                     </Form.Group>
-                    <Form.Group as={Col} md="3" controlId="formCity">
-                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
-                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="3" controlId="formState">
-                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
-                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
+                    <Form.Group as={Col} md="6" controlId="formPostalCode">
+                        <Form.Label className={style.labelUserInfo}>Código Postal</Form.Label>
+                        <Form.Control type="text" value={localUser.postalCode} className={style.userInfo} readOnly/>
                     </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formPhone">
-                        <Form.Label className={style.userInfo}>Teléfono</Form.Label>
-                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
+                    <Form.Group as={Col} md="6" controlId="formCity">
+                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
+                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
+                    </Form.Group>
+                    <Form.Group as={Col} md="6" controlId="formState">
+                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
+                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
                     </Form.Group>
                 </Row>
             </Form>
