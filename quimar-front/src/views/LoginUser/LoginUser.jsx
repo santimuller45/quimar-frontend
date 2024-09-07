@@ -82,16 +82,14 @@ const LoginUser = () => {
                     <Form.Control
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="CUIT/CUIL o Contraseña"
                         value={formLogin.password}
                         onChange={handlerInputChange}
                     />
                 </Form.Group>
 
                 <Row>
-                    <Button type="submit">
-                        Enviar
-                    </Button>
+                    <Button type="submit">Ingresar</Button>
                 </Row>
                 <Row><Link to={'/forgot-password'}>Olvidé mi contraseña</Link></Row>
             </Form>
