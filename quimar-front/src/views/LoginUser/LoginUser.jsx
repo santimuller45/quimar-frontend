@@ -26,7 +26,7 @@ const LoginUser = () => {
     const [typeAlert, setTypeAlert] = useState(false);
     // <----------------------
 
-    const { state ,userLogin } = useUser();
+    const { userLogin } = useUser();
 
     const [formLogin, setFormLogin] = useState({
         email: "",
@@ -40,42 +40,22 @@ const LoginUser = () => {
         });
     };
 
-    useEffect(() => {
-        if (state.error) {
-            setMessageAlert(state.error);
-            setTypeAlert(false);
-            setShowAlert(true);
-            setTimeout(() => {
-                setShowAlert(false);
-            },3000)
-        }
-    }, [state.error]);
-
     const submitLoginHandler = async (e) => {
         e.preventDefault();
-        // Limpiar errores anteriores antes de enviar el formulario
         setMessageAlert('');
         setTypeAlert(false);
-    
+
         try {
             await userLogin(formLogin);
-            // Verifica si hay un error en el estado después de intentar iniciar sesión
-            if (state.error) {
-                setMessageAlert(state.error);
-                setTypeAlert(false); // Tipo de alerta para error
-                setShowAlert(true);
-            } else {
-                setMessageAlert("¡Usuario logueado correctamente!");
-                setTypeAlert(true); // Tipo de alerta para éxito
-                setShowAlert(true);
-                setTimeout(() => {
-                    navigate('/account');
-                },2000);
-            }
+            setMessageAlert("¡Usuario logueado correctamente!");
+            setTypeAlert(true);
+            setShowAlert(true);
+            setTimeout(() => {
+                navigate('/account');
+            }, 1000);
         } catch (error) {
-            // Captura errores inesperados
-            setMessageAlert(error.message || "Error desconocido");
-            setTypeAlert(false); // Tipo de alerta para error
+            setMessageAlert(error);
+            setTypeAlert(false);
             setShowAlert(true);
         }
     };
