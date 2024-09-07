@@ -6,6 +6,10 @@ import style from './RegisterPage.module.css';
 import { Button, Form, Row, Col } from "react-bootstrap";
 // <------------------------
 
+// COMPONENT ------->
+import { CustomAlert } from "../../components/indexComponents.js";
+// <-----------------
+
 // CUSTOM HOOK ---->
 import { useUser } from "../../customHooks/useUser.js";
 // <----------------
@@ -18,6 +22,12 @@ const RegisterPage = () => {
 
     const navigate = useNavigate();
     const { registerUser } = useUser();
+
+    // MANEJO DE ALERTAS ---->
+    const [showAlert, setShowAlert] = useState(false);
+    const [messageAlert, setMessageAlert] = useState('');
+    const [typeAlert, setTypeAlert] = useState(false);
+    // <----------------------
 
     const [formData, setFormData] = useState({
         email: "",
@@ -48,10 +58,25 @@ const RegisterPage = () => {
 
     };
 
-    const handlerSubmitRegister = (e) => {
+    const handlerSubmitRegister = async (e) => {
         e.preventDefault();
-        registerUser(formData);
-        navigate('/');
+        setMessageAlert('');
+        setTypeAlert(false);
+
+        try {
+            await registerUser(formData);
+            setMessageAlert("¡Usuario creado correctamente!");
+            setTypeAlert(true);
+            setShowAlert(true);
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
+        } catch (error) {
+            setMessageAlert(error);
+            setTypeAlert(false);
+            setShowAlert(true);
+        }
+
     };
 
 
@@ -216,6 +241,7 @@ const RegisterPage = () => {
                     </Button>
                 </Row>
             </Form>
+            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     );
 };

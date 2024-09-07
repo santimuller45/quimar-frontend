@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { Button, Table, Form, Row, Col } from "react-bootstrap";
 // <---------------------
 
+// COMPONENT ------->
+import { CustomAlert } from "../../components/indexComponents.js";
+// <-----------------
+
 //FONT-AWESOME ------->
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
@@ -26,6 +30,12 @@ const OrderCheckout = () => {
     const { setNewOrder } = useOrders();
     const { state } = useUser();
 
+     // MANEJO DE ALERTAS ---->
+     const [showAlert, setShowAlert] = useState(false);
+     const [messageAlert, setMessageAlert] = useState('');
+     const [typeAlert, setTypeAlert] = useState(false);
+     // <----------------------
+
     const localUser = state.user || {};
     const [comments, setComments] = useState(""); // Nuevo estado para comentarios
 
@@ -34,6 +44,8 @@ const OrderCheckout = () => {
     };
 
     const enviarPedido = async () => {
+        setMessageAlert('');
+        setTypeAlert(false);
         const pedido = {
             listaPedido: shop.map(elem => `codigo:${elem.codigo} cantidad:${elem.quantity} producto:${elem.name}`),
             amount: totalOrderAmount,
@@ -42,9 +54,22 @@ const OrderCheckout = () => {
             orderStatus: "PENDIENTE",
             userEmail: localUser.email
         };
-        await setNewOrder(pedido);
-        clearOrder();
-        navigate('/');
+        
+        try {
+            await setNewOrder(pedido);
+            setMessageAlert("¡Pedido enviado exitosamente!");
+            setTypeAlert(true);
+            setShowAlert(true);
+            setTimeout(() => {
+                clearOrder();
+                navigate('/');
+            }, 2000);
+        } catch (error) {
+            setMessageAlert(error);
+            setTypeAlert(false);
+            setShowAlert(true);
+        }
+
     };
 
     useEffect(() => {
@@ -139,6 +164,7 @@ const OrderCheckout = () => {
                 <Button className={style.button} variant="danger" onClick={() => navigate(-1)}>Volver</Button>
                 <Button className={style.button} variant="success" onClick={enviarPedido}>Enviar</Button>
             </div>
+            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     );
 };
