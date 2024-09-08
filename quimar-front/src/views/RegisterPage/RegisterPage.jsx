@@ -81,10 +81,10 @@ const RegisterPage = () => {
 
 
     return (
-        <div className={style.container}>
+        <div className="container">
             <h2 className={style.title}>Registro de Usuario</h2>
             <Form onSubmit={handlerSubmitRegister} noValidate>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group as={Col} md="4" controlId="formBasicEmail" className={style.container}>
                     <Form.Label className={style.label}>Email</Form.Label>
                     <Form.Control
                         type="email"
@@ -93,137 +93,123 @@ const RegisterPage = () => {
                         value={formData.email}
                         onChange={handlerInputChange}
                         isInvalid={!!errors.email}
-                    />
+                        className={style.text}
+                        />
                     <Form.Control.Feedback type="invalid">
                         {errors.email}
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Row>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label className={style.label}>Nombre</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="name"
-                                placeholder="Ingrese su nombre"
-                                value={formData.name}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.name}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.name}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
+                <Form.Group as={Col} md="4" controlId="formBasicName" className={style.container}>
+                    <Form.Label className={style.label}>Nombre</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="name"
+                        placeholder="Ingrese su nombre"
+                        value={formData.name}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.name}
+                        className={style.text}
+                        />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.name}
+                    </Form.Control.Feedback>
+                </Form.Group>
+                
+                <Form.Group as={Col} md="4" controlId="formBasicPhone" className={style.container}>
+                    <Form.Label className={style.label}>Teléfono</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="phone"
+                        placeholder="Ingrese su número de teléfono"
+                        value={formData.phone}
+                        onChange={handlerInputChange}
+                        className={style.text}
+                    />
+                </Form.Group>
+                    
+                <Form.Group as={Col} md="4" controlId="formBasicCuit" className={style.container}>
+                    <Form.Label className={style.label}>CUIT/CUIL</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="cuit"
+                        placeholder="Ingrese su CUIT/CUIL"
+                        value={formData.cuit}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.cuit}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.cuit}
+                    </Form.Control.Feedback>
+                </Form.Group>
+                
+                <Form.Group as={Col} md="4" controlId="formBasicAddress" className={style.container}>
+                    <Form.Label className={style.label}>Dirección</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="address"
+                        placeholder="Ingrese su dirección"
+                        value={formData.address}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.address}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.address}
+                    </Form.Control.Feedback>
+                </Form.Group>
+        
+                <Form.Group as={Col} md="4" controlId="formBasicCP" className={style.container}>
+                    <Form.Label className={style.label}>Código Postal</Form.Label>
+                    <Form.Control
+                        type="number"
+                        name="postalCode"
+                        placeholder="Ingrese su código postal"
+                        value={formData.postalCode}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.postalCode}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.postalCode}
+                    </Form.Control.Feedback>
+                </Form.Group>
+                
+                <Form.Group as={Col} md="4" controlId="formBasicCity" className={style.container}>
+                    <Form.Label className={style.label}>Localidad</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="city"
+                        placeholder="Ingrese su localidad"
+                        value={formData.city}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.city}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.city}
+                    </Form.Control.Feedback>
+                </Form.Group>
+                    
+                <Form.Group as={Col} md="4" controlId="formBasicState" className={style.container}>
+                    <Form.Label className={style.label}>Provincia</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="state"
+                        placeholder="Ingrese su provincia"
+                        value={formData.state}
+                        onChange={handlerInputChange}
+                        isInvalid={!!errors.state}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.state}
+                    </Form.Control.Feedback>
+                </Form.Group>
 
-                <Row>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicPhone">
-                            <Form.Label className={style.label}>Teléfono</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="phone"
-                                placeholder="Ingrese su número de teléfono"
-                                value={formData.phone}
-                                onChange={handlerInputChange}
-                            />
-                        </Form.Group>
-                    </Col>
-
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicCuit">
-                            <Form.Label className={style.label}>CUIT/CUIL</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="cuit"
-                                placeholder="Ingrese su CUIT/CUIL"
-                                value={formData.cuit}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.cuit}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.cuit}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicAddress">
-                            <Form.Label className={style.label}>Dirección</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="address"
-                                placeholder="Ingrese su dirección"
-                                value={formData.address}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.address}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.address}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicCP">
-                            <Form.Label className={style.label}>Código Postal</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="postalCode"
-                                placeholder="Ingrese su código postal"
-                                value={formData.postalCode}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.postalCode}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.postalCode}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicCity">
-                            <Form.Label className={style.label}>Localidad</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="city"
-                                placeholder="Ingrese su localidad"
-                                value={formData.city}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.city}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.city}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicState">
-                            <Form.Label className={style.label}>Provincia</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="state"
-                                placeholder="Ingrese su provincia"
-                                value={formData.state}
-                                onChange={handlerInputChange}
-                                isInvalid={!!errors.state}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.state}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <div className={style.sendButton}>
+                    <Form.Group controlId="formBasicCheckbox">
                         <Form.Check
                             type="checkbox"
                             name="confirm"
@@ -231,6 +217,7 @@ const RegisterPage = () => {
                             checked={formData.confirm}
                             onChange={handlerInputChange}
                             isInvalid={!!errors.confirm}
+                            className={style.checkBox}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.confirm}
@@ -239,7 +226,7 @@ const RegisterPage = () => {
                     <Button type="submit" disabled={Object.keys(errors).length > 0}>
                         Enviar
                     </Button>
-                </Row>
+                </div>
             </Form>
             { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>

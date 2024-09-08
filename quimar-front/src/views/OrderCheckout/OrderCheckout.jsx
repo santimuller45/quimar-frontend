@@ -78,7 +78,7 @@ const OrderCheckout = () => {
 
     return (
         <div className="container">
-            <h2 className={style.title}>DATOS</h2>
+            <h2 className={style.title}>Datos del cliente</h2>
             <Form>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="formEmail">
@@ -121,7 +121,7 @@ const OrderCheckout = () => {
                     </Form.Group>
                 </Row>
             </Form>
-            <h2 className={style.title}>DETALLE DEL PEDIDO</h2>
+            <h2 className={style.title}>Detalle del pedido</h2>
             <Table striped bordered hover variant="dark" responsive="lg">
                 <thead>
                     <tr>

@@ -47,7 +47,7 @@ const UserNavBar = () => {
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser} /> Cuenta</span>} id="basic-nav-dropdown-account">
                     <NavDropdown.Item href="/log-in"><span className={style.navLink}>Ingresar</span></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/register"><span className={style.navLink}>Registrarse</span></NavDropdown.Item>
+                    <NavDropdown.Item href="/register"><span className={style.navLink}>Registrarme</span></NavDropdown.Item>
                 </NavDropdown>
                 
             }

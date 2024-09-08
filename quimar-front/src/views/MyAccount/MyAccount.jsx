@@ -24,13 +24,14 @@ const MyAccount = () => {
 
     return (
         <div className="container">
-            <h2 className={style.title}>MI CUENTA</h2>
+            <h2 className={style.title}>Mis datos</h2>
             <Form>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="formEmail">
                         <Form.Label className={style.labelUserInfo}>Email</Form.Label>
                         <Form.Control type="email" value={localUser.email} className={style.userInfo} readOnly/>
                     </Form.Group>
+
                     <Form.Group as={Col} md="6" controlId="formName">
                         <Form.Label className={style.labelUserInfo}>Nombre</Form.Label>
                         <Form.Control type="text" value={localUser.name} className={style.userInfo} readOnly/>
@@ -38,9 +39,10 @@ const MyAccount = () => {
                 </Row>
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="formCuit">
-                        <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
+                        <Form.Label className={style.labelUserInfo}>CUIT/CUIL</Form.Label>
                         <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>
                     </Form.Group>
+                    
                     <Form.Group as={Col} md="6" controlId="formPhone">
                         <Form.Label className={style.labelUserInfo}>Teléfono</Form.Label>
                         <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
@@ -51,6 +53,7 @@ const MyAccount = () => {
                         <Form.Label className={style.labelUserInfo}>Dirección</Form.Label>
                         <Form.Control type="text" value={localUser.address} className={style.userInfo} readOnly/>
                     </Form.Group>
+
                     <Form.Group as={Col} md="6" controlId="formPostalCode">
                         <Form.Label className={style.labelUserInfo}>Código Postal</Form.Label>
                         <Form.Control type="text" value={localUser.postalCode} className={style.userInfo} readOnly/>
@@ -61,6 +64,7 @@ const MyAccount = () => {
                         <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
                         <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
                     </Form.Group>
+                    
                     <Form.Group as={Col} md="6" controlId="formState">
                         <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
                         <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>

@@ -23,7 +23,7 @@ const OrderTable = () => {
 
     return (
         <div className={style.container}>
-            <h1 className={style.title}>PEDIDO</h1>
+            <h1 className={style.title}>Pedido</h1>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr>
