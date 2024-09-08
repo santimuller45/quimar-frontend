@@ -91,8 +91,25 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    // Reestablecer cuenta del usuario
+    const updateUserPassword = async (user) => {
+        try {
+            await axios.put('/users/forgot-password', user);
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
+    const updateUsers = async (user) => {
+        try {
+            await axios.put('/users/config-users', user);
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
     return (
-        <UserContext.Provider value={{ state, registerUser, userLogin, userLogOut, getAllUsers }}>
+        <UserContext.Provider value={{ state, registerUser, userLogin, userLogOut, getAllUsers, updateUserPassword, updateUsers }}>
             {children}
         </UserContext.Provider>
     );

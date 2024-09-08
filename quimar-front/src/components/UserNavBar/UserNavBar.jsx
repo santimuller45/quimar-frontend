@@ -8,7 +8,7 @@ import { Nav, NavDropdown } from 'react-bootstrap';
 
 //FONT-AWESOME ------->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faUser, faScrewdriverWrench, faUsers, faGears } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
@@ -37,11 +37,12 @@ const UserNavBar = () => {
             </Nav.Link>
             { localUser.email
                 ?
-                <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser} /> Cuenta</span>} id="basic-nav-dropdown-account">
+                <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account">
                     <NavDropdown.Item href="/account"><span className={style.navLink}>Mi Cuenta</span></NavDropdown.Item>
-                    <NavDropdown.Item href="/account-panel"><span className={style.navLink}>Panel de cuenta</span></NavDropdown.Item>
+                    <NavDropdown.Item href="/"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
+                    <NavDropdown.Item href="/"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item><button onClick={logoutHandler}>Desconectar</button></NavDropdown.Item>
+                    <NavDropdown.Item><button onClick={logoutHandler} className={style.logButton}>Desconectar</button></NavDropdown.Item>
                 </NavDropdown>
                 :
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser} /> Cuenta</span>} id="basic-nav-dropdown-account">
@@ -49,7 +50,16 @@ const UserNavBar = () => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/register"><span className={style.navLink}>Registrarme</span></NavDropdown.Item>
                 </NavDropdown>
-                
+            }
+            {
+                localUser.admin
+                ?
+                <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faScrewdriverWrench} /> Admin</span>} id="basic-nav-dropdown-admin">
+                    <NavDropdown.Item href="/"><span className={style.navLink}><FontAwesomeIcon icon={faGears} /> Productos</span></NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="/account-panel"><span className={style.navLink}><FontAwesomeIcon icon={faUsers}/> Cuentas</span></NavDropdown.Item>
+                </NavDropdown>
+                : null
             }
         </Nav>
     )

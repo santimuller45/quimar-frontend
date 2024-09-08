@@ -163,7 +163,7 @@ const RegisterPage = () => {
                 <Form.Group as={Col} md="4" controlId="formBasicCP" className={style.container}>
                     <Form.Label className={style.label}>Código Postal</Form.Label>
                     <Form.Control
-                        type="number"
+                        type="text"
                         name="postalCode"
                         placeholder="Ingrese su código postal"
                         value={formData.postalCode}

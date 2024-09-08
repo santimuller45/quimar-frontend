@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
@@ -18,6 +18,7 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icon
 
 // CUSTOM HOOK ---->
 import { useShop } from "../../customHooks/useShop.js";
+import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
 const CardProduct = (product) => {
@@ -25,6 +26,7 @@ const CardProduct = (product) => {
     const { id, codigo, name, price, imagen, category, status } = product;
 
     const { addToOrder } = useShop();
+    const { state } = useUser();
 
     const [showAlert, setShowAlert] = useState(false);
 
@@ -33,6 +35,9 @@ const CardProduct = (product) => {
         setShowAlert(true);
         setTimeout(() => setShowAlert(false), 3000);
     };
+
+    useEffect(() => {
+    },[state.user])
 
     return (
         <>
@@ -51,7 +56,10 @@ const CardProduct = (product) => {
                     <Card.Title className={style.cardTitle}><strong>{name}</strong></Card.Title>
                     <Card.Text className={style.cardText}>Código del producto: <strong>{codigo}</strong></Card.Text>
                     <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
-                    <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
+                    {   state.user.email
+                        ?   <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
+                        :   null
+                    }
                     { status === true
                         ? <Card.Text className={style.cardText}>Stock disponible: <FontAwesomeIcon icon={faCircleCheck} className={style.cardStockSymbol}/></Card.Text>
                         : <Card.Text className={style.cardText}>Stock disponible: <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbol}/></Card.Text>

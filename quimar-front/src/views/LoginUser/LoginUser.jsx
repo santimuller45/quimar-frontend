@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import style from './LoginUser.module.css';
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
