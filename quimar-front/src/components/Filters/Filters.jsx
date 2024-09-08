@@ -21,7 +21,7 @@ const Filters = ({ handleFilterBySubRubro }) => {
 
     return (
         <div className={style.filtersContainer}>
-            <h5 className={style.filtersTitle}>RUBROS DE PRODUCTOS</h5>
+            <h2 className={style.filtersTitle}>Rubros</h2>
             <Accordion>
                 {listRubros?.map((rubro, index) => (
                     <Card key={rubro.id} className={style.accordionCard}>

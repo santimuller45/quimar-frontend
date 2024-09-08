@@ -11,7 +11,7 @@ import { useProducts } from "../../customHooks/useProducts.js";
 // <-----------------
 
 // REACT BOOSTRAP ------>
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 // <---------------------
 
 const ProductsPage = () => {
@@ -36,14 +36,14 @@ const ProductsPage = () => {
     };
 
     return (
-        <Container fluid="lg">
+        <div className="container-fluid">
             <Row>
                 <Col md={3}>
                     <Filters handleFilterBySubRubro={handleFilterBySubRubro}></Filters>
                 </Col>
                 <Col md={9}>
                     <section>
-                        <h2 className={style.mainTitle}><strong>NUESTROS PRODUCTOS</strong></h2>
+                        <h2 className={style.mainTitle}><strong>Nuestros Productos</strong></h2>
                         <Row>
                             <Col>
                                 <CardContainer 
@@ -64,7 +64,7 @@ const ProductsPage = () => {
                     </section>
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 };
 
