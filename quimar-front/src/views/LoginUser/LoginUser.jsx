@@ -1,6 +1,6 @@
 import React from "react";
 import style from './LoginUser.module.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
@@ -27,7 +27,7 @@ const LoginUser = () => {
     const [typeAlert, setTypeAlert] = useState(false);
     // <----------------------
 
-    const { userLogin } = useUser();
+    const { state, userLogin } = useUser();
 
     const [formLogin, setFormLogin] = useState({
         email: "",
@@ -60,6 +60,10 @@ const LoginUser = () => {
             setShowAlert(true);
         }
     };
+
+    useEffect(() => {
+        state.user && navigate('/');
+    },[state]);
 
     return (
         <div className="container">
