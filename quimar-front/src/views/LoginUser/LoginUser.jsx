@@ -62,7 +62,7 @@ const LoginUser = () => {
     };
 
     useEffect(() => {
-        state.user && navigate('/');
+        state.user.email && navigate('/');
     },[state]);
 
     return (

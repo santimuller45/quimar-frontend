@@ -1,6 +1,7 @@
 import React from "react";
 import style from './OrderTable.module.css';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 // REACT-BOOSTRAP ------>
 import { Button, Table } from "react-bootstrap";
@@ -14,12 +15,24 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 // CUSTOM HOOK ---->
 import { useShop } from "../../customHooks/useShop.js";
+import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
 const OrderTable = () => {
 
     const navigate = useNavigate();
     const { shop, addToOrder, decrementQuantity, removeFromOrder, clearOrder, totalOrderAmount } = useShop();
+    const { state } = useUser();
+
+    const submitHandler = () => {
+        if (!state.user ) navigate('/log-in');
+        else navigate('/order-checkout');
+    };
+
+    useEffect(() => {
+
+    },[state.user])
+    
 
     return (
         <div className={style.container}>
@@ -82,7 +95,7 @@ const OrderTable = () => {
 
             <div className={style.endButtons}>
                 <Button className={style.button} variant="danger" onClick={() => clearOrder()}>Limpiar pedido</Button>
-                <Button className={style.button} variant="success" onClick={() => navigate('/order-checkout')}>Continuar</Button>
+                <Button className={style.button} variant="success" onClick={submitHandler}>Continuar</Button>
             </div>
         </div>
     );

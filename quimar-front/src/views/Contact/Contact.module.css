@@ -3,24 +3,44 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
-    background-color: #0194DC; /* Fondo azul */
-    color: #000; /* Color del texto en blanco para contraste */
+    color: #000;
 }
 
 .header {
-    margin-bottom: 2rem;
+    margin: 2rem;
 }
 
-.textTitle {
+.mainTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     font-size: 3rem;
     margin: 0;
     padding-bottom: 0.5rem; /* Espacio inferior opcional */
-    border-bottom: 2px solid #fff; /* Línea debajo del título opcional */
+    border-bottom: 2px solid #333; /* Línea debajo del título opcional */
+}
+
+.title {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+    padding-bottom: 0.5rem; /* Espacio inferior opcional */
+    border-bottom: 2px solid #333; /* Línea debajo del título opcional */
+}
+
+.subTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+    padding-bottom: 1rem; /* Espacio inferior opcional */
+    padding-top: 1rem;
 }
 
 .text {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .contactSection {
@@ -29,7 +49,7 @@
 
 .contactItem {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +57,7 @@
 
 .contactItem svg {
     margin-right: 0.5rem;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 /* Media Queries for Responsiveness */

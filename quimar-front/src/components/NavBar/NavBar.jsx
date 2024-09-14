@@ -2,7 +2,7 @@ import React from "react";
 import style from './NavBar.module.css';
 
 // LOGO ----->
-import logo from '../../assets/logo4.png';
+import logo from '../../assets/logo.png';
 //-------<
 
 // COMPONENTS ---------->
