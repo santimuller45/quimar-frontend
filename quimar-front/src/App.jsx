@@ -10,12 +10,17 @@ import { useProducts } from './customHooks/useProducts.js';
 // URL DE RESPUESTA DEL BACKEND ---->
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3001";
+
+// URL PARA COMPARTIR
+// axios.defaults.baseURL = "https://zw1l1ft7-3001.brs.devtunnels.ms/"; 
+
 //<-----------------------------------------------
 
 // VIEWS ------>
 import { 
   LandingPage, 
-  AccountPanel, 
+  AccountPanel,
+  ProductPanel, 
   MyAccount, 
   ProductsPage, 
   AboutUs, 
@@ -51,6 +56,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage/>}></Route>
           <Route path='/products' element={<ProductsPage/>}></Route>
+          <Route path='/product-panel' element={<ProductPanel/>}></Route>
           <Route path='/detail/:productID' element={<Detail/>} />
           <Route path='/account' element={<MyAccount/>}></Route>
           <Route path='/account-panel' element={<AccountPanel/>}></Route>

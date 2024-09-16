@@ -77,7 +77,7 @@ const productReducer = (state, action) => {
 
 
 export const ProductProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(productReducer, initialState);
+    const [productState, dispatch] = useReducer(productReducer, initialState);
 
     const getAllProducts = async () => {
         try {
@@ -125,6 +125,14 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const updateProducts = async (product) => {
+        try {
+            await axios.put('/productos/config-products', product);
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
     const filterByRubro = (rubname) => {
         dispatch({
             type: ACTION_TYPES.FILTER_BY_RUBRO,
@@ -133,7 +141,7 @@ export const ProductProvider = ({ children }) => {
     };
 
     return (
-        <ProductContext.Provider value={{ state, getAllProducts, getProductByName, getAllRubros, filterByRubro }}>
+        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, getAllRubros, updateProducts, filterByRubro }}>
             {children}
         </ProductContext.Provider>
     );

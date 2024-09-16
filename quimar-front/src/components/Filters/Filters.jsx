@@ -16,8 +16,8 @@ import { faCircleChevronDown, faCircle } from "@fortawesome/free-solid-svg-icons
 
 
 const Filters = ({ handleFilterBySubRubro }) => {
-    const { state } = useProducts();
-    const listRubros = state.rubros;
+    const { productState } = useProducts();
+    const listRubros = productState.rubros;
 
     return (
         <div className={style.filtersContainer}>
@@ -61,36 +61,5 @@ function CustomToggle({ children, eventKey }) {
         </button>
     );
 };
-
-// ----------- VER 2 -----------
-
-// const Filters = ({ handleFilterBySubRubro }) => {
-//     const listRubros = useSelector((state) => state.allRubros);
-
-//     return (
-//         <Nav className={style.filtersContainer}>
-//             <Nav.Item>
-//                 <Nav.Link className={style.filtersTitle}>RUBROS DE PRODUCTOS</Nav.Link>
-//             </Nav.Item>
-//             {listRubros?.map((rubro, index) => (
-//                 <NavDropdown
-//                     key={rubro.id}
-//                     title={<><FontAwesomeIcon icon={faCircleChevronDown} /> {rubro.name}</>}
-//                     className={style.navDropdown}
-//                 >
-//                     {rubro.subRubro?.map((sub, index2) => (
-//                         <NavDropdown.Item
-//                             key={index2}
-//                             className={style.subRubroItem}
-//                             onClick={() => handleFilterBySubRubro(sub)}
-//                         >
-//                             {sub}
-//                         </NavDropdown.Item>
-//                     ))}
-//                 </NavDropdown>
-//             ))}
-//         </Nav>
-//     );
-// }
 
 export default Filters;

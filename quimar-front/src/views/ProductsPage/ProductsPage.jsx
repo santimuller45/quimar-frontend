@@ -16,9 +16,9 @@ import { Row, Col } from 'react-bootstrap';
 
 const ProductsPage = () => {
 
-    const { state, filterByRubro } = useProducts();
+    const { productState, filterByRubro } = useProducts();
     
-    const productsDB = state.products;
+    const productsDB = productState.products;
 
     const [currentPage , setCurrentPage ] = useState(1);
     const productPerPage = 12;
