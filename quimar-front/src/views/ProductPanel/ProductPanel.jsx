@@ -20,6 +20,7 @@ import { useUser } from "../../customHooks/useUser";
 
 // COMPONENT ------->
 import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
+import NavBarPanelProduct from "./NavBarPanelProduct/NavBarPanelProduct.jsx";
 // <-----------------
 
 const ProductPanel = () => {
@@ -46,6 +47,7 @@ const ProductPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
+            <NavBarPanelProduct></NavBarPanelProduct>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">

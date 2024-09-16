@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Row, Col } from "react-bootstrap";
 // <------------------------
 
-// COMPONENT ------->
-import { CustomAlert } from "../../components/indexComponents.js";
-// <-----------------
+// SWEETALERT2 ---->
+import Swal from 'sweetalert2';
+// <-------------------
 
 // CUSTOM HOOK ---->
 import { useUser } from "../../customHooks/useUser.js";
@@ -20,12 +20,6 @@ const ForgotPassword = () => {
     // USO DE NAVEGACIÓN ---->
     const navigate = useNavigate();
     // <----------------
-
-    // MANEJO DE ALERTAS ---->
-    const [showAlert, setShowAlert] = useState(false);
-    const [messageAlert, setMessageAlert] = useState('');
-    const [typeAlert, setTypeAlert] = useState(false);
-    // <----------------------
 
     const { updateUserPassword } = useUser();
 
@@ -43,21 +37,23 @@ const ForgotPassword = () => {
 
     const submitLoginHandler = async (e) => {
         e.preventDefault();
-        setMessageAlert('');
-        setTypeAlert(false);
 
         try {
             await updateUserPassword(form);
-            setMessageAlert("¡Usuario recuperado exitosamente! Ya puede ingresar nuevamente");
-            setTypeAlert(true);
-            setShowAlert(true);
-            setTimeout(() => {
+            Swal.fire ({
+                icon: 'success',
+                title: '¡Usuario recuperado exitosamente! Ya puede ingresar nuevamente',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
                 navigate('/log-in');
-            }, 1000);
+            });
         } catch (error) {
-            setMessageAlert(error);
-            setTypeAlert(false);
-            setShowAlert(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error || 'Error al iniciar sesión'
+            });
         }
     }
 
@@ -96,7 +92,6 @@ const ForgotPassword = () => {
                     <Button type="submit">Enviar</Button>
                 </div>
             </Form>
-            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     )
 };

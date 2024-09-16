@@ -7,9 +7,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Row, Col } from "react-bootstrap";
 // <------------------------
 
-// COMPONENT ------->
-import { CustomAlert } from "../../components/indexComponents.js";
-// <-----------------
+// SWEETALERT2 ---->
+import Swal from 'sweetalert2';
+// <-------------------
 
 // CUSTOM HOOK ---->
 import { useUser } from "../../customHooks/useUser.js";
@@ -20,12 +20,6 @@ const LoginUser = () => {
     // USO DE NAVEGACIÓN ---->
     const navigate = useNavigate();
     // <----------------
-
-    // MANEJO DE ALERTAS ---->
-    const [showAlert, setShowAlert] = useState(false);
-    const [messageAlert, setMessageAlert] = useState('');
-    const [typeAlert, setTypeAlert] = useState(false);
-    // <----------------------
 
     const { state, userLogin } = useUser();
 
@@ -43,21 +37,22 @@ const LoginUser = () => {
 
     const submitLoginHandler = async (e) => {
         e.preventDefault();
-        setMessageAlert('');
-        setTypeAlert(false);
-
         try {
             await userLogin(formLogin);
-            setMessageAlert("¡Usuario logueado correctamente!");
-            setTypeAlert(true);
-            setShowAlert(true);
-            setTimeout(() => {
+            Swal.fire ({
+                icon: 'success',
+                title: '¡Usuario logueado correctamente!',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
                 navigate('/account');
-            }, 1000);
+            });
         } catch (error) {
-            setMessageAlert(error);
-            setTypeAlert(false);
-            setShowAlert(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error || 'Error al iniciar sesión'
+            });
         }
     };
 
@@ -104,7 +99,6 @@ const LoginUser = () => {
                     <Link to={'/forgot-password'}>Olvidé mi contraseña</Link>
                 </div>
             </Form>
-            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     )
 };

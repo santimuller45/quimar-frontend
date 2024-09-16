@@ -125,9 +125,27 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
-    const updateProducts = async (product) => {
+    const addProduct = async (data) => {
         try {
-            await axios.put('/productos/config-products', product);
+            const response = await axios.put('/productos/registerProduct', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return response.data;
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
+    const updateProducts = async (data) => {
+        try {
+            const response = await axios.put('/productos/config-products', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return response.data;
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
@@ -141,7 +159,7 @@ export const ProductProvider = ({ children }) => {
     };
 
     return (
-        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, getAllRubros, updateProducts, filterByRubro }}>
+        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, getAllRubros, addProduct, updateProducts, filterByRubro }}>
             {children}
         </ProductContext.Provider>
     );

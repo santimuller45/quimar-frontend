@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import style from './RegisterPage.module.css';
 
 // REACT BOOSTRAP --------->
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 // <------------------------
 
-// COMPONENT ------->
-import { CustomAlert } from "../../components/indexComponents.js";
-// <-----------------
+// SWEETALERT2 ---->
+import Swal from 'sweetalert2';
+// <-------------------
 
 // CUSTOM HOOK ---->
 import { useUser } from "../../customHooks/useUser.js";
@@ -22,12 +22,6 @@ const RegisterPage = () => {
 
     const navigate = useNavigate();
     const { registerUser } = useUser();
-
-    // MANEJO DE ALERTAS ---->
-    const [showAlert, setShowAlert] = useState(false);
-    const [messageAlert, setMessageAlert] = useState('');
-    const [typeAlert, setTypeAlert] = useState(false);
-    // <----------------------
 
     const [formData, setFormData] = useState({
         email: "",
@@ -60,25 +54,25 @@ const RegisterPage = () => {
 
     const handlerSubmitRegister = async (e) => {
         e.preventDefault();
-        setMessageAlert('');
-        setTypeAlert(false);
 
         try {
             await registerUser(formData);
-            setMessageAlert("¡Usuario creado correctamente!");
-            setTypeAlert(true);
-            setShowAlert(true);
-            setTimeout(() => {
+            Swal.fire ({
+                icon: 'success',
+                title: '¡Usuario creado correctamente! Espere a que su cuenta sea activada',
+                showConfirmButton: false,
+                timer: 5000
+            }).then(() => {
                 navigate('/');
-            }, 2000);
+            });
         } catch (error) {
-            setMessageAlert(error);
-            setTypeAlert(false);
-            setShowAlert(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error || 'Error registrar su cuenta'
+            });
         }
-
     };
-
 
     return (
         <div className="container">
@@ -228,7 +222,6 @@ const RegisterPage = () => {
                     </Button>
                 </div>
             </Form>
-            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     );
 };

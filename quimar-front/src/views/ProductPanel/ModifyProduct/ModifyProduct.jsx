@@ -1,6 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect} from "react";
 
 // REACT BOOSTRAP -------->
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
@@ -10,22 +8,14 @@ import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { useProducts } from "../../../customHooks/useProducts.js";
 // <----------------
 
-// COMPONENT ------->
-import { CustomAlert } from "../../../components/indexComponents.js";
-// <-----------------
+// SWEETALERT2 ---->
+import Swal from 'sweetalert2';
+// <-------------------
 
 const ModifyProduct = ({ show, handleClose, product }) => {
 
-    const navigate = useNavigate();
-    const { productState, updateProducts } = useProducts();
-    const listRubros = productState.rubros;
-    const rubros = listRubros.flatMap(elem => elem?.subRubro || []);
-
-    // MANEJO DE ALERTAS ---->
-    const [showAlert, setShowAlert] = useState(false);
-    const [messageAlert, setMessageAlert] = useState('');
-    const [typeAlert, setTypeAlert] = useState(false);
-    // <----------------------
+    const { productState, getAllProducts, updateProducts } = useProducts();
+    const rubros = productState.rubros.flatMap(elem => elem?.subRubro || []);
 
     const [form, setForm] = useState({
         id: "",
@@ -59,32 +49,35 @@ const ModifyProduct = ({ show, handleClose, product }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessageAlert('');
-        setTypeAlert(false);
+
+        // SE DEBE CREAR EL FORMULARIO UTILIZANDO LA FUNCION FormData PARA QUE SE PUEDA ENVIAR EL FORMULARIO CON LA IMAGEN AL BACK
+        const data = new FormData();
+        Object.keys(form).forEach(key => {
+            if (form[key] !== null && form[key] !== undefined) {
+                data.append(key, form[key]);
+            }
+        });
+        // <-----
 
         try {
-            await updateProducts(form);
-            setMessageAlert("¡Producto actualizado correctamente!");
-            setTypeAlert(true);
-            setShowAlert(true);
-            setTimeout(() => {
-                handleClose
-            }, 1000);
+            await updateProducts(data);
+            Swal.fire ({
+                icon: 'success',
+                title: '¡Producto actualizado correctamente!',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
+                handleClose();
+                getAllProducts();
+            });
         } catch (error) {   
-            setMessageAlert(error || 'Error al actualizar el producto');
-            setTypeAlert(false);
-            setShowAlert(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error || 'Error al iniciar sesión'
+            });
         }
     };
-
-    // IMPORTANTE PARA ENVIAR LAS IMAGENES
-    // Crea una instancia de FormData para enviar los datos
-    // const formData = new FormData();
-    // for (const key in form) {
-    //     if (form.hasOwnProperty(key)) {
-    //         formData.append(key, form[key]);
-    //     }
-    // }
 
     useEffect(() => {
         if (product) {
@@ -99,7 +92,7 @@ const ModifyProduct = ({ show, handleClose, product }) => {
                 status: product.status || false
             });
         }
-    },[product])
+    },[product]);
 
     return (
         <div className="container">
@@ -187,7 +180,6 @@ const ModifyProduct = ({ show, handleClose, product }) => {
                     </Form>
                 </Modal.Body>
             </Modal>
-            { showAlert && ( <CustomAlert message={messageAlert} onClose={() => setShowAlert(false)} type={typeAlert} /> )}
         </div>
     )
 };
