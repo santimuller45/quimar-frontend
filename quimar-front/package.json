@@ -25,7 +25,7 @@
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "sweetalert": "^2.1.2"
+    "sweetalert2": "^11.14.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
