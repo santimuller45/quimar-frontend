@@ -16,6 +16,19 @@ const LandingPage = () => (
                 </div>
             </header>
             <section className={style.section}>
+                <h2 className={style.textSubTitle}>Nuestros Rubros</h2>
+                <ul className={style.rubList}>
+                    <li>QUIMICOS Y DILUYENTES</li>
+                    <li>ACCESORIOS PARA PINTURA</li>
+                    <li>ARTICULOS DE LIMPIEZA Y VARIOS</li>
+                    <li>ARTICULOS PARA LA CONSTRUCCION</li>
+                    <li>FERRETERIA</li>
+                    <li>PINTURAS</li>
+                    <li>ZINGUERIA</li>
+                    <li>MÁS...</li>
+                </ul>
+            </section>
+            <section className={style.section}>
                 <h2 className={style.textSubTitle}>Nuestra Misión</h2>                
                 <p className={style.text}>En <strong>Quimar</strong>, nuestra misión es ofrecer una amplia gama de productos de ferretería</p>
                 <p className={style.text}>que cumplan con los estándares más exigentes de calidad y rendimiento.</p>
@@ -37,19 +50,6 @@ const LandingPage = () => (
                 <h2 className={style.textSubTitle}>Visión de Futuro</h2>                
                 <p className={style.text}>Estamos comprometidos a seguir creciendo y evolucionando para adaptarnos a las cambiantes necesidades del mercado.</p>
                 <p className={style.text}>Innovación, calidad y servicio son los pilares que guían nuestro camino hacia el futuro.</p>
-            </section>
-            <section className={style.section}>
-                <h2 className={style.textSubTitle}>Nuestros Rubros</h2>
-                <ul className={style.rubList}>
-                    <li>QUIMICOS Y DILUYENTES</li>
-                    <li>ACCESORIOS PARA PINTURA</li>
-                    <li>ARTICULOS DE LIMPIEZA Y VARIOS</li>
-                    <li>ARTICULOS PARA LA CONSTRUCCION</li>
-                    <li>FERRETERIA</li>
-                    <li>PINTURAS</li>
-                    <li>ZINGUERIA</li>
-                    <li>MÁS...</li>
-                </ul>
             </section>
             <div className={style.footer}>
                 <h5>Gracias por elegir <strong>Quimar Distribuidora</strong>. Estamos aquí para ayudarle a hacer realidad sus proyectos con los mejores productos de ferretería.</h5>
