@@ -2,9 +2,14 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    text-align: center;
-    background-color: #0194DC; /* Fondo azul */
     color: #000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .title {
@@ -19,21 +24,20 @@
 .subTitle {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: 0;
+    margin-bottom: 1rem;
     padding-bottom: 0.5rem; /* Espacio inferior opcional */
     border-bottom: 2px solid #333; /* Línea debajo del título opcional */
 }
 
 .section {
     color: #000;
+    font-weight: 550;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
-    margin: 4rem;
+    margin: 2rem;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    background-color: #0077b6;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
