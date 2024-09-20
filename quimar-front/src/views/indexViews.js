@@ -5,7 +5,7 @@ import MyAccount from "./MyAccount/MyAccount.jsx";
 import ProductsPage from "./ProductsPage/ProductsPage.jsx";
 import AboutUs from "./AboutUs/AboutUs.jsx";
 import Contact from "./Contact/Contact.jsx";
-import Detail from "./Detail/Detail.jsx";
+import ProductDetail from "./ProductDetail/ProductDetail.jsx";
 import RegisterPage from "./RegisterPage/RegisterPage.jsx";
 import LoginUser from "./LoginUser/LoginUser.jsx";
 import ForgotPassword from "./ForgotPassword/ForgotPassword.jsx";
@@ -20,7 +20,7 @@ export {
     ProductsPage, 
     AboutUs, 
     Contact, 
-    Detail, 
+    ProductDetail, 
     RegisterPage, 
     LoginUser, 
     ForgotPassword,

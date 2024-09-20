@@ -25,7 +25,7 @@ import {
   ProductsPage, 
   AboutUs, 
   Contact, 
-  Detail,
+  ProductDetail,
   RegisterPage,
   LoginUser,
   ForgotPassword,
@@ -57,7 +57,7 @@ function App() {
           <Route path='/' element={<LandingPage/>}></Route>
           <Route path='/products' element={<ProductsPage/>}></Route>
           <Route path='/product-panel' element={<ProductPanel/>}></Route>
-          <Route path='/detail/:productID' element={<Detail/>} />
+          <Route path='/detail/:productID' element={<ProductDetail/>} />
           <Route path='/account' element={<MyAccount/>}></Route>
           <Route path='/account-panel' element={<AccountPanel/>}></Route>
           <Route path='/contact-us' element={<Contact/>}></Route>
