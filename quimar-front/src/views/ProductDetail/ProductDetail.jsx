@@ -9,6 +9,11 @@ import { useShop } from "../../customHooks/useShop.js";
 import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
+// FONT-AWESOME ------->
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+// <-------------------
+
 // COMPONENT ------->
 import { CustomAlert } from "../../components/indexComponents.js";
 // <-----------------
@@ -60,6 +65,16 @@ const ProductDetail = () => {
                 <h1 className={style.cardTitle}>{product.name}</h1>
                 <p className={style.cardText}>Código del producto: <strong>{product.codigo}</strong></p>
                 <p className={style.cardText}>Subrubro: {product.category}</p>
+                { product.status === true
+                    ? 
+                      <p className={style.cardText}>Stock disponible 
+                        <FontAwesomeIcon icon={faCircleCheck} className={style.cardStockSymbolCheck} style={{ color: 'green' }}/>
+                      </p>
+                    : 
+                      <p className={style.cardText}>Stock disponible 
+                        <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
+                      </p>
+                }
                 { state.user.email
                   ?
                     <>

@@ -75,6 +75,17 @@
     text-align: center;
 }
 
+.cardStockSymbolCheck {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: green;
+}
+.cardStockSymbolCross {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: red;
+}
+
 /* Custom button */
 .addButton {
     align-self: start;
