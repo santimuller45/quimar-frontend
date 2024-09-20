@@ -1,16 +1,14 @@
 .nav {
     background-color: #333;
-}
-
-.navLink {
-    color: #0194DC !important;
-    font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Custom button */
 .logButton {
+    margin-right: 4rem; /* Espaciado entre botones */
     padding: 0.5rem 0.5rem;
     background: #333;
     color: #0194DC;
@@ -30,4 +28,10 @@
 
 .logButton:focus {
     outline: none;
+}
+
+.searchContainer {
+    flex-grow: 1; /* Permite que el contenedor ocupe el espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra el SearchBox */
 }

@@ -39,6 +39,24 @@
     color: #17a2b8; /* Color de hover para mejorar la interacción visual */
 }
 
+.summaryContainer {
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Espaciado superior */
+    padding: 15px; /* Espaciado interno */
+    color: #000; /* Color del texto */
+}
+
+.totalTitle {
+    font-size: 1.5rem; /* Tamaño de fuente para el título */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+.totalAmount {
+    font-size: 2rem; /* Tamaño de fuente grande para el total */
+    font-weight: bold; /* Negrita para destacar el total */
+    margin: 0; /* Sin margen */
+}
+
 /* End Buttons Container */
 .endButtons {
     display: flex;

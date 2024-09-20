@@ -39,7 +39,7 @@ const OrderTable = () => {
             <h1 className={style.title}>Pedido</h1>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
-                    <tr>
+                    <tr className="text-center">
                         <th>Código</th>
                         <th>Detalle</th>
                         <th>Cantidad</th>
@@ -80,19 +80,15 @@ const OrderTable = () => {
                 </tbody>
             </Table>
 
-            <Table striped bordered hover variant="dark" size="sm">
-                <thead>
-                    <tr className="text-center">
-                        <th>TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="text-center">
-                        <td>${totalOrderAmount}</td>
-                    </tr>
-                </tbody>
-            </Table>
+            {/* TOTAL DEL PEDIDO */}
+            <div className={style.summaryContainer}>
+                <h2 className={style.totalTitle}>Total del Pedido</h2>
+                <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
+                <br/>
+                <p className="text-center"><strong>¡Revise su pedido antes de continuar!</strong></p>
+            </div>
 
+            {/* BOTONES */}
             <div className={style.endButtons}>
                 <Button className={style.button} variant="danger" onClick={() => clearOrder()}>Limpiar pedido</Button>
                 <Button className={style.button} variant="success" onClick={submitHandler}>Continuar</Button>

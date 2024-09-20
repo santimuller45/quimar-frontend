@@ -94,14 +94,28 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
-    const getProductByName = async (name) => {
+    const getProductByName = async (product) => {
         try {
-            const result = (await axios.get(`/productos?name=${name}`)).data;
-            if (!result) throw new Error('Producto no encontrado');
+            let result;
+
+            // Verifica si 'product' es un nombre
+            if (typeof product === 'string' && isNaN(product)) {
+                result = (await axios.get(`/productos?name=${product}`)).data;
+            } else {
+                // Si no es un nombre, asume que es un código
+                result = (await axios.get(`/productos?code=${product}`)).data;
+            }
+    
+            // Verifica si el resultado está vacío o no
+            if (!result || Object.keys(result).length === 0) {
+                throw new Error('Producto no encontrado');
+            }
+    
             dispatch({
                 type: ACTION_TYPES.GET_PRODUCT_BY_NAME,
                 payload: result
             });
+            
         } catch (error) {
             dispatch({
                 type: ACTION_TYPES.SET_ERROR,

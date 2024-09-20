@@ -28,7 +28,7 @@ const ModifyProduct = ({ show, handleClose, product }) => {
         status: false
     });
 
-    // Manejo del cambio en inputs
+    // Manejo del cambio en INPUTS
     const handleInputChange = (e) => {
         e.preventDefault();
         const { name, value, type, files } = e.target;
@@ -38,12 +38,20 @@ const ModifyProduct = ({ show, handleClose, product }) => {
         });
     };
 
-    // Manejo del cambio en el select
+    // Manejo del cambio en el SELECT
     const handleSelectChange = (e) => {
         const { name, value } = e.target;
         setForm({
             ...form,
             [name]: value
+        });
+    };
+
+    // Manejo del cambio en el CHECKBOX
+    const handleCheckboxChange = (e) => {
+        setForm({
+            ...form,
+            status: e.target.checked
         });
     };
 
@@ -95,92 +103,98 @@ const ModifyProduct = ({ show, handleClose, product }) => {
     },[product]);
 
     return (
-        <div className="container">
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Producto a modificar: {product.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
-                        {/* CODIGO DEL PRODUCTO */}
-                        <Form.Group as={Row} className="mb-3" controlId="formBasicCodigo">
-                            <Form.Label column sm="2">Código</Form.Label>
-                                <Col sm="10">
-                                    <Form.Control
-                                        placeholder="Nuevo Codigo"
-                                        name="codigo"
-                                        value={form.codigo}
-                                        onChange={handleInputChange} 
-                                    />
-                                </Col>
-                        </Form.Group>
-                            {/* NOMBRE DEL PRODUCTO */}
-                            <Form.Group as={Row} className="mb-3" controlId="formBasicName">
-                                <Form.Label column sm="2">Nombre</Form.Label>
-                                <Col sm="10">
-                                    <Form.Control
-                                        placeholder="Nuevo Nombre"
-                                        name="name"
-                                        value={form.name}
-                                        onChange={handleInputChange} 
-                                    />
-                                </Col>
-                            </Form.Group>
-                            {/* PRECIO DEL PRODUCTO */}
-                            <Form.Group as={Row} className="mb-3" controlId="formBasicPrice">
-                                <Form.Label column sm="2">Precio</Form.Label>
-                                <Col sm="10">
-                                    <Form.Control
-                                        placeholder="Nuevo Precio"
-                                        name="price"
-                                        value={form.price}
-                                        onChange={handleInputChange} 
-                                    />
-                                </Col>
-                            </Form.Group>
-                            {/* CATEGORIA DEL PRODUCTO */}
-                            <Form.Group controlId="formBasicCategory">
-                                <Form.Label>Rubro</Form.Label>
-                                <Form.Select
-                                    aria-label="Seleccione el rubro"
-                                    name="category"
-                                    value={form.category}
-                                    onChange={handleSelectChange}
-                                >
-                                    {rubros.map((elem, index) => (
-                                        <option value={elem} key={index}>
-                                            {elem}
-                                        </option>
-                                    ))}
-                                </Form.Select>
-                            </Form.Group>
-                            {/* DESCRIPCION DEL PRODUCTO */}
-                            <Form.Group className="mb-3" controlId="formBasicDescription">
-                                <Form.Label>Descripción del producto</Form.Label>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Modificar Producto</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={handleSubmit}>
+                    {/* CODIGO DEL PRODUCTO */}
+                    <Form.Group as={Row} className="mb-3" controlId="formBasicCodigo">
+                        <Form.Label column sm="2">Código</Form.Label>
+                            <Col sm="10">
                                 <Form.Control
-                                    as="textarea"
-                                    placeholder="Nueva Descripción"
-                                    name="descripcion"
-                                    value={form.descripcion}
+                                    placeholder="Nuevo Codigo"
+                                    name="codigo"
+                                    value={form.codigo}
                                     onChange={handleInputChange} 
                                 />
-                            </Form.Group>
-                            {/* IMAGEN DEL PRODUCTO */}
-                            <Form.Group controlId="formFile" className="mb-3">
-                                <Form.Label>Seleccione la imagen para el producto</Form.Label>
+                            </Col>
+                    </Form.Group>
+                        {/* NOMBRE DEL PRODUCTO */}
+                        <Form.Group as={Row} className="mb-3" controlId="formBasicName">
+                            <Form.Label column sm="2">Nombre</Form.Label>
+                            <Col sm="10">
                                 <Form.Control
-                                    type="file"
-                                    name="imagen"
-                                    onChange={handleInputChange}
+                                    placeholder="Nuevo Nombre"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleInputChange} 
                                 />
-                            </Form.Group>
-                            {/* STATUS DEL PRODUCTO */}
-                        
-                        <Button type="submit">Guardar Cambios</Button>
-                    </Form>
-                </Modal.Body>
-            </Modal>
-        </div>
+                            </Col>
+                        </Form.Group>
+                        {/* PRECIO DEL PRODUCTO */}
+                        <Form.Group as={Row} className="mb-3" controlId="formBasicPrice">
+                            <Form.Label column sm="2">Precio</Form.Label>
+                            <Col sm="10">
+                                <Form.Control
+                                    placeholder="Nuevo Precio"
+                                    name="price"
+                                    value={form.price}
+                                    onChange={handleInputChange} 
+                                />
+                            </Col>
+                        </Form.Group>
+                        {/* CATEGORIA DEL PRODUCTO */}
+                        <Form.Group controlId="formBasicCategory">
+                            <Form.Label>Seleccione el Sub Rubro</Form.Label>
+                            <Form.Select
+                                aria-label="Seleccione el rubro"
+                                name="category"
+                                value={form.category}
+                                onChange={handleSelectChange}
+                            >
+                                {rubros?.map((elem, index) => (
+                                    <option value={elem} key={index}>
+                                        {elem}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                        <br/>
+                        {/* DESCRIPCION DEL PRODUCTO */}
+                        <Form.Group className="mb-3" controlId="formBasicDescription">
+                            <Form.Label>Descripción del producto</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                placeholder="Nueva Descripción"
+                                name="descripcion"
+                                value={form.descripcion}
+                                onChange={handleInputChange} 
+                            />
+                        </Form.Group>
+                        {/* IMAGEN DEL PRODUCTO */}
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Seleccione la imagen para el producto</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="imagen"
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        {/* STATUS DEL PRODUCTO */}
+                        <Form.Group controlId="formBasicStatus" className="mb-3">
+                            <Form.Check
+                                label="Activar Producto"
+                                type="checkbox"
+                                checked={form.status}
+                                onChange={handleCheckboxChange}
+                            />
+                        </Form.Group>
+                    <Button type="submit">Guardar Cambios</Button>
+                </Form>
+            </Modal.Body>
+        </Modal>
     )
 };
 

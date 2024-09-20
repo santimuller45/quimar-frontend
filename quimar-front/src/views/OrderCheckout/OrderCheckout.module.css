@@ -11,18 +11,27 @@
     margin-bottom: 2rem; /* Espacio debajo del título */
 }
 
-.labelUserInfo {
-    font-size: 1.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 700; /* Utilizar font-weight 700 para un texto más destacado */
-    color: #000; /* Color blanco para contraste sobre fondo oscuro */
+.table {
+    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+    margin-bottom: 2rem; /* Espacio debajo de las tablas */
 }
 
-.userInfo {
-    font-size: 1rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 700; /* Utilizar font-weight 700 para un texto más destacado */
-    color: #000; /* Color blanco para contraste sobre fondo oscuro */
+.summaryContainer {
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Espaciado superior */
+    padding: 15px; /* Espaciado interno */
+    color: #000; /* Color del texto */
+}
+
+.totalTitle {
+    font-size: 1.5rem; /* Tamaño de fuente para el título */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+.totalAmount {
+    font-size: 2rem; /* Tamaño de fuente grande para el total */
+    font-weight: bold; /* Negrita para destacar el total */
+    margin: 0; /* Sin margen */
 }
 
 .endButtons {

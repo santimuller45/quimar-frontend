@@ -17,7 +17,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
-const SearchBox = () => {
+const SearchBox = ({ urlNavigate }) => {
 
     const [ product , setProduct ] = useState('');
     const { getProductByName, getAllProducts } = useProducts();
@@ -29,7 +29,7 @@ const SearchBox = () => {
 
     const searchBoxHandler = async (e) => {
         e.preventDefault();
-        navigate('/products');
+        navigate(urlNavigate);
         await getProductByName(product);
     };
 
@@ -46,7 +46,7 @@ const SearchBox = () => {
                         <Form.Control
                             name="product"
                             type="text"
-                            placeholder="Buscar..."
+                            placeholder="Buscar producto..."
                             className={style.searchInput}
                             value={product}
                             onChange={productHandler}

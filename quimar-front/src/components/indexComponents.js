@@ -6,5 +6,6 @@ import PaginationComponent from "./Pagination/PaginationComponent.jsx";
 import Filters from "./Filters/Filters.jsx";
 import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
+import UserInfo from "./UserInfo/UserInfo.jsx";
 
-export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert };
+export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert, UserInfo };

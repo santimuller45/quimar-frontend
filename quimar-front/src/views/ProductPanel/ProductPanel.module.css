@@ -11,19 +11,42 @@
     margin-bottom: 2rem; /* Espacio debajo del título */
 }
 
-.table {
-    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
-    margin-bottom: 2rem; /* Espacio debajo de las tablas */
-}
-
 .tableButtons {
     background: none;
     border: none;
-    color: #f8f9fa; /* Color del icono para contraste */
-    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
-    transition: color 0.3s ease; /* Transición para el cambio de color */
+    color: #f8f9fa;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .tableButtons:hover {
-    color: #17a2b8; /* Color de hover para mejorar la interacción visual */
+    color: #17a2b8;
+}
+
+/* Media Queries para ajustar el tamaño de la fuente en dispositivos más pequeños */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem; /* Disminuir el tamaño del texto en pantallas más pequeñas */
+    }
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 2rem;
+    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+}
+
+.table th,
+.table td {
+    text-align: center; /* Centrar texto en la tabla */
+    padding: 0.5rem; /* Espaciado interno en celdas */
+}
+
+/* Media Queries para mejorar el espaciado y la legibilidad en pantallas pequeñas */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        padding: 0.3rem; /* Reducir espaciado en pantallas más pequeñas */
+        font-size: 0.9rem; /* Tamaño de texto más pequeño en pantallas pequeñas */
+    }
 }

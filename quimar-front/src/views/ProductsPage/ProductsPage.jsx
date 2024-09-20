@@ -1,6 +1,6 @@
 import React from "react";
 import style from './ProductsPage.module.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // COMPONENTS ----->
 import { CardContainer, PaginationComponent, Filters } from "../../components/indexComponents.js";
@@ -11,11 +11,14 @@ import { useProducts } from "../../customHooks/useProducts.js";
 // <-----------------
 
 // REACT BOOSTRAP ------>
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 // <---------------------
 
 const ProductsPage = () => {
 
+    // SPINNER DE LOADING ----->
+    const [loading, setLoading] = useState(true);
+    // <-----
     const { productState, filterByRubro } = useProducts();
     
     const productsDB = productState.products;
@@ -35,6 +38,13 @@ const ProductsPage = () => {
         setCurrentPage(1);
     };
 
+    // USAMOS EL USE EFFECT PARA VERIFICAR SI HAY PRODUCTOS EN EL REDUCER SINO USAMOS EL LOADING
+    useEffect(() => {
+        if (productState.products.length > 0) {
+            setLoading(false); // Cambia a false cuando los productos estén cargados
+        }
+    }, [productState.products]);
+
     return (
         <div className="container-fluid">
             <Row>
@@ -44,23 +54,35 @@ const ProductsPage = () => {
                 <Col md={9}>
                     <section>
                         <h2 className={style.mainTitle}><strong>Nuestros Productos</strong></h2>
-                        <Row>
-                            <Col>
-                                <CardContainer 
-                                    currenProducts={currentProducts} 
-                                />
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-center mt-4">
-                            <Col xs="auto">
-                                <PaginationComponent 
-                                    productPerPage={productPerPage} 
-                                    productsDB={productsDB.length} 
-                                    paginado={paginado} 
-                                    currentPage={currentPage}
-                                />
-                            </Col>
-                        </Row>
+                        {loading ? (
+                            <Row className="justify-content-center mt-5">
+                                <Col xs="auto">
+                                    <Spinner animation="border" role="status">
+                                        <span className="visually-hidden">Cargando...</span>
+                                    </Spinner>
+                                </Col>
+                            </Row>
+                        ) : (
+                            <>
+                                <Row>
+                                    <Col>
+                                        <CardContainer 
+                                            currenProducts={currentProducts} 
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="justify-content-center mt-4">
+                                    <Col xs="auto">
+                                        <PaginationComponent 
+                                            productPerPage={productPerPage} 
+                                            productsDB={productsDB.length} 
+                                            paginado={paginado} 
+                                            currentPage={currentPage}
+                                        />
+                                    </Col>
+                                </Row>
+                            </>
+                        )}
                     </section>
                 </Col>
             </Row>

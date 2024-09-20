@@ -23,7 +23,9 @@ const Contact = () => {
         <div className={style.container}>
             <div className={style.header}>
                 <h1 className={style.mainTitle}><strong>Distribuidora Quimar</strong></h1>
-                <p className={style.text}>Su socio confiable en el mundo de los artículos de ferretería</p>
+                <p className={style.text}>Su socio confiable en el rubro de los artículos de ferretería</p>
+                <p className={style.text}>de Pegurri Marcos Ariel</p>
+                <p className={style.text}>CUIT: <strong>20-23130541-7</strong></p>
             </div>
             <h2 className={style.title}><strong>Pueden contactarnos via:</strong></h2>
             <section className={style.contactSection}>
@@ -37,7 +39,7 @@ const Contact = () => {
                 <h2 className={style.title}>Nuestros Horarios</h2>
                 <br/>
                 <h4 className={style.subTitle}>Lunes a viernes</h4>
-                <h6 className={style.text}>08:00 hs - 17:00hs</h6>
+                <h6 className={style.text}>08:30 hs - 16:30hs</h6>
             </section>
         </div>
     )

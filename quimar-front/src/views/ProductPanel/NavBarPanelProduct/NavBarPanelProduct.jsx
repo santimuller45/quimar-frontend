@@ -14,10 +14,17 @@ const NavBarPanelProduct = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Item><button onClick={() => {}} className={style.logButton}>Crear Producto</button></Nav.Item>
+                        <Nav.Item>
+                            <button onClick={() => {}} className={style.logButton}>Crear Producto</button>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <button onClick={() => {}} className={style.logButton}>Crear Rubro</button>
+                        </Nav.Item>
                     </Nav>
-                    {/* SEARCHBAR */}
-                    <SearchBox/>
+                    <div className={style.searchContainer}>
+                        {/* SEARCHBOX */}
+                        <SearchBox urlNavigate={'/product-panel'}/>
+                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -12,7 +12,7 @@ const LandingPage = () => (
                 <img src={logo} alt="Quimar logo" className={style.logo}/>
                 <div>
                     <h1 className={style.textTitle}>Distribuidora Quimar</h1>
-                    <p className={style.text}>Su socio confiable en el mundo de los artículos de ferretería</p>
+                    <p className={style.text}>Su socio confiable en el rubro de los artículos de ferretería</p>
                 </div>
             </header>
             <section className={style.section}>

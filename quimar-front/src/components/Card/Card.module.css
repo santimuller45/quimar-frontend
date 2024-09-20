@@ -49,8 +49,15 @@
     font-size: 1.2rem;
 }
 
-.cardStockSymbol {
+.cardStockSymbolCheck {
+    margin-left: 1rem;
     font-size: 1.5rem;
+    color: green;
+}
+.cardStockSymbolCross {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: red;
 }
 
 /* Custom button */

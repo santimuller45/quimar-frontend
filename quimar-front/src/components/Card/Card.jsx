@@ -61,8 +61,14 @@ const CardProduct = (product) => {
                         :   null
                     }
                     { status === true
-                        ? <Card.Text className={style.cardText}>Stock disponible: <FontAwesomeIcon icon={faCircleCheck} className={style.cardStockSymbol}/></Card.Text>
-                        : <Card.Text className={style.cardText}>Stock disponible: <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbol}/></Card.Text>
+                        ? 
+                            <Card.Text className={style.cardText}>Stock disponible 
+                                <FontAwesomeIcon icon={faCircleCheck} className={style.cardStockSymbolCheck} style={{ color: 'green' }}/>
+                            </Card.Text>
+                        : 
+                            <Card.Text className={style.cardText}>Stock disponible 
+                                <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
+                            </Card.Text>
                     }
                     <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
                 </Card.Body>

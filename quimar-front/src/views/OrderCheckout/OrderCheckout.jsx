@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // REACT-BOOSTRAP ------>
-import { Button, Table, Form, Row, Col } from "react-bootstrap";
+import { Button, Table, Form } from "react-bootstrap";
 // <---------------------
 
 // SWEETALERT2 ---->
@@ -17,6 +17,10 @@ import { useUser } from "../../customHooks/useUser.js";
 import { useOrders } from "../../customHooks/useOrders.js";
 // <----------------
 
+// COMPONENTES ------>
+import { UserInfo } from "../../components/indexComponents.js";
+// <------------------
+
 const OrderCheckout = () => {
 
     const navigate = useNavigate();
@@ -24,7 +28,6 @@ const OrderCheckout = () => {
     const { setNewOrder } = useOrders();
     const { state } = useUser();
 
-    const localUser = state.user || {};
     const [comments, setComments] = useState(""); // Nuevo estado para comentarios
 
     const handleCommentsChange = (e) => {
@@ -38,7 +41,7 @@ const OrderCheckout = () => {
             totalAmount: totalOrderAmount,
             comentary: comments,
             orderStatus: "PENDIENTE",
-            userEmail: localUser.email
+            userEmail: state.user.email
         };
         
         try {
@@ -63,58 +66,27 @@ const OrderCheckout = () => {
     };
 
     useEffect(() => {
-        !localUser.email && navigate('/log-in');
-    },[localUser]);
+        if (!state.user.email ) navigate('/log-in');
+    },[state.user.email]);
 
     return (
         <div className="container">
             <h2 className={style.title}>Datos del cliente</h2>
-            <Form>
-                <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formEmail">
-                        <Form.Label className={style.labelUserInfo}>Email</Form.Label>
-                        <Form.Control type="email" value={localUser.email} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="formName">
-                        <Form.Label className={style.labelUserInfo}>Nombre</Form.Label>
-                        <Form.Control type="text" value={localUser.name} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formCuit">
-                        <Form.Label className={style.labelUserInfo}>CUIT</Form.Label>
-                        <Form.Control type="text" value={localUser.cuit} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="formPhone">
-                        <Form.Label className={style.labelUserInfo}>Teléfono</Form.Label>
-                        <Form.Control type="text" value={localUser.phone} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formAddress">
-                        <Form.Label className={style.labelUserInfo}>Dirección</Form.Label>
-                        <Form.Control type="text" value={localUser.address} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="formPostalCode">
-                        <Form.Label className={style.labelUserInfo}>Código Postal</Form.Label>
-                        <Form.Control type="text" value={localUser.postalCode} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="formCity">
-                        <Form.Label className={style.labelUserInfo}>Localidad</Form.Label>
-                        <Form.Control type="text" value={localUser.city} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="formState">
-                        <Form.Label className={style.labelUserInfo}>Provincia</Form.Label>
-                        <Form.Control type="text" value={localUser.state} className={style.userInfo} readOnly/>
-                    </Form.Group>
-                </Row>
-            </Form>
+            <UserInfo 
+                email={state.user.email}
+                name={state.user.name}
+                cuit={state.user.cuit}
+                phone={state.user.phone}
+                address={state.user.address}
+                postalCode={state.user.postalCode}
+                city={state.user.city}
+                state={state.user.state}
+            />
             <h2 className={style.title}>Detalle del pedido</h2>
-            <Table striped bordered hover variant="dark" responsive="lg">
+
+            <Table striped bordered hover variant="dark" responsive="lg" className={style.table}>
                 <thead>
-                    <tr>
+                    <tr className="text-center">
                         <th>Código</th>
                         <th>Detalle</th>
                         <th>Cantidad</th>
@@ -140,6 +112,7 @@ const OrderCheckout = () => {
                     )}
                 </tbody>
             </Table>
+
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label className={style.labelUserInfo}>Observación para el pedido</Form.Label>
@@ -150,6 +123,14 @@ const OrderCheckout = () => {
                     />
                 </Form.Group>
             </Form>
+
+             {/* TOTAL DEL PEDIDO */}
+             <div className={style.summaryContainer}>
+                <h2 className={style.totalTitle}>Total a pagar</h2>
+                <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
+            </div>
+
+
             <div className={style.endButtons}>
                 <Button className={style.button} variant="danger" onClick={() => navigate(-1)}>Volver</Button>
                 <Button className={style.button} variant="success" onClick={enviarPedido}>Enviar</Button>
