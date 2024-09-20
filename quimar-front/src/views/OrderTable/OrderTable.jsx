@@ -25,12 +25,11 @@ const OrderTable = () => {
     const { state } = useUser();
 
     const submitHandler = () => {
-        if (!state.user ) navigate('/log-in');
+        if (!state.user.email ) navigate('/log-in');
         else navigate('/order-checkout');
     };
 
     useEffect(() => {
-
     },[state.user])
     
 

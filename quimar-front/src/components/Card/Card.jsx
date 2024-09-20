@@ -33,11 +33,11 @@ const CardProduct = (product) => {
     const handleAddToOrder = () => {
         addToOrder(product);
         setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000);
+        setTimeout(() => setShowAlert(false), 2000);
     };
 
     useEffect(() => {
-    },[state.user])
+    },[state.user]);
 
     return (
         <>
@@ -70,7 +70,11 @@ const CardProduct = (product) => {
                                 <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
                             </Card.Text>
                     }
-                    <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
+                    {   state.user.email
+                        ?   <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
+                        :   null
+                    }
+                   
                 </Card.Body>
             </Card>
             { showAlert && ( <CustomAlert message="¡Producto agregado al pedido! " onClose={() => setShowAlert(false)} type={true} /> )}
