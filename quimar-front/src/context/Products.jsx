@@ -141,7 +141,7 @@ export const ProductProvider = ({ children }) => {
 
     const addProduct = async (data) => {
         try {
-            const response = await axios.put('/productos/registerProduct', data, {
+            const response = await axios.post('/productos/register-product', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

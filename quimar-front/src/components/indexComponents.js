@@ -7,5 +7,6 @@ import Filters from "./Filters/Filters.jsx";
 import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
 import UserInfo from "./UserInfo/UserInfo.jsx";
+import ProductForm from "./ProductForm/ProductForm.jsx";
 
-export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert, UserInfo };
+export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert, UserInfo, ProductForm };

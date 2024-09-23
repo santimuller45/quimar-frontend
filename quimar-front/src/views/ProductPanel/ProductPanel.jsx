@@ -20,6 +20,7 @@ import { useUser } from "../../customHooks/useUser";
 
 // COMPONENT ------->
 import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
+import AddProduct from "./AddProduct/AddProduct.jsx";
 import NavBarPanelProduct from "./NavBarPanelProduct/NavBarPanelProduct.jsx";
 // <-----------------
 
@@ -29,25 +30,30 @@ const ProductPanel = () => {
     const { state } = useUser();
     const navigate = useNavigate();
 
-    // CREO UN ESTADO PARA PASARLO AL COMPONENTE DE ModifyProduct
+    // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
     const [viewProduct, setViewProduct] = useState({});
-    // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [showModifyProduct, setShowModifyProduct] = useState(false);
+    const handleCloseModifyProduct = () => setShowModifyProduct(false);
+
+    // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
+    const [showCreateProduct, setShowCreateProduct] = useState(false);
+    const handleCloseCreateProduct = () => setShowCreateProduct(false);
 
     useEffect(() => {
         if (!state.user.admin) navigate('/');
-    },[state.user.admin, navigate]);
+    },[state.user.admin, navigate, showModifyProduct, showCreateProduct ]);
 
     const updateSubmitHandler = (product) => {
-        setShow(true);
+        setShowModifyProduct(true);
         setViewProduct(product);
     };
+
+    const createSubmitHandler = () => setShowCreateProduct(true);
 
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
-            <NavBarPanelProduct/>
+            <NavBarPanelProduct createSubmitHandler={createSubmitHandler}/>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">
@@ -100,7 +106,11 @@ const ProductPanel = () => {
                         </tr>)
                     }
                 </tbody>
-                <ModifyProduct show={show} handleClose={handleClose} product={viewProduct}/>
+                {/* MODAL DE MODIFICAR PRODUCTO */}
+                <ModifyProduct showModifyProduct={showModifyProduct} handleCloseModifyProduct={handleCloseModifyProduct} product={viewProduct}/>
+                {/* MODAL DE CREAR PRODUCTO */}
+                <AddProduct showCreateProduct={showCreateProduct} handleCloseCreateProduct={handleCloseCreateProduct}/>
+                {/* MODAL DE CREAR RUBRO */}
             </Table>
         </div>
     );
