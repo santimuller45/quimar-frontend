@@ -1,6 +1,8 @@
 import LandingPage from "./LandingPage/LandingPage.jsx";
 import AccountPanel from "./AccountPanel/AccountPanel.jsx";
 import ProductPanel from "./ProductPanel/ProductPanel.jsx";
+import OrdersPanel from "./OrdersPanel/OrdersPanel.jsx";
+import RubroPanel from "./RubroPanel/RubroPanel.jsx";
 import MyAccount from "./MyAccount/MyAccount.jsx";
 import ProductsPage from "./ProductsPage/ProductsPage.jsx";
 import AboutUs from "./AboutUs/AboutUs.jsx";
@@ -15,7 +17,9 @@ import OrderCheckout from "./OrderCheckout/OrderCheckout.jsx";
 export { 
     LandingPage, 
     AccountPanel,
-    ProductPanel, 
+    ProductPanel,
+    OrdersPanel,
+    RubroPanel, 
     MyAccount, 
     ProductsPage, 
     AboutUs, 

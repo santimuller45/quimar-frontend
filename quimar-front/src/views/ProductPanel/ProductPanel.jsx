@@ -14,8 +14,8 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
-import { useProducts } from "../../customHooks/useProducts";
-import { useUser } from "../../customHooks/useUser";
+import { useProducts } from "../../customHooks/useProducts.js";
+import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENT ------->
@@ -33,27 +33,29 @@ const ProductPanel = () => {
     // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
     const [viewProduct, setViewProduct] = useState({});
     const [showModifyProduct, setShowModifyProduct] = useState(false);
+
     const handleCloseModifyProduct = () => setShowModifyProduct(false);
-
-    // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
-    const [showCreateProduct, setShowCreateProduct] = useState(false);
-    const handleCloseCreateProduct = () => setShowCreateProduct(false);
-
-    useEffect(() => {
-        if (!state.user.admin) navigate('/');
-    },[state.user.admin, navigate, showModifyProduct, showCreateProduct ]);
-
+    
     const updateSubmitHandler = (product) => {
         setShowModifyProduct(true);
         setViewProduct(product);
     };
 
+    // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
+    const [showCreateProduct, setShowCreateProduct] = useState(false);
+    const handleCloseCreateProduct = () => setShowCreateProduct(false);
     const createSubmitHandler = () => setShowCreateProduct(true);
+
+    useEffect(() => {
+        if (!state.user.admin) navigate('/');
+    },[state.user.admin, navigate, showModifyProduct, showCreateProduct ]);
+
+
 
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
-            <NavBarPanelProduct createSubmitHandler={createSubmitHandler}/>
+            <NavBarPanelProduct createSubmitHandler={createSubmitHandler} />
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">
@@ -110,7 +112,6 @@ const ProductPanel = () => {
                 <ModifyProduct showModifyProduct={showModifyProduct} handleCloseModifyProduct={handleCloseModifyProduct} product={viewProduct}/>
                 {/* MODAL DE CREAR PRODUCTO */}
                 <AddProduct showCreateProduct={showCreateProduct} handleCloseCreateProduct={handleCloseCreateProduct}/>
-                {/* MODAL DE CREAR RUBRO */}
             </Table>
         </div>
     );

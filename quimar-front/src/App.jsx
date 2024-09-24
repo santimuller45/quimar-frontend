@@ -20,7 +20,9 @@ axios.defaults.baseURL = "http://localhost:3001";
 import { 
   LandingPage, 
   AccountPanel,
-  ProductPanel, 
+  ProductPanel,
+  OrdersPanel,
+  RubroPanel, 
   MyAccount, 
   ProductsPage, 
   AboutUs, 
@@ -58,6 +60,8 @@ function App() {
           <Route path='/products' element={<ProductsPage/>}></Route>
           <Route path='/product-panel' element={<ProductPanel/>}></Route>
           <Route path='/detail/:productID' element={<ProductDetail/>} />
+          <Route path='/orders-panel' element={<OrdersPanel/>}></Route>
+          <Route path='/rubro-panel' element={<RubroPanel/>}></Route>
           <Route path='/account' element={<MyAccount/>}></Route>
           <Route path='/account-panel' element={<AccountPanel/>}></Route>
           <Route path='/contact-us' element={<Contact/>}></Route>

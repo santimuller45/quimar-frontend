@@ -1,0 +1,12 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    font-size: 2.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold; /* Utilizar font-weight 700 para un texto más destacado */
+    margin-bottom: 2rem; /* Espacio debajo del título */
+}

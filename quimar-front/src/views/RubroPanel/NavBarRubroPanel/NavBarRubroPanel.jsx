@@ -1,13 +1,11 @@
 import React from "react";
-import style from "./NavBarPanelProduct.module.css";
+import style from "./NavBarRubroPanel.module.css";
 
 // REACT BOOSTRAP
 import { Navbar, Nav, Container } from 'react-bootstrap';
 //------------>
 
-import { SearchBox } from "../../../components/indexComponents.js";
-
-const NavBarPanelProduct = ({ createSubmitHandler }) => {
+const NavBarRubroPanel = ({ createRubroSubmitHandler }) => {
 
     return (
         <Navbar expand="lg" className={style.nav}>
@@ -16,19 +14,15 @@ const NavBarPanelProduct = ({ createSubmitHandler }) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Item>
-                            <button onClick={createSubmitHandler} className={style.logButton} aria-label="crear producto">
-                                Crear Producto
+                            <button onClick={createRubroSubmitHandler} className={style.logButton} aria-label="crear rubro">
+                                Crear Rubro
                             </button>
                         </Nav.Item>
                     </Nav>
-                    <div className={style.searchContainer}>
-                        {/* SEARCHBOX */}
-                        <SearchBox urlNavigate={'/product-panel'}/>
-                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     )
 };
 
-export default NavBarPanelProduct;
+export default NavBarRubroPanel;
