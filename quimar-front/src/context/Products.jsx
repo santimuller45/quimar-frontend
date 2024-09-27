@@ -16,6 +16,7 @@ const initialState = {
 const ACTION_TYPES = {
     GET_ALL_PRODUCTS: 'GET_ALL_PRODUCTS',
     GET_PRODUCT_BY_NAME: 'GET_PRODUCT_BY_NAME',
+    FILTER_BY_PRODUCT_STATUS: 'FILTER_BY_PRODUCT_STATUS',
     GET_ALL_RUBROS: 'GET_ALL_RUBROS',
     FILTER_BY_RUBRO: 'FILTER_BY_RUBRO',
     SET_ERROR: 'SET_ERROR'
@@ -42,6 +43,21 @@ const productReducer = (state, action) => {
             };
         }
 
+        case ACTION_TYPES.FILTER_BY_PRODUCT_STATUS: {
+
+            let filteredSource;
+
+            if (action.payload === 'activo') filteredSource = state.allProducts.filter(elem => elem.status)
+            else if (action.payload === 'inactivo') filteredSource = state.allProducts.filter(elem => !elem.status)
+            else filteredSource = state.allProducts;
+
+            return {
+                ...state,
+                products: filteredSource,
+                error: null
+            };
+        }
+
         case ACTION_TYPES.GET_ALL_RUBROS: {
             return {
                 ...state,
@@ -52,7 +68,7 @@ const productReducer = (state, action) => {
 
         case ACTION_TYPES.FILTER_BY_RUBRO: {
 
-            const filteredSource = action.payload === 'all'
+            let filteredSource = action.payload === 'all'
             ? state.allProducts
             : state.allProducts.filter(elem => (elem.category).includes(action.payload));
 
@@ -124,21 +140,6 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
-    const getAllRubros = async () => {
-        try {
-            const result = (await axios.get('/rubro')).data;
-            dispatch({
-                type: ACTION_TYPES.GET_ALL_RUBROS,
-                payload: result
-            });
-        } catch (error) {
-            dispatch({
-                type: ACTION_TYPES.SET_ERROR,
-                payload: error.message
-            });
-        }
-    };
-
     const addProduct = async (data) => {
         try {
             const response = await axios.post('/productos/register-product', data, {
@@ -165,6 +166,46 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const filterByProductStatus = (status) => {
+        dispatch({
+            type: ACTION_TYPES.FILTER_BY_PRODUCT_STATUS,
+            payload: status
+        });
+    };
+
+    const getAllRubros = async () => {
+        try {
+            const result = (await axios.get('/rubro')).data;
+            dispatch({
+                type: ACTION_TYPES.GET_ALL_RUBROS,
+                payload: result
+            });
+        } catch (error) {
+            dispatch({
+                type: ACTION_TYPES.SET_ERROR,
+                payload: error.message
+            });
+        }
+    };
+
+    const addRubro = async (rubro) => {
+        try {
+            const response = await axios.post('/rubro/register-rubro', rubro)
+            return response.data;
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
+    const updateRubro = async (rubro) => {
+        try {
+            const response = await axios.put('/rubro/config-rubro', rubro)
+            return response.data;
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
     const filterByRubro = (rubname) => {
         dispatch({
             type: ACTION_TYPES.FILTER_BY_RUBRO,
@@ -173,7 +214,7 @@ export const ProductProvider = ({ children }) => {
     };
 
     return (
-        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, getAllRubros, addProduct, updateProducts, filterByRubro }}>
+        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, filterByProductStatus, getAllRubros, addProduct, updateProducts, addRubro, updateRubro, filterByRubro }}>
             {children}
         </ProductContext.Provider>
     );

@@ -5,7 +5,10 @@ import style from "./NavBarPanelProduct.module.css";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 //------------>
 
+// COMPONENTS ------>
 import { SearchBox } from "../../../components/indexComponents.js";
+import FilterByStatus from "../FilterByStatus/FilterByStatus.jsx";
+// <-----------------
 
 const NavBarPanelProduct = ({ createSubmitHandler }) => {
 
@@ -21,9 +24,12 @@ const NavBarPanelProduct = ({ createSubmitHandler }) => {
                             </button>
                         </Nav.Item>
                     </Nav>
+                    {/* SEARCHBOX */}
                     <div className={style.searchContainer}>
-                        {/* SEARCHBOX */}
                         <SearchBox urlNavigate={'/product-panel'}/>
+                    </div>
+                    <div className={style.searchContainer}>
+                        <FilterByStatus></FilterByStatus>
                     </div>
                 </Navbar.Collapse>
             </Container>

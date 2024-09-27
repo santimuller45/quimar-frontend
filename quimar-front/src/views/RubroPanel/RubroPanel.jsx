@@ -47,8 +47,8 @@ const RubroPanel = () => {
     const handleCloseModifyRubros = () => setShowModifyRubros(false);
     const updateRubrosSubmitHandler = (rubro) => {
         setShowModifyRubros(true);
-        setViewRubro(rubro)
-    }
+        setViewRubro(rubro);
+    };
 
 
     return (

@@ -8,5 +8,6 @@ import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
 import UserInfo from "./UserInfo/UserInfo.jsx";
 import ProductForm from "./ProductForm/ProductForm.jsx";
+import RubroForm from "./RubroForm/RubroForm.jsx";
 
-export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert, UserInfo, ProductForm };
+export { Footer, NavBar, SearchBox, CardContainer, PaginationComponent, Filters, UserNavBar, CustomAlert, UserInfo, ProductForm, RubroForm };

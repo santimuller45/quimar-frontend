@@ -4,7 +4,7 @@ import { useState ,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
-import { Table, Button, Spinner } from "react-bootstrap";
+import { Table, Button, Spinner, Row, Col } from "react-bootstrap";
 // <------------------------
 
 //FONT-AWESOME ------->
@@ -22,6 +22,7 @@ import { useUser } from "../../customHooks/useUser.js";
 import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
 import AddProduct from "./AddProduct/AddProduct.jsx";
 import NavBarPanelProduct from "./NavBarPanelProduct/NavBarPanelProduct.jsx";
+import { PaginationComponent } from "../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
@@ -29,6 +30,19 @@ const ProductPanel = () => {
     const { productState } = useProducts();
     const { state } = useUser();
     const navigate = useNavigate();
+
+    // ESTADOS DE PAGINADO ------>
+    const [currentPage , setCurrentPage ] = useState(1);
+    const productsDB = productState.products;
+    const productPerPage = 20;
+    const indexOfLastProduct = currentPage * productPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+    const currentProducts = productsDB.slice( indexOfFirstProduct, indexOfLastProduct );
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+    // <--------------------------
 
     // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
     const [viewProduct, setViewProduct] = useState({});
@@ -48,8 +62,7 @@ const ProductPanel = () => {
 
     useEffect(() => {
         if (!state.user.admin) navigate('/');
-    },[state.user.admin, navigate, showModifyProduct, showCreateProduct ]);
-
+    },[state.user.admin, navigate, showModifyProduct, showCreateProduct, productState.products ]);
 
 
     return (
@@ -69,9 +82,9 @@ const ProductPanel = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    { productState.products?.length > 0 
+                    { currentProducts?.length > 0 
                         ? 
-                        (productState.products.map(product => (
+                        (currentProducts.map(product => (
                         <tr key={product.id} className="text-center">
                             <td>{product.codigo}</td>
                             <td>{product.name}</td>
@@ -113,6 +126,16 @@ const ProductPanel = () => {
                 {/* MODAL DE CREAR PRODUCTO */}
                 <AddProduct showCreateProduct={showCreateProduct} handleCloseCreateProduct={handleCloseCreateProduct}/>
             </Table>
+            <Row className="justify-content-center mt-4">
+                <Col xs="auto">
+                    <PaginationComponent 
+                        productPerPage={productPerPage} 
+                        productsDB={productsDB.length} 
+                        paginado={paginado} 
+                        currentPage={currentPage}
+                    />
+                </Col>
+            </Row>
         </div>
     );
 };
