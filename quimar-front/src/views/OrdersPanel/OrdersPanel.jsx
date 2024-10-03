@@ -13,6 +13,7 @@ import { useOrders } from "../../customHooks/useOrders.js"
 const OrdersPanel = () => {
 
     const { order, getAllOrders } = useOrders();
+    const allPendingOrders = order.ordersPending || [];
 
     useEffect(() => {
         getAllOrders();
@@ -23,11 +24,17 @@ const OrdersPanel = () => {
             <h2 className={style.title}>Panel de Pedidos</h2>
             <Accordion>
                 {
-                    order.ordersPending.length > 0
-                    ? order.ordersPending.map(elem => (
-                        <Accordion.Item eventKey={elem.id.toString()} key={elem.id}>
-                            <Accordion.Header>{`Pedido #${elem.id}`}</Accordion.Header>
+                    allPendingOrders.length > 0
+                    ? allPendingOrders.map(orderList => (
+                        <Accordion.Item eventKey={orderList.id.toString()} key={orderList.id}>
+                            <Accordion.Header>{`Pedido #${orderList.id}`}</Accordion.Header>
                             <Accordion.Body>
+                                <div className={style.summaryContainer}>
+                                    <h2 className={style.totalTitle}>Cliente</h2>
+                                    <h3 className={style.totalAmount}>{orderList.users[0].name}</h3>
+                                    <h2 className={style.totalTitle}>Usuario</h2>
+                                    <p>{orderList.users[0].email}</p>
+                                </div>
                                 <Table striped bordered hover variant="dark">
                                     <thead>
                                         <tr>
@@ -36,34 +43,32 @@ const OrdersPanel = () => {
                                             <th>Precio</th>
                                             <th>Cantidad</th>
                                             <th>Total</th>
-                                            <th>Comentarios</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            elem.listaPedido?.map((item, index) => (
+                                            orderList.listaPedido?.map((item, index) => (
                                                 <tr key={index} className="text-center">
                                                     <td>{item.codigo}</td>
                                                     <td>{item.name}</td>
                                                     <td>{item.price}</td>
                                                     <td>{item.quantity}</td>
                                                     <td>{item.total}</td>
-                                                    <td>{item.comentary}</td>
                                                 </tr>
                                             ))
                                         }
                                     </tbody>
                                 </Table>
                                 <div className={style.summaryContainer}>
-                                    <h2 className={style.totalTitle}>Comentarios:</h2>
-                                    <p>{elem.comentary ? elem.comentary : "No hay comentarios"}</p>
+                                    <h2 className={style.totalTitle}>Comentarios</h2>
+                                    <p>{orderList.comentary ? orderList.comentary : "No hay comentarios"}</p>
                                     <h2 className={style.totalTitle}>Total a pagar</h2>
-                                    <h3 className={style.totalAmount}>${elem.totalAmount}</h3>
+                                    <h3 className={style.totalAmount}>${orderList.totalAmount}</h3>
                                 </div>
                             </Accordion.Body>
                         </Accordion.Item>
                     ))
-                    : <div>No hay pedidos pendientes</div>
+                    : <div className={style.loading}>No hay pedidos pendientes</div>
                 }
             </Accordion>
         </div>
