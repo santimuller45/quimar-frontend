@@ -73,7 +73,7 @@ export function OrderProvider ({ children }) {
      const setNewOrder = async (order) => {
          try {
              const { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } = order;
-             const response = (await axios.post('/orders', { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } )).data;
+             const response = (await axios.post('/orders/register-order', { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } )).data;
              if (response) dispatch ({ type: ACTION_TYPES.SET_NEW_ORDER });
          } catch (error) {
             dispatch({

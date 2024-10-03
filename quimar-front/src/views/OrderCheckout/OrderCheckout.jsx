@@ -36,7 +36,7 @@ const OrderCheckout = () => {
 
     const enviarPedido = async () => {
         const pedido = {
-            listaPedido: shop.map(elem => `codigo:${elem.codigo} cantidad:${elem.quantity} producto:${elem.name}`),
+            listaPedido: shop,
             amount: totalOrderAmount,
             totalAmount: totalOrderAmount,
             comentary: comments,
