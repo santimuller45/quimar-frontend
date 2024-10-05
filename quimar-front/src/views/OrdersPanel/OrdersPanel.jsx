@@ -27,11 +27,11 @@ const OrdersPanel = () => {
                     allPendingOrders.length > 0
                     ? allPendingOrders.map(orderList => (
                         <Accordion.Item eventKey={orderList.id.toString()} key={orderList.id}>
-                            <Accordion.Header>{`Pedido #${orderList.id}`}</Accordion.Header>
+                            <Accordion.Header><strong> {`Pedido #${orderList.id} ${orderList.users[0]?.name}`} </strong></Accordion.Header>
                             <Accordion.Body>
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Cliente</h2>
-                                    <h3 className={style.totalAmount}>{orderList.users[0].name}</h3>
+                                    <h3 className={style.totalAmount}>{orderList.users[0]?.name}</h3>
                                     <h2 className={style.totalTitle}>Usuario</h2>
                                     <p>{orderList.users[0].email}</p>
                                 </div>
@@ -62,7 +62,7 @@ const OrdersPanel = () => {
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Comentarios</h2>
                                     <p>{orderList.comentary ? orderList.comentary : "No hay comentarios"}</p>
-                                    <h2 className={style.totalTitle}>Total a pagar</h2>
+                                    <h2 className={style.totalTitle}>Total</h2>
                                     <h3 className={style.totalAmount}>${orderList.totalAmount}</h3>
                                 </div>
                             </Accordion.Body>
