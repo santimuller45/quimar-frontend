@@ -6,17 +6,16 @@ export const OrdersContext = createContext();
 
 // Define el estado inicial
 const initialState = {
-    ordersPending: [],
-    ordersCompleted:[],
-    ordersCanceled:[],
-    error: null
+    allOrders: [],
+    orders: [],
 };
 
 // TIPOS DE ACCION ---->
 const ACTION_TYPES = {
     GET_ALL_ORDERS: 'GET_ALL_ORDERS',
     SET_NEW_ORDER: 'SET_NEW_ORDER',
-    SET_ERROR: 'SET_ERROR'
+    GET_ORDER_BY_ID: 'GET_ORDER_BY_ID',
+    GET_ORDER_BY_USER: 'GET_ORDER_BY_USER',
 };
 
 const orderReducer = ( state , action ) => {
@@ -26,9 +25,8 @@ const orderReducer = ( state , action ) => {
         case ACTION_TYPES.GET_ALL_ORDERS: {
             return {
                 ...state,
-                ordersPending: action.payload,
-                ordersCompleted: action.payload2,
-                ordersCanceled: action.payload3
+                allOrders: action.payload,
+                orders: action.payload,
             }
         }
 
@@ -36,12 +34,19 @@ const orderReducer = ( state , action ) => {
             return state;
         };
 
-        case ACTION_TYPES.SET_ERROR: {
+        case ACTION_TYPES.GET_ORDER_BY_ID: {
             return {
                 ...state,
-                error: action.payload
-            };
-        }
+                orders: [action.payload]
+            }
+        };
+
+        case ACTION_TYPES.GET_ORDER_BY_USER: {
+            return {
+                ...state,
+                orders: action.payload
+            }
+        };
 
         default: {
             return state;
@@ -53,38 +58,58 @@ export function OrderProvider ({ children }) {
     
     const [ orderState , dispatch ] = useReducer( orderReducer, initialState);
  
-     const getAllOrders = async () => {
+    const getAllOrders = async () => {
         try {
-            const response = (await axios.get('/orders')).data;
+            const response = await axios.get('/orders');
             dispatch({ 
                 type: ACTION_TYPES.GET_ALL_ORDERS, 
-                payload:  response.orderPending,
-                payload2: response.orderCompleted,
-                payload3: response.orderCancel 
+                payload:  response.data,
             });
         } catch (error) {
-            dispatch({
-                type: ACTION_TYPES.SET_ERROR,
-                payload: error.message
-            });
+            throw error.response?.data?.message || error.message;
         }
     }
  
-     const setNewOrder = async (order) => {
+    const setNewOrder = async (order) => {
          try {
              const { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } = order;
              const response = (await axios.post('/orders/register-order', { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } )).data;
              if (response) dispatch ({ type: ACTION_TYPES.SET_NEW_ORDER });
          } catch (error) {
-            dispatch({
-                type: ACTION_TYPES.SET_ERROR,
-                payload: error.message
-            });
+            throw error.response?.data?.message || error.message;
          }
-     };
+    };
+
+    const getByOrderID = async (orderID) => {
+        try {
+            const response = await axios.get(`/orders/${orderID}`);
+            if (response) {
+                dispatch ({
+                    type: ACTION_TYPES.GET_ORDER_BY_ID,
+                    payload: response.data
+                })
+            }
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
+    const getOrderByUser = async (email) => {
+        try {
+            const response = await axios.get(`/orders?email=${email}`);
+            if (response) {
+                dispatch ({
+                    type: ACTION_TYPES.GET_ORDER_BY_USER,
+                    payload: response.data
+                })
+            }
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    }
  
      return (
-         <OrdersContext.Provider value={{ order : orderState, getAllOrders, setNewOrder }}>
+         <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser }}>
              {children}
          </OrdersContext.Provider>
      )

@@ -40,7 +40,7 @@ const OrderCheckout = () => {
             amount: totalOrderAmount,
             totalAmount: totalOrderAmount,
             comentary: comments,
-            orderStatus: "PENDIENTE",
+            orderStatus: "COMPLETADO",
             userEmail: state.user.email
         };
         
@@ -125,7 +125,7 @@ const OrderCheckout = () => {
             </Form>
 
              {/* TOTAL DEL PEDIDO */}
-             <div className={style.summaryContainer}>
+            <div className={style.summaryContainer}>
                 <h2 className={style.totalTitle}>Total a pagar</h2>
                 <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
             </div>

@@ -10,10 +10,14 @@ import { Accordion, Table } from "react-bootstrap";
 import { useOrders } from "../../customHooks/useOrders.js"
 // <-------------------
 
+// COMPONENTS -------->
+import NavBarPanelOrders from "./NavBarPanelOrders/NavBarPanelOrders.jsx"
+// <-------------------
+
 const OrdersPanel = () => {
 
-    const { order, getAllOrders } = useOrders();
-    const allPendingOrders = order.ordersPending || [];
+    const { orderState, getAllOrders } = useOrders();
+    const allOrdersDB = orderState.orders || [];
 
     useEffect(() => {
         getAllOrders();
@@ -22,21 +26,22 @@ const OrdersPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Pedidos</h2>
+            <NavBarPanelOrders/>
             <Accordion>
                 {
-                    allPendingOrders.length > 0
-                    ? allPendingOrders.map(orderList => (
-                        <Accordion.Item eventKey={orderList.id.toString()} key={orderList.id}>
-                            <Accordion.Header><strong> {`Pedido #${orderList.id} ${orderList.users[0]?.name}`} </strong></Accordion.Header>
+                    allOrdersDB.length > 0
+                    ? allOrdersDB.map(orderList => (
+                        <Accordion.Item eventKey={orderList?.id.toString()} key={orderList.id}>
+                            <Accordion.Header><strong> {`Pedido #${orderList.id} ${orderList.user ? orderList.user.name : 'Desconocido'}`} </strong></Accordion.Header>
                             <Accordion.Body>
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Cliente</h2>
-                                    <h3 className={style.totalAmount}>{orderList.users[0]?.name}</h3>
+                                    <h3 className={style.totalAmount}>{orderList.user.name}</h3>
                                     <h2 className={style.totalTitle}>Usuario</h2>
-                                    <p>{orderList.users[0].email}</p>
+                                    <p>{orderList.user.email}</p>
                                 </div>
                                 <Table striped bordered hover variant="dark">
-                                    <thead>
+                                    <thead className="text-center">
                                         <tr>
                                             <th>Código</th>
                                             <th>Detalle</th>
@@ -47,8 +52,8 @@ const OrdersPanel = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            orderList.listaPedido?.map((item, index) => (
-                                                <tr key={index} className="text-center">
+                                            orderList.listaPedido?.map((item) => (
+                                                <tr key={item.codigo} className="text-center">
                                                     <td>{item.codigo}</td>
                                                     <td>{item.name}</td>
                                                     <td>{item.price}</td>
@@ -68,7 +73,7 @@ const OrdersPanel = () => {
                             </Accordion.Body>
                         </Accordion.Item>
                     ))
-                    : <div className={style.loading}>No hay pedidos pendientes</div>
+                    : <div className={style.loading}>No hay pedidos en el registro</div>
                 }
             </Accordion>
         </div>

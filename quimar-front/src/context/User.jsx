@@ -9,15 +9,21 @@ const initialState = {
 };
 
 const USER_ACTION_TYPES = {
+    GET_ALL_USERS: 'GET_ALL_USERS',
     LOGIN_USER: 'LOGIN_USER',
     LOGOUT_USER: 'LOGOUT_USER',
-    GET_ALL_USERS: 'GET_ALL_USERS',
 };
 
 const updateUserLocalStorage = (user) => window.localStorage.setItem('user', JSON.stringify(user));
 
 const userReducer = (state, action) => {
     switch (action.type) {
+        case USER_ACTION_TYPES.GET_ALL_USERS: {
+            return {
+                ...state,
+                allUsers: action.payload,
+            };
+        }
         case USER_ACTION_TYPES.LOGIN_USER: {
             return {
                 ...state,
@@ -28,12 +34,6 @@ const userReducer = (state, action) => {
             return {
                 ...state,
                 user: {},
-            };
-        }
-        case USER_ACTION_TYPES.GET_ALL_USERS: {
-            return {
-                ...state,
-                allUsers: action.payload,
             };
         }
         default: {
@@ -109,7 +109,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ state, registerUser, userLogin, userLogOut, getAllUsers, updateUserPassword, updateUsers }}>
+        <UserContext.Provider value={{ state, getAllUsers, registerUser, userLogin, userLogOut, updateUserPassword, updateUsers }}>
             {children}
         </UserContext.Provider>
     );

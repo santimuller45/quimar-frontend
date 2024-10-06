@@ -90,7 +90,14 @@ const OrderTable = () => {
             {/* BOTONES */}
             <div className={style.endButtons}>
                 <Button className={style.button} variant="danger" onClick={() => clearOrder()}>Limpiar pedido</Button>
-                <Button className={style.button} variant="success" onClick={submitHandler}>Continuar</Button>
+                <Button 
+                    className={style.button} 
+                    variant="success" 
+                    onClick={submitHandler}
+                    disabled={shop.length === 0} // Desactiva el botón si el carrito está vacío
+                >
+                    Continuar
+                </Button>
             </div>
         </div>
     );

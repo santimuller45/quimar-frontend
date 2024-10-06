@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 // CUSTOM HOOK ---->
 import { useProducts } from "../../customHooks/useProducts.js";
+import { useUser } from "../../customHooks/useUser.js";
+import { useOrders } from "../../customHooks/useOrders.js";
 // <----------------
 
 // REACT BOOSTRAP
@@ -17,25 +19,43 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
-const SearchBox = ({ urlNavigate }) => {
+const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, isEmail }) => {
 
-    const [ product , setProduct ] = useState('');
+    // HOOKS
     const { getProductByName, getAllProducts } = useProducts();
+    const { getByOrderID, getOrderByUser, getAllOrders } = useOrders();
+    const { getAllUsers } = useUser();
+
+
+    const [ input , setInput ] = useState('');
     const navigate = useNavigate();
 
-    const productHandler = (e) => {
-        setProduct(e.target.value);
+    const inputHandler = (e) => {
+        setInput(e.target.value);
     };
 
     const searchBoxHandler = async (e) => {
         e.preventDefault();
+        if (!input.trim()) return;
+
+        if (isProduct) {
+            await getProductByName(input);
+        } else if (isUser) {
+
+        } else if (isOrder) {
+            await getByOrderID(input);
+        } else if (isEmail) {
+            await getOrderByUser(input);
+        }
+        setInput("");
         navigate(urlNavigate);
-        await getProductByName(product);
     };
 
     const resetHandler = async () => {
-        setProduct('');
+        setInput('');
         await getAllProducts();
+        await getAllOrders();
+        await getAllUsers();
     };
 
     return (
@@ -44,15 +64,19 @@ const SearchBox = ({ urlNavigate }) => {
                 <Col>
                     <div className={style.searchContainer}>
                         <Form.Control
-                            name="product"
+                            name="input"
                             type="text"
-                            placeholder="Buscar producto..."
+                            placeholder="Buscar..."
                             className={style.searchInput}
-                            value={product}
-                            onChange={productHandler}
+                            value={input}
+                            onChange={inputHandler}
                         />
-                        <Button type="submit" className={style.searchButton}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                        <Button onClick={resetHandler} className={style.resetButton}><FontAwesomeIcon icon={faCircleXmark} /></Button>
+                        <Button type="submit" className={style.searchButton}>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </Button>
+                        <Button onClick={resetHandler} className={style.resetButton}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </Button>
                     </div>
                 </Col>
             </Row>

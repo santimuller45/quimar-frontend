@@ -26,7 +26,7 @@ const NavBarPanelProduct = ({ createSubmitHandler }) => {
                     </Nav>
                     {/* SEARCHBOX */}
                     <div className={style.searchContainer}>
-                        <SearchBox urlNavigate={'/product-panel'}/>
+                        <SearchBox urlNavigate={'/product-panel'} isProduct={true} isUser={false} isOrder={false} isEmail={false}/>
                     </div>
                     <div className={style.searchContainer}>
                         <FilterByStatus></FilterByStatus>
