@@ -7,9 +7,10 @@ import Filters from "./Filters/Filters.jsx";
 import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
 import UserInfo from "./UserInfo/UserInfo.jsx";
-import ProductForm from "./ProductForm/ProductForm.jsx";
 import FilterByStatus from "./FilterByStatus/FilterByStatus.jsx";
+import ProductForm from "./ProductForm/ProductForm.jsx";
 import RubroForm from "./RubroForm/RubroForm.jsx";
+import UserForm from "./UserForm/UserForm.jsx";
 import PanelNavBar from "./PanelNavBar/PanelNavBar.jsx";
 
 export { 
@@ -22,8 +23,9 @@ export {
     UserNavBar, 
     CustomAlert, 
     UserInfo, 
-    ProductForm,
     FilterByStatus, 
-    RubroForm, 
+    ProductForm,
+    RubroForm,
+    UserForm, 
     PanelNavBar 
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import style from './AccountPanel.module.css'
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
@@ -18,6 +18,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENTS ----->
+import ModifyUser from "./ModifyUser/ModifyUser.jsx";
 import { PanelNavBar } from "../../../components/indexComponents.js"; 
 // <----------------
 
@@ -26,12 +27,21 @@ const AccountPanel = () => {
     const { state, getAllUsers } = useUser();
     const navigate = useNavigate();
 
+    // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyUser
+    const [viewUser, setViewUser] = useState({});
+    const [showModifyUser, setShowModifyUser] = useState(false);
+
+    const handleCloseModifyUser = () => setShowModifyUser(false);
+    
+    const updateSubmitHandler = (user) => {
+        setShowModifyUser(true);
+        setViewUser(user);
+    };
+
     useEffect(() => {
         !state.user.admin && navigate('/');
         getAllUsers();
     },[]);
-
-    const submitHandler = () => {};
 
     return (
         <div className="container-fluid">
@@ -68,15 +78,37 @@ const AccountPanel = () => {
                                 <td>{user.phone}</td>
                                 {/* STATUS DEL USUARIO */}
                                 <td>
-                                    {user.userStatus ? <FontAwesomeIcon icon={faCircleCheck}/> : <FontAwesomeIcon icon={faCircleXmark}/>}
+                                    {user.userStatus 
+                                    ? 
+                                        <>
+                                            <h6 style={{ color: 'green' }}>Activado</h6>
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }}/> 
+                                        </>
+                                    :
+                                        <>
+                                            <h6 style={{ color: 'red' }}>Desactivado</h6>
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }}/>
+                                        </>
+                                    }
                                 </td>
                                 {/* STATUS DE USUARIO ADMIN */}
                                 <td>
-                                    {user.admin ? <FontAwesomeIcon icon={faCircleCheck}/> : <FontAwesomeIcon icon={faCircleXmark}/>}
+                                    {user.admin 
+                                    ? 
+                                        <>
+                                            <h6 style={{ color: 'green' }}>Activado</h6>
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }}/> 
+                                        </>
+                                    :
+                                        <>
+                                            <h6 style={{ color: 'red' }}>Desactivado</h6>
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }}/>
+                                        </> 
+                                    }
                                 </td>
                                 {/* MODIFICAR USUARIO */}
                                 <td>
-                                    <Button onClick={submitHandler} className={style.tableButtons} aria-label="modificar usuario">
+                                    <Button onClick={ () => updateSubmitHandler(user)} className={style.tableButtons} aria-label="modificar usuario">
                                         <FontAwesomeIcon icon={faGear} />
                                     </Button>
                                 </td>
@@ -84,6 +116,7 @@ const AccountPanel = () => {
                         ))
                     }
                 </tbody>
+                <ModifyUser showModifyUser={showModifyUser} handleCloseModifyUser={handleCloseModifyUser} viewUser={viewUser}/>
             </Table>
         </div>
     )
