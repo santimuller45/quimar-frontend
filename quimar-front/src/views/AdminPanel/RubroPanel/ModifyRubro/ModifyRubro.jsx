@@ -1,4 +1,4 @@
-import { RubroForm } from "../../../components/indexComponents.js";
+import { RubroForm } from "../../../../components/indexComponents.js";
 
 const ModifyRubro = ({ showModifyRubros, handleCloseModifyRubros, rubro }) => {
 

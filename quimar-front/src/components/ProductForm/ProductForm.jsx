@@ -70,6 +70,15 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         });
     };
 
+    const showSuccessMessage = (message) => {
+        Swal.fire({
+            icon: 'success',
+            title: message,
+            showConfirmButton: false,
+            timer: 2000
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -84,26 +93,13 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         try {
             if (isEditing) {
                 await updateProducts(data);
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Producto actualizado correctamente!',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    handleClose();
-                    getAllProducts();
-                });
+                showSuccessMessage('¡Producto actualizado correctamente!');
             } else {
                 await addProduct(data);
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Producto creado correctamente!',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    handleClose();
-                });
+                showSuccessMessage('¡Producto creado correctamente!');
             }
+            handleClose();
+            getAllProducts();
         } catch (error) {
             Swal.fire({
                 icon: 'error',

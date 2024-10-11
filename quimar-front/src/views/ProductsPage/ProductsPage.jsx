@@ -74,8 +74,8 @@ const ProductsPage = () => {
                                 <Row className="justify-content-center mt-4">
                                     <Col xs="auto">
                                         <PaginationComponent 
-                                            productPerPage={productPerPage} 
-                                            productsDB={productsDB.length} 
+                                            itemsPerPage={productPerPage} 
+                                            itemsDB={productsDB.length} 
                                             paginado={paginado} 
                                             currentPage={currentPage}
                                         />

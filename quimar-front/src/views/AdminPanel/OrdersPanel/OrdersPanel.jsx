@@ -1,23 +1,35 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState ,useEffect } from "react";
 import style from "./OrdersPanel.module.css";
 
 // REACT BOOSTRAP ---->
-import { Accordion, Table } from "react-bootstrap";
+import { Accordion, Table, Row, Col } from "react-bootstrap";
 // <-------------------
 
 // CUSTOM HOOKS ------>
-import { useOrders } from "../../../customHooks/useOrders.js"
+import { useOrders } from "../../../customHooks/useOrders.js";
 // <-------------------
 
 // COMPONENTS -------->
-import { PanelNavBar } from "../../../components/indexComponents.js";
+import { PanelNavBar, PaginationComponent } from "../../../components/indexComponents.js";
 // <-------------------
 
 const OrdersPanel = () => {
 
     const { orderState, getAllOrders } = useOrders();
     const allOrdersDB = orderState.orders || [];
+    
+    // ESTADOS DE PAGINADO ------>
+    const [currentPage , setCurrentPage ] = useState(1);
+    const ordersPerPage = 20;
+    const indexOfLastProduct = currentPage * ordersPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - ordersPerPage;
+    const currentOrders = allOrdersDB.slice( indexOfFirstProduct, indexOfLastProduct );
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+    // <--------------------------
 
     useEffect(() => {
         getAllOrders();
@@ -29,18 +41,17 @@ const OrdersPanel = () => {
             <PanelNavBar isOrderPanel={true}/>
             <Accordion>
                 {
-                    allOrdersDB.length > 0
-                    ? allOrdersDB.map(orderList => (
+                    currentOrders.length > 0
+                    ? currentOrders.map(orderList => (
                         <Accordion.Item eventKey={orderList?.id.toString()} key={orderList.id}>
                             <Accordion.Header>
                                 <strong>{`Pedido #${orderList.id} de: ${orderList.user ? orderList.user.name : 'Desconocido'}`}</strong>
                             </Accordion.Header>
                             <Accordion.Body>
                                 <div className={style.summaryContainer}>
-                                    <h2 className={style.totalTitle}>Cliente</h2>
+                                    <h2 className={style.totalTitle}>Usuario N° {orderList.user.userNumber}</h2>
                                     <h3 className={style.totalAmount}>{orderList.user.name}</h3>
-                                    <h2 className={style.totalTitle}>Usuario</h2>
-                                    <p>{orderList.user.email}</p>
+                                    <br/>
                                 </div>
                                 <Table striped bordered hover variant="dark">
                                     <thead className="text-center">
@@ -69,7 +80,7 @@ const OrdersPanel = () => {
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Comentarios</h2>
                                     <p>{orderList.comentary ? orderList.comentary : "No hay comentarios"}</p>
-                                    <h2 className={style.totalTitle}>Total</h2>
+                                    <h2 className={style.totalTitle}>Total del pedido</h2>
                                     <h3 className={style.totalAmount}>${orderList.totalAmount}</h3>
                                 </div>
                             </Accordion.Body>
@@ -78,6 +89,16 @@ const OrdersPanel = () => {
                     : <div className={style.loading}>No hay pedidos en el registro</div>
                 }
             </Accordion>
+            <Row className="justify-content-center mt-4">
+                <Col xs="auto">
+                    <PaginationComponent 
+                        itemsPerPage={ordersPerPage} 
+                        itemsDB={allOrdersDB.length} 
+                        paginado={paginado} 
+                        currentPage={currentPage}
+                    />
+                </Col>
+            </Row>
         </div>
     )
 };

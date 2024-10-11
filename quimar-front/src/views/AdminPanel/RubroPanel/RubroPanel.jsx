@@ -12,13 +12,13 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOKS ------>
-import { useProducts } from "../../customHooks/useProducts.js";
+import { useProducts } from "../../../customHooks/useProducts.js";
 // <-------------------
 
 // COMPONENTS -------->
 import AddRubro from "./AddRubro/AddRubro.jsx";
 import ModifyRubro from "./ModifyRubro/ModifyRubro.jsx";
-import { PanelNavBar } from "../../components/indexComponents.js";
+import { PanelNavBar } from "../../../components/indexComponents.js";
 // <-------------------
 
 const RubroPanel = () => {

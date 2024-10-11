@@ -1,4 +1,4 @@
-import { ProductForm } from "../../../components/indexComponents.js";
+import { ProductForm } from "../../../../components/indexComponents.js";
 
 const ModifyProduct = ({ showModifyProduct, handleCloseModifyProduct, product }) => {
 

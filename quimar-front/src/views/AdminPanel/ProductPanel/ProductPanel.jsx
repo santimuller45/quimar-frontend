@@ -14,14 +14,14 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
-import { useProducts } from "../../customHooks/useProducts.js";
-import { useUser } from "../../customHooks/useUser.js";
+import { useProducts } from "../../../customHooks/useProducts.js";
+import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENT ------->
 import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
 import AddProduct from "./AddProduct/AddProduct.jsx";
-import { PaginationComponent, PanelNavBar } from "../../components/indexComponents.js";
+import { PaginationComponent, PanelNavBar } from "../../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
@@ -57,7 +57,7 @@ const ProductPanel = () => {
     // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
     const [showCreateProduct, setShowCreateProduct] = useState(false);
     const handleCloseCreateProduct = () => setShowCreateProduct(false);
-    const createSubmitHandler = () => setShowCreateProduct(true);
+    const createProductSubmitHandler = () => setShowCreateProduct(true);
 
     useEffect(() => {
         if (!state.user.admin) navigate('/');
@@ -67,7 +67,7 @@ const ProductPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
-            <PanelNavBar isProductPanel={true} createSubmitHandler={createSubmitHandler} />
+            <PanelNavBar isProductPanel={true} createProductSubmitHandler={createProductSubmitHandler} />
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">
@@ -128,8 +128,8 @@ const ProductPanel = () => {
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">
                     <PaginationComponent 
-                        productPerPage={productPerPage} 
-                        productsDB={productsDB.length} 
+                        itemsPerPage={productPerPage} 
+                        itemsDB={productsDB.length} 
                         paginado={paginado} 
                         currentPage={currentPage}
                     />

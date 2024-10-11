@@ -9,7 +9,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { SearchBox, FilterByStatus } from "../indexComponents.js";
 // <-----------------
 
-const PanelNavBar = ({ createSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
+const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
 
     return (
         <Navbar expand="lg" className={style.nav}>
@@ -21,7 +21,7 @@ const PanelNavBar = ({ createSubmitHandler, createRubroSubmitHandler, isProductP
                         ?
                         <Nav className="me-auto">
                             <Nav.Item className={style.navItem}>
-                                <button onClick={createSubmitHandler} className={style.buttonItem} aria-label="crear producto">
+                                <button onClick={createProductSubmitHandler} className={style.buttonItem} aria-label="crear producto">
                                     Crear Producto
                                 </button>
                             </Nav.Item>

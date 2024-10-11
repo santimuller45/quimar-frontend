@@ -1,11 +1,10 @@
 import React from "react";
-import style from "./PaginationComponent.module.css";
 
 // REACT BOOSTRAP ---->
 import { Pagination } from 'react-bootstrap';
 // <-------------------
-function PaginationComponent({ productPerPage, productsDB, paginado, currentPage }) {
-    const totalPages = Math.ceil(productsDB / productPerPage);
+function PaginationComponent({ itemsPerPage, itemsDB, paginado, currentPage }) {
+    const totalPages = Math.ceil(itemsDB / itemsPerPage);
     const pageNumbers = [];
     const maxPagesToShow = 6;
 

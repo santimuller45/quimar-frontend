@@ -14,11 +14,11 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
-import { useUser } from "../../customHooks/useUser.js";
+import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENTS ----->
-import { PanelNavBar } from "../../components/indexComponents.js";
+import { PanelNavBar } from "../../../components/indexComponents.js"; 
 // <----------------
 
 const AccountPanel = () => {
