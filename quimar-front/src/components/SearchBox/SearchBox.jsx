@@ -19,7 +19,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
-const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, isEmail }) => {
+const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
 
     // HOOKS
     const { getProductByName, getAllProducts } = useProducts();
@@ -44,7 +44,7 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, isEmail }) => {
 
         } else if (isOrder) {
             await getByOrderID(input);
-        } else if (isEmail) {
+        } else if (userOrder) {
             await getOrderByUser(input);
         }
         setInput("");

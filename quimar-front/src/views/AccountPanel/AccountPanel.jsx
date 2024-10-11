@@ -17,6 +17,10 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
+// COMPONENTS ----->
+import { PanelNavBar } from "../../components/indexComponents.js";
+// <----------------
+
 const AccountPanel = () => {
 
     const { state, getAllUsers } = useUser();
@@ -32,9 +36,11 @@ const AccountPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Cuentas</h2>
+            <PanelNavBar isUserPanel={true}/>
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">
+                        <td>N° Usuario</td>
                         <td>Email</td>
                         <td>Nombre</td>
                         <td>CUIT</td>
@@ -51,6 +57,7 @@ const AccountPanel = () => {
                 <tbody>
                     {   state.allUsers?.map((user, index) => (
                             <tr key={index} className="text-center">
+                                <td>{user.userNumber}</td>
                                 <td>{user.email}</td>
                                 <td>{user.name}</td>
                                 <td>{user.cuit}</td>

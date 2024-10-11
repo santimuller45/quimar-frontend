@@ -18,7 +18,7 @@ import { useProducts } from "../../customHooks/useProducts.js";
 // COMPONENTS -------->
 import AddRubro from "./AddRubro/AddRubro.jsx";
 import ModifyRubro from "./ModifyRubro/ModifyRubro.jsx";
-import NavBarRubroPanel from "./NavBarRubroPanel/NavBarRubroPanel.jsx";
+import { PanelNavBar } from "../../components/indexComponents.js";
 // <-------------------
 
 const RubroPanel = () => {
@@ -54,8 +54,7 @@ const RubroPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Rubros</h2>
-            <NavBarRubroPanel createRubroSubmitHandler={createRubroSubmitHandler}/>
-
+            <PanelNavBar isRubroPanel={true} createRubroSubmitHandler={createRubroSubmitHandler}/>
             <Accordion activeKey={activeKey}>
                 {rubros.length > 0 ? (
                     rubros.map((rubro) => (

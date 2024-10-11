@@ -34,7 +34,10 @@ const NavBar = () => {
                         <Nav.Link href="/products" className={style.navLink}>Productos</Nav.Link>
                     </Nav>
                     {/* SEARCHBAR */}
-                    <SearchBox urlNavigate={'/products'} isProduct={true} isUser={false} isOrder={false} isEmail={false}/>
+                    <SearchBox 
+                        urlNavigate={'/products'} 
+                        isProduct={true}
+                    />
                     {/* USERBAR */}
                     <UserNavBar/>
                 </Navbar.Collapse>

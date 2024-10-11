@@ -7,7 +7,7 @@ import { Form, Row, Col } from "react-bootstrap";
 // <--------------------
 
 // CUSTOM HOOKS ------>
-import { useProducts } from "../../../customHooks/useProducts.js";
+import { useProducts } from "../../customHooks/useProducts.js";
 // <-------------------
 
 const FilterByStatus = () => {

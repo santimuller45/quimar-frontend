@@ -21,8 +21,7 @@ import { useUser } from "../../customHooks/useUser.js";
 // COMPONENT ------->
 import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
 import AddProduct from "./AddProduct/AddProduct.jsx";
-import NavBarPanelProduct from "./NavBarPanelProduct/NavBarPanelProduct.jsx";
-import { PaginationComponent } from "../../components/indexComponents.js";
+import { PaginationComponent, PanelNavBar } from "../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
@@ -68,7 +67,7 @@ const ProductPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
-            <NavBarPanelProduct createSubmitHandler={createSubmitHandler} />
+            <PanelNavBar isProductPanel={true} createSubmitHandler={createSubmitHandler} />
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">

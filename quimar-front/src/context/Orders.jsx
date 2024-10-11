@@ -94,9 +94,9 @@ export function OrderProvider ({ children }) {
         }
     };
 
-    const getOrderByUser = async (email) => {
+    const getOrderByUser = async (userNumber) => {
         try {
-            const response = await axios.get(`/orders?email=${email}`);
+            const response = await axios.get(`/orders?userNumber=${userNumber}`);
             if (response) {
                 dispatch ({
                     type: ACTION_TYPES.GET_ORDER_BY_USER,
