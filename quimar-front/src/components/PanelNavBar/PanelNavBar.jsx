@@ -27,7 +27,10 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 Nombre / Código
-                                <SearchBox urlNavigate={'/product-panel'} isProduct={true}/>
+                                <SearchBox 
+                                    urlNavigate={'/product-panel'} 
+                                    isProduct={true}
+                                />
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 <FilterByStatus isProduct={true}/>

@@ -61,7 +61,7 @@ const ProductPanel = () => {
 
     useEffect(() => {
         if (!state.user.admin) navigate('/');
-    },[state.user.admin, navigate, showModifyProduct, showCreateProduct, productState.products ]);
+    }, [ state.user.admin, navigate, showModifyProduct, showCreateProduct, productState.products ]);
 
 
     return (
@@ -84,31 +84,31 @@ const ProductPanel = () => {
                     { currentProducts?.length > 0 
                         ? 
                         (currentProducts.map(product => (
-                        <tr key={product.id} className="text-center">
-                            <td>{product.codigo}</td>
-                            <td>{product.name}</td>
-                            <td>${product.price}</td>
-                            <td>{product.category}</td>
-                            <td>{product.descripcion}</td>
-                            <td>{product.status 
-                                ? 
-                                    <>
-                                        <h6 style={{ color: 'green' }}>Activado</h6>
-                                        <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }}/>
-                                    </> 
-                                : 
-                                    <>
-                                        <h6 style={{ color: 'red' }}>Desactivado</h6>
-                                        <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }}/>
-                                    </>
-                                }
-                            </td>
-                            <td>
-                                <Button onClick={() => updateSubmitHandler(product)} className={style.tableButtons} aria-label="modificar producto">
-                                    <FontAwesomeIcon icon={faGear} />
-                                </Button>
-                            </td>
-                        </tr>
+                            <tr key={product.id} className="text-center">
+                                <td>{product.codigo}</td>
+                                <td>{product.name}</td>
+                                <td>${product.price}</td>
+                                <td>{product.category}</td>
+                                <td>{product.descripcion}</td>
+                                <td>{product.status 
+                                    ? 
+                                        <>
+                                            <h6 style={{ color: 'green' }}>Activado</h6>
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }}/>
+                                        </> 
+                                    : 
+                                        <>
+                                            <h6 style={{ color: 'red' }}>Desactivado</h6>
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }}/>
+                                        </>
+                                    }
+                                </td>
+                                <td>
+                                    <Button onClick={() => updateSubmitHandler(product)} className={style.tableButtons} aria-label="modificar producto">
+                                        <FontAwesomeIcon icon={faGear} />
+                                    </Button>
+                                </td>
+                            </tr>
                         )))   
                         : 
                         (<tr>

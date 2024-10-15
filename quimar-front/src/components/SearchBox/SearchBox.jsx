@@ -74,7 +74,7 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
                         <Button type="submit" className={style.searchButton}>
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Button>
-                        <Button onClick={resetHandler} className={style.resetButton}>
+                        <Button onClick={() => resetHandler()} className={style.resetButton}>
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </Button>
                     </div>

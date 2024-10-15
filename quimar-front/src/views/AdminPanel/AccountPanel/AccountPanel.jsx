@@ -53,7 +53,7 @@ const AccountPanel = () => {
 
     useEffect(() => {
         if (!state.user.admin) navigate('/');
-    }, [navigate, state.user.admin, state.showUsers]);
+    }, [ navigate, state.user.admin, state.showUsers ]);
 
     return (
         <div className="container-fluid">
@@ -77,7 +77,9 @@ const AccountPanel = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {   currentUsers?.map((user, index) => (
+                    {   currentUsers?.length > 0
+                        ?    
+                        (currentUsers.map((user, index) => (
                             <tr key={index} className="text-center">
                                 <td>{user.userNumber}</td>
                                 <td>{user.email}</td>
@@ -125,7 +127,8 @@ const AccountPanel = () => {
                                     </Button>
                                 </td>
                             </tr>
-                        ))
+                        )))
+                        : null
                     }
                 </tbody>
                 <ModifyUser showModifyUser={showModifyUser} handleCloseModifyUser={handleCloseModifyUser} viewUser={viewUser}/>
