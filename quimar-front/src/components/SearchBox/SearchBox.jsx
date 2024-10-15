@@ -38,24 +38,37 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
         e.preventDefault();
         if (!input.trim()) return;
 
-        if (isProduct) {
-            await getProductByName(input);
-        } else if (isUser) {
-            await getUserByNameOrNumber(input);
-        } else if (isOrder) {
-            await getByOrderID(input);
-        } else if (userOrder) {
-            await getOrderByUser(input);
+        try {
+            if (isProduct) {
+                await getProductByName(input);
+            } else if (isUser) {
+                await getUserByNameOrNumber(input);
+            } else if (isOrder) {
+                await getByOrderID(input);
+            } else if (userOrder) {
+                await getOrderByUser(input);
+            }
+
+            setInput("");
+            navigate(urlNavigate);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
-        setInput("");
-        navigate(urlNavigate);
     };
 
     const resetHandler = async () => {
         setInput('');
-        await getAllProducts();
-        await getAllOrders();
-        await getAllUsers();
+        try {
+            if (isProduct) {
+                await getAllProducts();
+            } else if (isOrder) {
+                await getAllOrders();
+            } else if (isUser) {
+                await getAllUsers();
+            }
+        } catch (error) {
+            console.error("Error fetching all data:", error);
+        }
     };
 
     return (
