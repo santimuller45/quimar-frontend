@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Row, Col } from "react-bootstrap";
 // <------------------------
 
 //FONT-AWESOME ------->
@@ -19,13 +19,26 @@ import { useUser } from "../../../customHooks/useUser.js";
 
 // COMPONENTS ----->
 import ModifyUser from "./ModifyUser/ModifyUser.jsx";
-import { PanelNavBar } from "../../../components/indexComponents.js"; 
+import { PanelNavBar, PaginationComponent } from "../../../components/indexComponents.js"; 
 // <----------------
 
 const AccountPanel = () => {
 
-    const { state, getAllUsers } = useUser();
+    const { state } = useUser();
     const navigate = useNavigate();
+
+    // ESTADOS DE PAGINADO ------>
+    const [currentPage , setCurrentPage ] = useState(1);
+    const usersDB = state.showUsers;
+    const usersPerPage = 20;
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = usersDB.slice( indexOfFirstUser, indexOfLastUser );
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+    // <--------------------------
 
     // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyUser
     const [viewUser, setViewUser] = useState({});
@@ -39,9 +52,8 @@ const AccountPanel = () => {
     };
 
     useEffect(() => {
-        !state.user.admin && navigate('/');
-        getAllUsers();
-    },[]);
+        if (!state.user.admin) navigate('/');
+    }, [navigate, state.user.admin, state.showUsers]);
 
     return (
         <div className="container-fluid">
@@ -65,7 +77,7 @@ const AccountPanel = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {   state.allUsers?.map((user, index) => (
+                    {   currentUsers?.map((user, index) => (
                             <tr key={index} className="text-center">
                                 <td>{user.userNumber}</td>
                                 <td>{user.email}</td>
@@ -118,6 +130,16 @@ const AccountPanel = () => {
                 </tbody>
                 <ModifyUser showModifyUser={showModifyUser} handleCloseModifyUser={handleCloseModifyUser} viewUser={viewUser}/>
             </Table>
+            <Row className="justify-content-center mt-4">
+                <Col xs="auto">
+                    <PaginationComponent 
+                        itemsPerPage={usersPerPage} 
+                        itemsDB={usersDB.length} 
+                        paginado={paginado} 
+                        currentPage={currentPage}
+                    />
+                </Col>
+            </Row>
         </div>
     )
 };

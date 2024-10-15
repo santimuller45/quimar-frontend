@@ -26,11 +26,11 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                                 </button>
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
-                                Nombre/Código
+                                Nombre / Código
                                 <SearchBox urlNavigate={'/product-panel'} isProduct={true}/>
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
-                                <FilterByStatus/>
+                                <FilterByStatus isProduct={true}/>
                             </Nav.Item>
                         </Nav>
                         : null
@@ -39,8 +39,15 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                     {   isUserPanel
                         ?
                         <Nav className="me-auto">
-                            <Nav.Item>
-                                <SearchBox urlNavigate={'/account-panel'}/>
+                            <Nav.Item className={style.navItem}>
+                                N° Usuario / Nombre
+                                <SearchBox 
+                                    urlNavigate={'/account-panel'} 
+                                    isUser={true}
+                                />
+                            </Nav.Item>
+                            <Nav.Item className={style.navItem}>
+                                <FilterByStatus isUser={true}/>
                             </Nav.Item>
                         </Nav>
                         : null

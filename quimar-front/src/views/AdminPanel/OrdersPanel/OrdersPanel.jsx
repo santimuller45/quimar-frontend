@@ -1,5 +1,6 @@
 import React from "react";
 import { useState ,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import style from "./OrdersPanel.module.css";
 
 // REACT BOOSTRAP ---->
@@ -8,6 +9,7 @@ import { Accordion, Table, Row, Col } from "react-bootstrap";
 
 // CUSTOM HOOKS ------>
 import { useOrders } from "../../../customHooks/useOrders.js";
+import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
@@ -16,15 +18,17 @@ import { PanelNavBar, PaginationComponent } from "../../../components/indexCompo
 
 const OrdersPanel = () => {
 
+    const navigate = useNavigate();
     const { orderState, getAllOrders } = useOrders();
+    const { state } = useUser();
     const allOrdersDB = orderState.orders || [];
     
     // ESTADOS DE PAGINADO ------>
     const [currentPage , setCurrentPage ] = useState(1);
     const ordersPerPage = 20;
-    const indexOfLastProduct = currentPage * ordersPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - ordersPerPage;
-    const currentOrders = allOrdersDB.slice( indexOfFirstProduct, indexOfLastProduct );
+    const indexOfLastOrder = currentPage * ordersPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    const currentOrders = allOrdersDB.slice( indexOfFirstOrder, indexOfLastOrder );
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -32,8 +36,21 @@ const OrdersPanel = () => {
     // <--------------------------
 
     useEffect(() => {
-        getAllOrders();
-    },[])
+        const fetchOrders = async () => {
+            if (!state.user.admin) {
+                navigate('/');
+                return;
+            }
+    
+            try {
+                await getAllOrders();
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+            }
+        };
+    
+        fetchOrders();
+    },[navigate, state.user.admin])
 
     return (
         <div className="container-fluid">

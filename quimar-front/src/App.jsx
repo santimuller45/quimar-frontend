@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // CUSTOM HOOK ---->
 import { useProducts } from './customHooks/useProducts.js';
+import { useUser } from './customHooks/useUser.js';
 // <----------------
 
 // URL DE RESPUESTA DEL BACKEND ---->
@@ -43,10 +44,12 @@ import { NavBar, Footer } from './components/indexComponents.js'
 function App() {
 
   const { getAllProducts, getAllRubros } = useProducts();
+  const { getAllUsers } = useUser();
 
   useEffect(() => {
     getAllProducts();
     getAllRubros();
+    getAllUsers();
   },[]);
 
   return (

@@ -24,7 +24,7 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
     // HOOKS
     const { getProductByName, getAllProducts } = useProducts();
     const { getByOrderID, getOrderByUser, getAllOrders } = useOrders();
-    const { getAllUsers } = useUser();
+    const { getAllUsers, getUserByNameOrNumber } = useUser();
 
 
     const [ input , setInput ] = useState('');
@@ -41,7 +41,7 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
         if (isProduct) {
             await getProductByName(input);
         } else if (isUser) {
-
+            await getUserByNameOrNumber(input);
         } else if (isOrder) {
             await getByOrderID(input);
         } else if (userOrder) {
