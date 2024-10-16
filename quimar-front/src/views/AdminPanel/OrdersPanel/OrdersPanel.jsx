@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./OrdersPanel.module.css";
 
 // REACT BOOSTRAP ---->
-import { Accordion, Table, Row, Col } from "react-bootstrap";
+import { Accordion, Row, Col } from "react-bootstrap";
 // <-------------------
 
 // CUSTOM HOOKS ------>
@@ -13,7 +13,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
-import { PanelNavBar, PaginationComponent } from "../../../components/indexComponents.js";
+import { PanelNavBar, PaginationComponent, OrderDetail } from "../../../components/indexComponents.js";
 // <-------------------
 
 const OrdersPanel = () => {
@@ -63,37 +63,19 @@ const OrdersPanel = () => {
                         <Accordion.Item eventKey={orderList?.id.toString()} key={orderList.id}>
                             <Accordion.Header>
                                 <strong>{`Pedido #${orderList.id} de: ${orderList.user ? orderList.user.name : 'Desconocido'}`}</strong>
+                                {`Fecha: ${orderList.orderDate.day}/${orderList.orderDate.month}/${orderList.orderDate.year}`}
                             </Accordion.Header>
                             <Accordion.Body>
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Usuario N° {orderList.user.userNumber}</h2>
                                     <h3 className={style.totalAmount}>{orderList.user.name}</h3>
+                                    <h2 className={style.totalTitle}>Fecha: {`${orderList.orderDate.day}/${orderList.orderDate.month}/${orderList.orderDate.year}`}</h2>
+                                    <h2 className={style.totalTitle}>Hora: {`${orderList.orderDate.hour}:${orderList.orderDate.minute}:${orderList.orderDate.second}`}</h2>
                                     <br/>
                                 </div>
-                                <Table striped bordered hover variant="dark">
-                                    <thead className="text-center">
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>Detalle</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            orderList.listaPedido?.map((item) => (
-                                                <tr key={item.codigo} className="text-center">
-                                                    <td>{item.codigo}</td>
-                                                    <td>{item.name}</td>
-                                                    <td>{item.price}</td>
-                                                    <td>{item.quantity}</td>
-                                                    <td>{item.total}</td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </Table>
+                                {/* TABLA DE LA ORDEN */}
+                                <OrderDetail orderBody={orderList.listaPedido}/>
+                                {/*  */}
                                 <div className={style.summaryContainer}>
                                     <h2 className={style.totalTitle}>Comentarios</h2>
                                     <p>{orderList.comentary ? orderList.comentary : "No hay comentarios"}</p>

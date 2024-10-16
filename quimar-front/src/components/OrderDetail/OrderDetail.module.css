@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem; /* Añadir padding para evitar que el contenido quede pegado a los bordes */
+}
+
+/* Title Styles */
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    font-size: 2.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold; /* Utilizar font-weight 700 para un texto más destacado */
+    margin-bottom: 2rem; /* Espacio debajo del título */
+}
+
+/* Table Styles */
+.table {
+    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+    margin-bottom: 2rem; /* Espacio debajo de las tablas */
+}
+
+/* Table Button Styles */
+.tableButtons {
+    background: none;
+    border: none;
+    color: #f8f9fa; /* Color del icono para contraste */
+    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
+    transition: color 0.3s ease; /* Transición para el cambio de color */
+}
+
+.tableButtons:hover {
+    color: #17a2b8; /* Color de hover para mejorar la interacción visual */
+}
+
+.summaryContainer {
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Espaciado superior */
+    padding: 15px; /* Espaciado interno */
+    color: #000; /* Color del texto */
+}
+
+.totalTitle {
+    font-size: 1.5rem; /* Tamaño de fuente para el título */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+.totalAmount {
+    font-size: 2rem; /* Tamaño de fuente grande para el total */
+    font-weight: bold; /* Negrita para destacar el total */
+    margin: 0; /* Sin margen */
+}
+
+/* End Buttons Container */
+.endButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 2rem; /* Espacio arriba del contenedor de botones */
+    justify-content: center; /* Centrar los botones horizontalmente */
+}
+
+.button {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Table Customization */
+.table th, .table td {
+    text-align: center; /* Centrar el texto en las celdas de la tabla */
+    padding: 0.75rem; /* Padding para celdas de tabla */
+}
+
+/* Make sure tables are responsive */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.875rem; /* Ajustar el tamaño de fuente en pantallas pequeñas */
+    }
+
+    .endButtons {
+        flex-direction: column; /* Cambiar la dirección de los botones en pantallas pequeñas */
+    }
+}

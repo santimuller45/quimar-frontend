@@ -12,6 +12,7 @@ import ProductForm from "./ProductForm/ProductForm.jsx";
 import RubroForm from "./RubroForm/RubroForm.jsx";
 import UserForm from "./UserForm/UserForm.jsx";
 import PanelNavBar from "./PanelNavBar/PanelNavBar.jsx";
+import OrderDetail from "./OrderDetail/OrderDetail.jsx";
 
 export { 
     Footer, 
@@ -27,5 +28,6 @@ export {
     ProductForm,
     RubroForm,
     UserForm, 
-    PanelNavBar 
+    PanelNavBar,
+    OrderDetail, 
 };

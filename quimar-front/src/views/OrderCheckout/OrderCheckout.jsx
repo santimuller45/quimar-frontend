@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // REACT-BOOSTRAP ------>
-import { Button, Table, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 // <---------------------
 
 // SWEETALERT2 ---->
@@ -18,7 +18,7 @@ import { useOrders } from "../../customHooks/useOrders.js";
 // <----------------
 
 // COMPONENTES ------>
-import { UserInfo } from "../../components/indexComponents.js";
+import { UserInfo, OrderDetail } from "../../components/indexComponents.js";
 // <------------------
 
 const OrderCheckout = () => {
@@ -84,35 +84,9 @@ const OrderCheckout = () => {
             />
             <h2 className={style.title}>Detalle del pedido</h2>
 
-            <Table striped bordered hover variant="dark" responsive="lg" className={style.table}>
-                <thead>
-                    <tr className="text-center">
-                        <th>Código</th>
-                        <th>Detalle</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unidad</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {shop.length === 0 ? (
-                        <tr>
-                            <td colSpan="6" className="text-center">No hay productos en el carrito</td>
-                        </tr>
-                    ) : (
-                        shop.map(elem => (
-                            <tr className="text-center" key={elem.id}>
-                                <td>{elem.codigo}</td>
-                                <td>{elem.name}</td>
-                                <td>{elem.quantity}</td>
-                                <td>${elem.price}</td>
-                                <td><strong>${elem.total}</strong></td>
-                            </tr>
-                        ))
-                    )}
-                </tbody>
-            </Table>
-
+            {/* TABLA DE LA ORDEN */}
+            <OrderDetail orderBody={shop} />
+            {/*  */}
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label className={style.labelUserInfo}>Observación para el pedido</Form.Label>
@@ -127,9 +101,9 @@ const OrderCheckout = () => {
              {/* TOTAL DEL PEDIDO */}
             <div className={style.summaryContainer}>
                 <h2 className={style.totalTitle}>Total a pagar</h2>
-                <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
+                <h3 className={style.totalAmount}>${totalOrderAmount.toFixed(2)}</h3>
             </div>
-
+            {/*  */}
 
             <div className={style.endButtons}>
                 <Button className={style.button} variant="danger" onClick={() => navigate(-1)}>Volver</Button>
