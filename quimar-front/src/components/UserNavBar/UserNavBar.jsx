@@ -56,8 +56,8 @@ const UserNavBar = () => {
                 ?
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUnlock}/> Admin</span>} id="basic-nav-dropdown-admin">
                     <NavDropdown.Item href="/product-panel"><span className={style.navLink}><FontAwesomeIcon icon={faGears}/> Productos</span></NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/rubro-panel"><span className={style.navLink}><FontAwesomeIcon icon={faSliders} /> Rubros</span></NavDropdown.Item>
+                    {/* <NavDropdown.Divider />
+                    <NavDropdown.Item href="/rubro-panel"><span className={style.navLink}><FontAwesomeIcon icon={faSliders} /> Rubros</span></NavDropdown.Item> */}
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/account-panel"><span className={style.navLink}><FontAwesomeIcon icon={faUsers}/> Cuentas</span></NavDropdown.Item>
                     <NavDropdown.Divider />
