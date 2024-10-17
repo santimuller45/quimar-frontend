@@ -29,7 +29,7 @@ const orderReducer = ( state , action ) => {
             if (productInOrder >= 0) {
                 const newOrderState = structuredClone(state);
                 newOrderState[productInOrder].quantity += 1;
-                newOrderState[productInOrder].total += newOrderState[productInOrder].price;
+                newOrderState[productInOrder].total += parseFloat(newOrderState[productInOrder].price);
                 updateOrderLocalStorage(newOrderState);
                 return newOrderState;
             }
@@ -40,7 +40,7 @@ const orderReducer = ( state , action ) => {
                 {
                     ...actionPayload,
                     quantity: 1,
-                    total: actionPayload.price
+                    total: parseFloat(actionPayload.price)
                 }
             ];
             
@@ -56,7 +56,7 @@ const orderReducer = ( state , action ) => {
                 const newOrderState = structuredClone(state);
                 if (newOrderState[productInOrder].quantity > 1) {
                     newOrderState[productInOrder].quantity -= 1;
-                    newOrderState[productInOrder].total -= newOrderState[productInOrder].price;
+                    newOrderState[productInOrder].total -= parseFloat(newOrderState[productInOrder].price);
                 } else {
                     newOrderState.splice(productInOrder, 1);
                 }
@@ -81,7 +81,7 @@ const orderReducer = ( state , action ) => {
         };
 
         case ORDER_ACTION_TYPES.TOTAL_ORDER: {
-            const total = state.reduce((sum, item) => sum + item.total, 0);
+            const total = state.reduce((sum, item) => sum + parseFloat(item.total), 0);
             return { ...state, total };
         };
         
@@ -104,7 +104,7 @@ export function ShopProvider ({ children }) {
 
     const clearOrder = () => dispatch({ type: ORDER_ACTION_TYPES.CLEAN_ORDER });
 
-    const getTotalAmount = () => shopState.reduce((sum, item) => sum + item.total, 0);
+    const getTotalAmount = () => shopState.reduce((sum, item) => sum + parseFloat(item.total), 0);
 
     return (
         <ShopContext.Provider value={{ shop : shopState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>

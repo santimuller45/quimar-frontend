@@ -101,7 +101,7 @@ const OrderCheckout = () => {
              {/* TOTAL DEL PEDIDO */}
             <div className={style.summaryContainer}>
                 <h2 className={style.totalTitle}>Total a pagar</h2>
-                <h3 className={style.totalAmount}>${totalOrderAmount.toFixed(2)}</h3>
+                <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
             </div>
             {/*  */}
 

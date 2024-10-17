@@ -48,8 +48,8 @@ const OrderDetail = ( { orderBody, isEditing, onAdd, onDecrement, onRemove } ) =
                                 :
                                 <td>{body.quantity}</td>
                             }
-                            <td>${body.price.toFixed(2)}</td>
-                            <td>${body.total.toFixed(2)}</td>
+                            <td>${body.price}</td>
+                            <td>${body.total}</td>
                             {   isEditing
                                 ?
                                 <td>

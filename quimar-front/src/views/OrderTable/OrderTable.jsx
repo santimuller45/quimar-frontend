@@ -45,7 +45,7 @@ const OrderTable = () => {
             {/* TOTAL DEL PEDIDO */}
             <div className={style.summaryContainer}>
                 <h2 className={style.totalTitle}>Total del Pedido</h2>
-                <h3 className={style.totalAmount}>${totalOrderAmount.toFixed(2)}</h3>
+                <h3 className={style.totalAmount}>${totalOrderAmount}</h3>
                 <br/>
                 <p className="text-center"><strong>¡Revise su pedido antes de continuar!</strong></p>
             </div>
