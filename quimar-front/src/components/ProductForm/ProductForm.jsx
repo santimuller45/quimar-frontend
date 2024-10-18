@@ -12,6 +12,10 @@ import { useProducts } from "../../customHooks/useProducts.js";
 import Swal from 'sweetalert2';
 // <-----------------
 
+// VALIDATE -------->
+import { validateProduct } from "./validate.js";
+// <-----------------
+
 const ProductForm = ({ show, handleClose, product, isEditing }) => {
 
     const { productState, addProduct, updateProducts, getAllProducts } = useProducts();
@@ -82,6 +86,18 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const errors = validateProduct(form); // Validar el formulario
+
+        // Validar que el formulario tenga valores seleccionados
+        if (Object.keys(errors).length > 0) {
+            const errorMessages = Object.values(errors).join('\n');
+            return Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: errorMessages
+            });
+        }
+
         // SE DEBE CREAR EL FORMULARIO UTILIZANDO LA FUNCION FORMDATA PARA QUE SE PUEDA ENVIAR EL FORMULARIO CON LA IMAGEN AL BACK 
         const data = new FormData();
         Object.keys(form).forEach(key => {
@@ -98,6 +114,19 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
                 await addProduct(data);
                 showSuccessMessage('¡Producto creado correctamente!');
             }
+
+             // Reiniciar el formulario
+            setForm({
+                id: "",
+                codigo: "",
+                name: "",
+                price: "",
+                imagen: null,
+                category: "",
+                descripcion: "",
+                status: false
+            });
+
             handleClose();
             getAllProducts();
         } catch (error) {
@@ -150,13 +179,14 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
                         </Col>
                     </Form.Group>
                     <Form.Group controlId="formBasicCategory">
-                        <Form.Label>Seleccione el Sub Rubro</Form.Label>
+                        <Form.Label>Subrubros</Form.Label>
                         <Form.Select
                             aria-label="Seleccione el rubro"
                             name="category"
                             value={form.category}
                             onChange={handleSelectChange}
                         >
+                            <option value="">Seleccione un subrubro</option>
                             {rubros?.map((elem, index) => (
                                 <option value={elem} key={index}>
                                     {elem}

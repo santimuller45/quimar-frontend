@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./RubroPanel.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP ----->
 import { Accordion } from "react-bootstrap";
@@ -13,16 +14,17 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 // CUSTOM HOOKS ------>
 import { useProducts } from "../../../customHooks/useProducts.js";
+import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
-import AddRubro from "./AddRubro/AddRubro.jsx";
-import ModifyRubro from "./ModifyRubro/ModifyRubro.jsx";
-import { PanelNavBar } from "../../../components/indexComponents.js";
+import { PanelNavBar, RubroForm } from "../../../components/indexComponents.js";
 // <-------------------
 
 const RubroPanel = () => {
 
+    const navigate = useNavigate();
+    const { state } = useUser();
     const { productState } = useProducts();
     const rubros = productState.rubros || [];
 
@@ -33,8 +35,8 @@ const RubroPanel = () => {
     };
 
     useEffect(() => {
-
-    },[productState])
+        if (!state.user.admin) navigate('/');
+    },[ state.user.admin, navigate, productState ])
 
     // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddRubro
     const [showCreateRubro, setShowCreateRubro] = useState(false);
@@ -80,8 +82,18 @@ const RubroPanel = () => {
                     <p>No hay rubros disponibles.</p>
                 )}
             </Accordion>
-            <AddRubro showCreateRubro={showCreateRubro} handleCloseCreateRubro={handleCloseCreateRubro}/>
-            <ModifyRubro showModifyRubros={showModifyRubros} handleCloseModifyRubros={handleCloseModifyRubros} rubro={viewRubro}/>
+            {/* MODAL PARA AGREGAR NUEVO RUBRO */}
+            <RubroForm
+                show={showCreateRubro}
+                handleClose={handleCloseCreateRubro}
+            />
+            {/* MODAL PARA MODIFICAR LOS RUBROS */}
+            <RubroForm
+                show={showModifyRubros}
+                handleClose={handleCloseModifyRubros}
+                rubro={viewRubro}
+                isEditing={true} 
+            />
         </div>
     )
 };

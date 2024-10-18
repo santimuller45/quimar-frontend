@@ -1,23 +1,26 @@
 import React from "react";
 import style from './UserNavBar.module.css';
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP
-import { Nav, NavDropdown } from 'react-bootstrap';
+import { Nav, NavDropdown, Badge } from 'react-bootstrap';
 //------------>
 
 //FONT-AWESOME ------->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faUser, faUnlock, faUsers, faGears, faFileCircleCheck, faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faUser, faUnlock, faUsers, faGears, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
 // CUSTOM HOOK ---->
 import { useUser } from "../../customHooks/useUser.js";
+import { useShop } from "../../customHooks/useShop.js";
 // <----------------
 
 const UserNavBar = () => {
 
     const { state, userLogOut } = useUser();
+    const { shop } = useShop();
     const localUser = state.user || {};
     const navigate = useNavigate();
 
@@ -30,10 +33,16 @@ const UserNavBar = () => {
         }
     }
 
+    useEffect(() => {
+
+    },[shop])
+
     return (
         <Nav className="ms-auto">
             <Nav.Link href="/order">
-                <span className={style.navTitle}><FontAwesomeIcon icon={faCirclePlus}/> Mi Pedido</span>
+                <span className={style.navTitle}>
+                    <FontAwesomeIcon icon={faCirclePlus}/> Pedido <Badge>{shop.length}</Badge>
+                </span>
             </Nav.Link>
             { localUser.email
                 ?

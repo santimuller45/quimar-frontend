@@ -18,8 +18,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENTS ----->
-import ModifyUser from "./ModifyUser/ModifyUser.jsx";
-import { PanelNavBar, PaginationComponent } from "../../../components/indexComponents.js"; 
+import { PanelNavBar, PaginationComponent, UserForm } from "../../../components/indexComponents.js"; 
 // <----------------
 
 const AccountPanel = () => {
@@ -131,7 +130,14 @@ const AccountPanel = () => {
                         : null
                     }
                 </tbody>
-                <ModifyUser showModifyUser={showModifyUser} handleCloseModifyUser={handleCloseModifyUser} viewUser={viewUser}/>
+                {/* MODAL PARA MODIFICAR LOS USUARIOS */}
+                <UserForm
+                    show={showModifyUser}
+                    handleClose={handleCloseModifyUser}
+                    user={viewUser}
+                    isEditing={true}
+                />
+                {/*  */}
             </Table>
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">

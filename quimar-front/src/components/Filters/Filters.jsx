@@ -23,6 +23,12 @@ const Filters = ({ handleFilterBySubRubro }) => {
         <div className={style.filtersContainer}>
             <h2 className={style.filtersTitle}>Rubros</h2>
             <Accordion>
+                <Card className={style.accordionCard}>
+                    <Card.Header onClick={() => handleFilterBySubRubro("all")}>
+                        <CustomToggle ><FontAwesomeIcon icon={faCircleChevronDown}/> Ver todo</CustomToggle>
+                    </Card.Header>
+                </Card>
+                {/* LISTA DE LOS RUBROS CON SUS SUBRUBROS */}
                 {listRubros?.map((rubro, index) => (
                     <Card key={rubro.id} className={style.accordionCard}>
                         <Card.Header>

@@ -6,7 +6,7 @@ import PaginationComponent from "./Pagination/PaginationComponent.jsx";
 import Filters from "./Filters/Filters.jsx";
 import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
-import UserInfo from "./UserInfo/UserInfo.jsx";
+import UserDetail from "./UserDetail/UserDetail.jsx";
 import FilterByStatus from "./FilterByStatus/FilterByStatus.jsx";
 import ProductForm from "./ProductForm/ProductForm.jsx";
 import RubroForm from "./RubroForm/RubroForm.jsx";
@@ -23,7 +23,7 @@ export {
     Filters, 
     UserNavBar, 
     CustomAlert, 
-    UserInfo, 
+    UserDetail, 
     FilterByStatus, 
     ProductForm,
     RubroForm,

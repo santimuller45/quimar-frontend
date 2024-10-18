@@ -19,9 +19,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENT ------->
-import ModifyProduct from "./ModifyProduct/ModifyProduct.jsx";
-import AddProduct from "./AddProduct/AddProduct.jsx";
-import { PaginationComponent, PanelNavBar } from "../../../components/indexComponents.js";
+import { PaginationComponent, PanelNavBar, ProductForm } from "../../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
@@ -121,9 +119,17 @@ const ProductPanel = () => {
                     }
                 </tbody>
                 {/* MODAL DE MODIFICAR PRODUCTO */}
-                <ModifyProduct showModifyProduct={showModifyProduct} handleCloseModifyProduct={handleCloseModifyProduct} product={viewProduct}/>
+                <ProductForm
+                    show={showModifyProduct} 
+                    handleClose={handleCloseModifyProduct} 
+                    product={viewProduct} 
+                    isEditing={true}  
+                />
                 {/* MODAL DE CREAR PRODUCTO */}
-                <AddProduct showCreateProduct={showCreateProduct} handleCloseCreateProduct={handleCloseCreateProduct}/>
+                <ProductForm
+                    show={showCreateProduct} 
+                    handleClose={handleCloseCreateProduct}
+                />
             </Table>
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">

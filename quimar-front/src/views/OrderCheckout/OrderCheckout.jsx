@@ -18,7 +18,7 @@ import { useOrders } from "../../customHooks/useOrders.js";
 // <----------------
 
 // COMPONENTES ------>
-import { UserInfo, OrderDetail } from "../../components/indexComponents.js";
+import { UserDetail, OrderDetail } from "../../components/indexComponents.js";
 // <------------------
 
 const OrderCheckout = () => {
@@ -72,7 +72,7 @@ const OrderCheckout = () => {
     return (
         <div className="container">
             <h2 className={style.title}>Datos del cliente</h2>
-            <UserInfo 
+            <UserDetail 
                 email={state.user.email}
                 name={state.user.name}
                 cuit={state.user.cuit}
@@ -89,7 +89,7 @@ const OrderCheckout = () => {
             {/*  */}
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label className={style.labelUserInfo}>Observación para el pedido</Form.Label>
+                    <Form.Label className={style.labelUserDetail}>Observación para el pedido</Form.Label>
                     <Form.Control 
                         as="textarea" rows={3}
                         value={comments}

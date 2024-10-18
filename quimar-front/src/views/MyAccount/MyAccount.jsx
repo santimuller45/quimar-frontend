@@ -8,7 +8,7 @@ import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENTES ------->
-import { UserInfo } from "../../components/indexComponents.js";
+import { UserDetail } from "../../components/indexComponents.js";
 // <-------------------
 
 
@@ -24,7 +24,7 @@ const MyAccount = () => {
     return (
         <div className="container">
             <h2 className={style.title}>Mis datos</h2>
-            <UserInfo 
+            <UserDetail 
                 email={state.user.email}
                 name={state.user.name}
                 cuit={state.user.cuit}

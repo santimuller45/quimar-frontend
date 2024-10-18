@@ -1,11 +1,11 @@
 import React from "react";
-import style from './UserInfo.module.css';
+import style from './UserDetail.module.css';
 
 // REACT-BOOSTRAP ------>
 import { Form, Row, Col } from "react-bootstrap";
 // <---------------------
 
-const UserInfo = ({ email, name, cuit, phone, address, postalCode, city, state }) => {
+const UserDetail = ({ email, name, cuit, phone, address, postalCode, city, state }) => {
     return (
         <Form>
             <Row className="mb-3">
@@ -52,4 +52,4 @@ const UserInfo = ({ email, name, cuit, phone, address, postalCode, city, state }
     )
 };
 
-export default UserInfo;
+export default UserDetail;
