@@ -6,7 +6,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 //------------>
 
 // COMPONENTS ------>
-import { SearchBox, FilterByStatus } from "../indexComponents.js";
+import { SearchBox, FilterByStatus, FilterByRubro } from "../indexComponents.js";
 // <-----------------
 
 const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
@@ -34,6 +34,9 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 <FilterByStatus isProduct={true}/>
+                            </Nav.Item>
+                            <Nav.Item className={style.navItem}>
+                                <FilterByRubro/>
                             </Nav.Item>
                         </Nav>
                         : null

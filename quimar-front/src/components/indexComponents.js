@@ -8,6 +8,7 @@ import UserNavBar from "./UserNavBar/UserNavBar.jsx";
 import CustomAlert from "./CustomAlert/CustomAlert.jsx";
 import UserDetail from "./UserDetail/UserDetail.jsx";
 import FilterByStatus from "./FilterByStatus/FilterByStatus.jsx";
+import FilterByRubro from "./FilterByRubro/FilterByRubro.jsx";
 import ProductForm from "./ProductForm/ProductForm.jsx";
 import RubroForm from "./RubroForm/RubroForm.jsx";
 import UserForm from "./UserForm/UserForm.jsx";
@@ -24,7 +25,8 @@ export {
     UserNavBar, 
     CustomAlert, 
     UserDetail, 
-    FilterByStatus, 
+    FilterByStatus,
+    FilterByRubro, 
     ProductForm,
     RubroForm,
     UserForm, 
