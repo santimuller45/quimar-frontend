@@ -1,0 +1,51 @@
+.accordionHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.summaryContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center; /* Centrar el texto */
+    color: #000; /* Color del texto */
+}
+
+.totalTitle {
+    font-size: 1.5rem; /* Tamaño de fuente para el título */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+.totalAmount {
+    font-size: 2rem; /* Tamaño de fuente grande para el total */
+    font-weight: bold; /* Negrita para destacar el total */
+    margin: 0; /* Sin margen */
+}
+
+/* Table Styles */
+.table {
+    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+    margin-bottom: 2rem; /* Espacio debajo de las tablas */
+}
+
+/* Table Customization */
+.table th, .table td {
+    text-align: center; /* Centrar el texto en las celdas de la tabla */
+    padding: 0.75rem; /* Padding para celdas de tabla */
+}
+
+/* Make sure tables are responsive */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.875rem; /* Ajustar el tamaño de fuente en pantallas pequeñas */
+    }
+
+    .endButtons {
+        flex-direction: column; /* Cambiar la dirección de los botones en pantallas pequeñas */
+    }
+}

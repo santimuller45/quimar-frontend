@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./OrdersPanel.module.css";
 
 // REACT BOOSTRAP ---->
-import { Accordion, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 // <-------------------
 
 // CUSTOM HOOKS ------>
@@ -13,7 +13,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
-import { PanelNavBar, PaginationComponent, OrderDetail } from "../../../components/indexComponents.js";
+import { PanelNavBar, PaginationComponent, OrdersUserDetail } from "../../../components/indexComponents.js";
 // <-------------------
 
 const OrdersPanel = () => {
@@ -56,38 +56,16 @@ const OrdersPanel = () => {
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Pedidos</h2>
             <PanelNavBar isOrderPanel={true}/>
-            <Accordion>
-                {
-                    currentOrders.length > 0
-                    ? currentOrders.map(orderList => (
-                        <Accordion.Item eventKey={orderList?.id.toString()} key={orderList.id}>
-                            <Accordion.Header>
-                                <strong>{`Pedido #${orderList.id} de: ${orderList.user ? orderList.user.name : 'Desconocido'}`}</strong>
-                                {`Fecha: ${orderList.orderDate.day}/${orderList.orderDate.month}/${orderList.orderDate.year}`}
-                            </Accordion.Header>
-                            <Accordion.Body>
-                                <div className={style.summaryContainer}>
-                                    <h2 className={style.totalTitle}>Usuario N° {orderList.user.userNumber}</h2>
-                                    <h3 className={style.totalAmount}>{orderList.user.name}</h3>
-                                    <h2 className={style.totalTitle}>Fecha: {`${orderList.orderDate.day}/${orderList.orderDate.month}/${orderList.orderDate.year}`}</h2>
-                                    <h2 className={style.totalTitle}>Hora: {`${orderList.orderDate.hour}:${orderList.orderDate.minute}:${orderList.orderDate.second}`}</h2>
-                                    <br/>
-                                </div>
-                                {/* TABLA DE LA ORDEN */}
-                                <OrderDetail orderBody={orderList.listaPedido}/>
-                                {/*  */}
-                                <div className={style.summaryContainer}>
-                                    <h2 className={style.totalTitle}>Comentarios</h2>
-                                    <p>{orderList.comentary ? orderList.comentary : "No hay comentarios"}</p>
-                                    <h2 className={style.totalTitle}>Total del pedido</h2>
-                                    <h3 className={style.totalAmount}>${orderList.totalAmount}</h3>
-                                </div>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    ))
-                    : <div className={style.loading}>No hay pedidos en el registro</div>
-                }
-            </Accordion>
+
+            {   currentOrders.map(orderList => (
+                <OrdersUserDetail
+                    key={orderList.id}
+                    orderBody={[orderList]}
+                    user={orderList.user}
+                />
+            ))
+            }
+            
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">
                     <PaginationComponent 

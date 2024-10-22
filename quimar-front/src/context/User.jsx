@@ -129,6 +129,9 @@ export const UserProvider = ({ children }) => {
                 type: USER_ACTION_TYPES.GET_USER_BY,
                 payload: response
             });
+
+            return response;
+
         } catch (error) {
             throw error.response ? error.response.data.error : error.message;
         }

@@ -9,7 +9,9 @@ import { Nav, NavDropdown, Badge } from 'react-bootstrap';
 
 //FONT-AWESOME ------->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faUser, faUnlock, faUsers, faGears, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUnlock, faUsers, faGears, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faNoteSticky } from "@fortawesome/free-regular-svg-icons";
+
 // <-------------------
 
 // CUSTOM HOOK ---->
@@ -41,14 +43,14 @@ const UserNavBar = () => {
         <Nav className="ms-auto">
             <Nav.Link href="/order">
                 <span className={style.navTitle}>
-                    <FontAwesomeIcon icon={faCirclePlus}/> Pedido <Badge>{shop.length}</Badge>
+                    <FontAwesomeIcon icon={faNoteSticky}/> Pedido <Badge >{shop.length}</Badge>
                 </span>
             </Nav.Link>
             { localUser.email
                 ?
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account">
                     <NavDropdown.Item href="/account"><span className={style.navLink}>Mi Cuenta</span></NavDropdown.Item>
-                    <NavDropdown.Item href="/"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
+                    <NavDropdown.Item href="/account/orders"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
                     <NavDropdown.Item href="/"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item><button onClick={logoutHandler} className={style.logButton}>Desconectar</button></NavDropdown.Item>

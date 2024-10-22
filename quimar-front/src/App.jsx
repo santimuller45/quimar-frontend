@@ -33,7 +33,8 @@ import {
   LoginUser,
   ForgotPassword,
   OrderTable,
-  OrderCheckout 
+  OrderCheckout,
+  MyOrders 
 } from './views/indexViews.js';
 //<-------------
 
@@ -66,6 +67,7 @@ function App() {
           <Route path='/orders-panel' element={<OrdersPanel/>}></Route>
           <Route path='/rubro-panel' element={<RubroPanel/>}></Route>
           <Route path='/account' element={<MyAccount/>}></Route>
+          <Route path='/account/orders' element={<MyOrders/>}></Route>
           <Route path='/account-panel' element={<AccountPanel/>}></Route>
           <Route path='/contact-us' element={<Contact/>}></Route>
           <Route path='/about-us' element={<AboutUs/>}></Route>

@@ -53,7 +53,7 @@ const OrderCheckout = () => {
                 timer: 2000
             }).then(() => {
                 clearOrder();
-                navigate('/');
+                navigate('/products');
             });
         } catch (error) {
             Swal.fire({
