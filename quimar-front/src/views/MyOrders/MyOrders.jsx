@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap";
 
 // CUSTOM HOOKS ---->
 import { useUser } from "../../customHooks/useUser.js";
+import { useOrders } from "../../customHooks/useOrders.js";
 // <-----------------
 
 
@@ -20,12 +21,12 @@ import { OrdersUserDetail, PaginationComponent } from "../../components/indexCom
 const MyOrders = () => {
 
     const navigate = useNavigate();
-    const { state, getUserByNameOrNumber } = useUser();
+    const { state } = useUser();
+    const { getOrderByUser, orderState } = useOrders();
     const [ orders, setOrders ] = useState([]);
 
     const getOrdersFromUser = async () => {
-        const user = await getUserByNameOrNumber(state.user.userNumber);
-        setOrders(user[0]?.orders || []);
+        await getOrderByUser(state.user.userNumber);
     };
 
     // ESTADOS DE PAGINADO ------>
@@ -47,6 +48,11 @@ const MyOrders = () => {
             getOrdersFromUser();
         }
     },[state.user.email, navigate])
+
+    // Añade un useEffect para actualizar el estado de orders cuando orderState.orders cambia
+    useEffect(() => {
+        setOrders(orderState.orders || []);
+    }, [orderState.orders]);
 
     return (
         <div className="container-fluid">

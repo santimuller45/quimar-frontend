@@ -29,7 +29,7 @@ const orderReducer = ( state , action ) => {
             if (productInOrder >= 0) {
                 const newOrderState = structuredClone(state);
                 newOrderState[productInOrder].quantity += 1;
-                newOrderState[productInOrder].total += parseFloat(newOrderState[productInOrder].price);
+                newOrderState[productInOrder].total = parseFloat((newOrderState[productInOrder].total + parseFloat(newOrderState[productInOrder].price)).toFixed(2));
                 updateOrderLocalStorage(newOrderState);
                 return newOrderState;
             }
@@ -40,7 +40,8 @@ const orderReducer = ( state , action ) => {
                 {
                     ...actionPayload,
                     quantity: 1,
-                    total: parseFloat(actionPayload.price)
+                    price: parseFloat(actionPayload.price),
+                    total: parseFloat(actionPayload.price),
                 }
             ];
             
@@ -56,7 +57,7 @@ const orderReducer = ( state , action ) => {
                 const newOrderState = structuredClone(state);
                 if (newOrderState[productInOrder].quantity > 1) {
                     newOrderState[productInOrder].quantity -= 1;
-                    newOrderState[productInOrder].total -= parseFloat(newOrderState[productInOrder].price);
+                    newOrderState[productInOrder].total = parseFloat((newOrderState[productInOrder].total - parseFloat(newOrderState[productInOrder].price)).toFixed(2));
                 } else {
                     newOrderState.splice(productInOrder, 1);
                 }
@@ -82,8 +83,8 @@ const orderReducer = ( state , action ) => {
 
         case ORDER_ACTION_TYPES.TOTAL_ORDER: {
             const total = state.reduce((sum, item) => sum + parseFloat(item.total), 0);
-            return { ...state, total };
-        };
+            return { ...state, total: parseFloat(total.toFixed(2)) }; // Redondear el total
+        }
         
         default: {
             return state;
@@ -104,7 +105,10 @@ export function ShopProvider ({ children }) {
 
     const clearOrder = () => dispatch({ type: ORDER_ACTION_TYPES.CLEAN_ORDER });
 
-    const getTotalAmount = () => shopState.reduce((sum, item) => sum + parseFloat(item.total), 0);
+    const getTotalAmount = () => {
+        const total = shopState.reduce((sum, item) => sum + parseFloat(item.total), 0);
+        return total.toFixed(2); // Redondear a dos decimales
+    };
 
     return (
         <ShopContext.Provider value={{ shop : shopState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>

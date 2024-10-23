@@ -40,7 +40,7 @@ const OrderCheckout = () => {
             amount: totalOrderAmount,
             totalAmount: totalOrderAmount,
             comentary: comments,
-            orderStatus: "COMPLETADO",
+            orderStatus: "PEDIDO-WEB",
             userEmail: state.user.email
         };
         
@@ -89,7 +89,7 @@ const OrderCheckout = () => {
             {/*  */}
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label className={style.labelUserDetail}>Observación para el pedido</Form.Label>
+                    <Form.Label className={style.labelObservation}>Observaciones para el pedido</Form.Label>
                     <Form.Control 
                         as="textarea" rows={3}
                         value={comments}

@@ -65,7 +65,7 @@ const OrdersUserDetail = ({ orderBody, user }) => {
                                 </Table>
                                 {/*  */}
                                 <div className={style.summaryContainer}>
-                                    <h2 className={style.totalTitle}>Comentarios</h2>
+                                    <h2 className={style.totalTitle}>Observaciones para el pedido</h2>
                                     <p>{order.comentary ? order.comentary : "No hay comentarios"}</p>
                                     <h2 className={style.totalTitle}>Total del pedido</h2>
                                     <h3 className={style.totalAmount}>${order.totalAmount}</h3>
