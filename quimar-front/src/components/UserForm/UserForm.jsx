@@ -87,7 +87,7 @@ const UserForm = ({ show, handleClose, user, isEditing }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(form);
         try {
             if (isEditing) {
                 await updateUsers(form);
@@ -128,9 +128,10 @@ const UserForm = ({ show, handleClose, user, isEditing }) => {
                         <Form.Label column sm="2">Email</Form.Label>
                         <Col sm="10">
                             <Form.Control
+                                placeholder={isEditing ? "Nuevo Email" : "Email del Usuario"}
                                 name="email"
                                 value={form.email}
-                                readOnly={true}
+                                onChange={handleInputChange}
                             />
                         </Col>
                     </Form.Group>
@@ -201,22 +202,33 @@ const UserForm = ({ show, handleClose, user, isEditing }) => {
                             onChange={handleInputChange} 
                         />
                     </Form.Group>
-                    <Form.Group controlId="formBasicStatus" className="mb-3">
-                        <Form.Check
-                            label="Activar Usuario"
-                            type="checkbox"
-                            checked={form.userStatus}
-                            onChange={handleUserStatusChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicStatusAdmin" className="mb-3">
-                        <Form.Check
-                            label="Activar Admin"
-                            type="checkbox"
-                            checked={form.admin}
-                            onChange={handleAdminChange}
-                        />
-                    </Form.Group>
+                    {/* CONTROLES DE ADMIN */}
+                    {   user.admin
+                        ?
+                        <>
+                            {/* CHECKBOX DE ESTADO USER */}
+                            <Form.Group controlId="formBasicStatus" className="mb-3">
+                                <Form.Check
+                                    label="Activar Usuario"
+                                    type="checkbox"
+                                    checked={form.userStatus}
+                                    onChange={handleUserStatusChange}
+                                    />
+                            </Form.Group>
+                            {/* CHECKBOX DE ADMIN USER */}
+                            <Form.Group controlId="formBasicStatusAdmin" className="mb-3">
+                                <Form.Check
+                                    label="Activar Admin"
+                                    type="checkbox"
+                                    checked={form.admin}
+                                    onChange={handleAdminChange}
+                                    />
+                            </Form.Group>
+                        </>
+                        : null
+
+                    }
+                    {/*  */}
                     <Button type="submit">{isEditing ? "Guardar Cambios" : "Crear Usuario"}</Button>
                 </Form>
             </Modal.Body>

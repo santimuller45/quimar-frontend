@@ -11,7 +11,6 @@ import { Nav, NavDropdown, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faUnlock, faUsers, faGears, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faNoteSticky } from "@fortawesome/free-regular-svg-icons";
-
 // <-------------------
 
 // CUSTOM HOOK ---->

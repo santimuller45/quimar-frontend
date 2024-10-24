@@ -39,7 +39,7 @@ const AccountPanel = () => {
     };
     // <--------------------------
 
-    // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyUser
+    // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE UserForm
     const [viewUser, setViewUser] = useState({});
     const [showModifyUser, setShowModifyUser] = useState(false);
 
@@ -130,7 +130,7 @@ const AccountPanel = () => {
                         : null
                     }
                 </tbody>
-                {/* MODAL PARA MODIFICAR LOS USUARIOS */}
+                {/* MODAL PARA MODIFICAR LOS DATOS DEL USUARIO */}
                 <UserForm
                     show={showModifyUser}
                     handleClose={handleCloseModifyUser}
