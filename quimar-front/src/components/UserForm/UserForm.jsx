@@ -12,7 +12,7 @@ import { useUser } from "../../customHooks/useUser.js";
 import Swal from 'sweetalert2';
 // <-----------------
 
-const UserForm = ({ show, handleClose, user, isEditing }) => {
+const UserForm = ({ show, handleClose, user, isEditing, isAdmin }) => {
 
     const { getAllUsers, updateUsers } = useUser();
 
@@ -203,7 +203,7 @@ const UserForm = ({ show, handleClose, user, isEditing }) => {
                         />
                     </Form.Group>
                     {/* CONTROLES DE ADMIN */}
-                    {   user.admin
+                    {   isAdmin
                         ?
                         <>
                             {/* CHECKBOX DE ESTADO USER */}

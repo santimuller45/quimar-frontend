@@ -28,15 +28,35 @@ const ForgotPassword = () => {
         cuit: "",
     });
 
+    const [errors, setErrors] = useState({ email: false, cuit: false }); // Estado para errores
+
     const handlerInputChange = (e) => {
         setForm({
             ...form,
             [e.target.name] : e.target.value
         });
+
+        // Limpia el error al escribir
+        if (e.target.name === "email" || e.target.name === "cuit") {
+            setErrors({
+                ...errors,
+                [e.target.name]: false
+            });
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {
+            email: !form.email,
+            cuit: !form.cuit,
+        };
+        setErrors(newErrors);
+        return !newErrors.email && !newErrors.cuit;
     };
 
     const submitLoginHandler = async (e) => {
         e.preventDefault();
+        if (!validateForm()) return; // Detiene el envío si hay errores
 
         try {
             await updateUserPassword(form);
@@ -52,7 +72,7 @@ const ForgotPassword = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: error || 'Error al iniciar sesión'
+                text: error || 'Error al recuperar la cuenta'
             });
         }
     }
@@ -67,11 +87,12 @@ const ForgotPassword = () => {
                         <Form.Control
                             type="email"
                             name="email"
-                            placeholder="Ingrese email"
+                            placeholder="Ingrese su email registrado"
                             value={form.email}
                             onChange={handlerInputChange}
-                            className={style.text}
+                            className={`${style.text} ${errors.email ? style.error : ""}`} // Aplicar clase de error
                         />
+                        {errors.email && <Form.Text className="text-danger">Este campo es requerido.</Form.Text>}
                     </Form.Group>
                 </Row>
 
@@ -81,11 +102,12 @@ const ForgotPassword = () => {
                         <Form.Control
                             type="text"
                             name="cuit"
-                            placeholder="Ingrese su CUIT/CUIL sin guiones ni puntos"
+                            placeholder="Ingrese su CUIT/CUIL con guiones o puntos"
                             value={form.cuit}
                             onChange={handlerInputChange}
-                            className={style.text}
+                            className={`${style.text} ${errors.cuit ? style.error : ""}`} // Aplicar clase de error
                         />
+                        {errors.cuit && <Form.Text className="text-danger">Este campo es requerido.</Form.Text>}
                     </Form.Group>
                 </Row>
                 <div className={style.sendButton}>

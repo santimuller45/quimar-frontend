@@ -136,6 +136,7 @@ const AccountPanel = () => {
                     handleClose={handleCloseModifyUser}
                     user={viewUser}
                     isEditing={true}
+                    isAdmin={state.user.admin}
                 />
                 {/*  */}
             </Table>

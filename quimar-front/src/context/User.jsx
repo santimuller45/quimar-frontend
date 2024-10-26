@@ -140,7 +140,7 @@ export const UserProvider = ({ children }) => {
     // Reestablecer cuenta del usuario
     const updateUserPassword = async (user) => {
         try {
-            await axios.put('/users/forgot-password', user);
+            await axios.put('/users/update-password', user);
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }

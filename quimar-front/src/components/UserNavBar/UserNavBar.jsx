@@ -50,7 +50,7 @@ const UserNavBar = () => {
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account">
                     <NavDropdown.Item href="/account"><span className={style.navLink}>Mi Cuenta</span></NavDropdown.Item>
                     <NavDropdown.Item href="/account/orders"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
-                    <NavDropdown.Item href="/"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
+                    <NavDropdown.Item href="/change-password"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item><button onClick={logoutHandler} className={style.logButton}>Desconectar</button></NavDropdown.Item>
                 </NavDropdown>

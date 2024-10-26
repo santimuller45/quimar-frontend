@@ -32,6 +32,7 @@ import {
   RegisterPage,
   LoginUser,
   ForgotPassword,
+  ChangePassword,
   OrderTable,
   OrderCheckout,
   MyOrders 
@@ -74,6 +75,7 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}></Route>
           <Route path='/log-in' element={<LoginUser/>}></Route>
           <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
+          <Route path='/change-password' element={<ChangePassword/>}></Route>
           <Route path='/order' element={<OrderTable/>}></Route>
           <Route path='/order-checkout' element={<OrderCheckout/>}></Route>
         </Routes>

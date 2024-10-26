@@ -20,6 +20,8 @@ import RegisterPage from "./RegisterPage/RegisterPage.jsx";
 import LoginUser from "./LoginUser/LoginUser.jsx";
 // FORGOT-PASSWORD PAGE
 import ForgotPassword from "./ForgotPassword/ForgotPassword.jsx";
+// CHANGE-PASSWORD PAGE
+import ChangePassword from "./ChangePassword/ChangePassword.jsx";
 // ORDER PAGES (CART)
 import OrderTable from "./OrderTable/OrderTable.jsx";
 import OrderCheckout from "./OrderCheckout/OrderCheckout.jsx";
@@ -38,6 +40,7 @@ export {
     RegisterPage, 
     LoginUser, 
     ForgotPassword,
+    ChangePassword,
     OrderTable, 
     OrderCheckout,
     MyOrders 

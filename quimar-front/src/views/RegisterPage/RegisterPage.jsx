@@ -139,11 +139,11 @@ const RegisterPage = () => {
                 </Form.Group>
                 
                 <Form.Group as={Col} md="4" controlId="formBasicAddress" className={style.container}>
-                    <Form.Label className={style.label}>Dirección</Form.Label>
+                    <Form.Label className={style.label}>Dirección Completa</Form.Label>
                     <Form.Control
                         type="text"
                         name="address"
-                        placeholder="Ingrese su dirección"
+                        placeholder="Ingrese su dirección calle y número"
                         value={formData.address}
                         onChange={handlerInputChange}
                         isInvalid={!!errors.address}
