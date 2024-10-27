@@ -1,0 +1,37 @@
+.form {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.labelCol {
+    display: flex; 
+    align-items: center; /* Centra el label verticalmente */
+    justify-content: center; /* Centra el label horizontalmente */
+}
+
+.label {
+    margin-bottom: 0; /* Quita el margen inferior para que quede alineado */
+    color: #0194DC;
+    font-size: 1.4rem; /* Asegúrate de que sea el tamaño deseado */
+    font-weight: bold;
+}
+
+.select {
+    flex: 1; /* Permite que el select ocupe el espacio restante */
+    min-width: 0; /* Ayuda a evitar que el select se desborde */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.searchButton {
+    background: none;
+    border: none;
+    color: #0194DC;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.searchButton:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+// REACT BOOSTRAP ---->
+import { Spinner } from "react-bootstrap";
+// <-------------------
+
+const LoadingComponent = () => {
+  return (
+    <Spinner animation="border" role="status">
+        <span className="visually-hidden">Cargando...</span>
+    </Spinner>
+  );
+}
+
+export default LoadingComponent;

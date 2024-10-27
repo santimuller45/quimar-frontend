@@ -6,12 +6,16 @@ import { Accordion, Table } from "react-bootstrap";
 // <-------------------
 
 
-const OrdersUserDetail = ({ orderBody, user }) => {
+const OrdersUserDetail = ({ orderBody= [], user= {} }) => {
+
+    if (!Array.isArray(orderBody) || !user) {
+        return <div>No hay información disponible.</div>;
+    }
 
     const renderOrderDetails = (listaPedido) => {
         if (listaPedido && listaPedido.length > 0) {
-            return listaPedido.map((body) => (
-                <tr key={body.codigo} className="text-center">
+            return listaPedido.map((body,index) => (
+                <tr key={`${body.codigo}-${index}`} className="text-center">
                     <td>{body.codigo}</td>
                     <td>{body.name}</td>
                     <td>{body.quantity}</td>

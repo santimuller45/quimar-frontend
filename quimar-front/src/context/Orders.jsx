@@ -16,6 +16,7 @@ const ACTION_TYPES = {
     SET_NEW_ORDER: 'SET_NEW_ORDER',
     GET_ORDER_BY_ID: 'GET_ORDER_BY_ID',
     GET_ORDER_BY_USER: 'GET_ORDER_BY_USER',
+    FILTER_BY_DATE: 'FILTER_BY_DATE',
 };
 
 const orderReducer = ( state , action ) => {
@@ -42,6 +43,13 @@ const orderReducer = ( state , action ) => {
         };
 
         case ACTION_TYPES.GET_ORDER_BY_USER: {
+            return {
+                ...state,
+                orders: action.payload
+            }
+        };
+
+        case ACTION_TYPES.FILTER_BY_DATE: {
             return {
                 ...state,
                 orders: action.payload
@@ -88,7 +96,7 @@ export function OrderProvider ({ children }) {
                     type: ACTION_TYPES.GET_ORDER_BY_ID,
                     payload: response.data
                 })
-            }
+            };
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
@@ -102,14 +110,28 @@ export function OrderProvider ({ children }) {
                     type: ACTION_TYPES.GET_ORDER_BY_USER,
                     payload: response.data
                 })
-            }
+            };
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
-    }
+    };
+
+    const filterOrderByDate = async (day, month, year) => {
+        try {
+            const response = await axios.get(`/orders/filter-order?day=${day}&month=${month}&year=${year}`);
+            if (response) {
+                dispatch ({
+                    type: ACTION_TYPES.FILTER_BY_DATE,
+                    payload: response.data
+                })
+            };
+        } catch (error) {   
+            throw error.response?.data?.message || error.message;
+        }
+    };
  
      return (
-         <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser }}>
+         <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser, filterOrderByDate }}>
              {children}
          </OrdersContext.Provider>
      )

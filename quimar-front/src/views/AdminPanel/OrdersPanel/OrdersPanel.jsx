@@ -13,7 +13,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
-import { PanelNavBar, PaginationComponent, OrdersUserDetail } from "../../../components/indexComponents.js";
+import { PanelNavBar, PaginationComponent, OrdersUserDetail, LoadingComponent } from "../../../components/indexComponents.js";
 // <-------------------
 
 const OrdersPanel = () => {
@@ -22,6 +22,10 @@ const OrdersPanel = () => {
     const { orderState, getAllOrders } = useOrders();
     const { state } = useUser();
     const allOrdersDB = orderState.orders || [];
+
+    // ESTADO DE LOADING -------->
+    const [loading, setLoading] = useState(true);
+    // <--------------------------
     
     // ESTADOS DE PAGINADO ------>
     const [currentPage , setCurrentPage ] = useState(1);
@@ -41,11 +45,13 @@ const OrdersPanel = () => {
                 navigate('/');
                 return;
             }
-    
+
             try {
                 await getAllOrders();
             } catch (error) {
                 console.error("Error fetching orders:", error);
+            } finally {
+                setLoading(false);
             }
         };
     
@@ -57,14 +63,15 @@ const OrdersPanel = () => {
             <h2 className={style.title}>Panel de Pedidos</h2>
             <PanelNavBar isOrderPanel={true}/>
 
-            {   currentOrders.map(orderList => (
+            {loading && <LoadingComponent/> }
+
+            {!loading && currentOrders.map(orderList => (
                 <OrdersUserDetail
                     key={orderList.id}
                     orderBody={[orderList]}
                     user={orderList.user}
                 />
-            ))
-            }
+            ))}
             
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">

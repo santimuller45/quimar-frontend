@@ -20,25 +20,6 @@
     margin-bottom: 2rem; /* Espacio debajo del título */
 }
 
-/* Table Styles */
-.table {
-    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
-    margin-bottom: 2rem; /* Espacio debajo de las tablas */
-}
-
-/* Table Button Styles */
-.tableButtons {
-    background: none;
-    border: none;
-    color: #f8f9fa; /* Color del icono para contraste */
-    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
-    transition: color 0.3s ease; /* Transición para el cambio de color */
-}
-
-.tableButtons:hover {
-    color: #17a2b8; /* Color de hover para mejorar la interacción visual */
-}
-
 .summaryContainer {
     text-align: center; /* Centrar el texto */
     margin-top: 20px; /* Espaciado superior */
@@ -71,18 +52,10 @@
     font-weight: bold;
 }
 
-/* Table Customization */
-.table th, .table td {
-    text-align: center; /* Centrar el texto en las celdas de la tabla */
-    padding: 0.75rem; /* Padding para celdas de tabla */
-}
 
 /* Make sure tables are responsive */
 @media (max-width: 768px) {
-    .table {
-        font-size: 0.875rem; /* Ajustar el tamaño de fuente en pantallas pequeñas */
-    }
-
+    
     .endButtons {
         flex-direction: column; /* Cambiar la dirección de los botones en pantallas pequeñas */
     }

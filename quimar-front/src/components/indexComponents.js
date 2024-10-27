@@ -15,6 +15,8 @@ import UserForm from "./UserForm/UserForm.jsx";
 import PanelNavBar from "./PanelNavBar/PanelNavBar.jsx";
 import OrderDetail from "./OrderDetail/OrderDetail.jsx";
 import OrdersUserDetail from "./OrdersUserDetail/OrdersUserDetail.jsx";
+import FilterByDate from "./FilterByDate/FilterByDate.jsx";
+import LoadingComponent from "./LoadingComponent/LoadingComponent.jsx";
 
 export { 
     Footer, 
@@ -33,5 +35,7 @@ export {
     UserForm, 
     PanelNavBar,
     OrderDetail,
-    OrdersUserDetail 
+    OrdersUserDetail,
+    FilterByDate,
+    LoadingComponent, 
 };
