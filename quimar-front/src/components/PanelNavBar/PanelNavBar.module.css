@@ -2,23 +2,26 @@
     background-color: #333;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between; /* Considera usar space-between si quieres que los extremos estén pegados al borde */
     align-items: center;
+    padding: 0; /* Espaciado interno para mejor apariencia */
 }
 
 .navItem {
     margin-right: 4rem; /* Espaciado entre botones */
-    padding: 0.5rem 0.5rem;
-    background: #333;
+    padding: 0.5rem;
+    background: transparent; /* Cambiado a transparente para evitar conflictos con el fondo */
     color: #0194DC;
     font-size: 1.3rem;
     font-weight: bold;
-    border-radius: 0.375rem;
-    border: none;
     text-align: center;
+    transition: color 0.3s ease; /* Agregado para un efecto suave al pasar el mouse */
 }
 
-/* Custom button */
+.navItem:last-child {
+    margin-right: 0; /* Elimina margen del último elemento */
+}
+
 .buttonItem {
     background: #333;
     color: #0194DC;
@@ -27,8 +30,9 @@
     border-radius: 0.375rem;
     border: none;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease; /* Agregado para un efecto suave en el color */
     text-align: center;
+    padding: 0.5rem 1rem; /* Agregado padding para un mejor tamaño */
 }
 
 .buttonItem:hover {
@@ -38,10 +42,4 @@
 
 .buttonItem:focus {
     outline: none;
-}
-
-.searchContainer {
-    flex-grow: 1; /* Permite que el contenedor ocupe el espacio disponible */
-    display: flex;
-    justify-content: center; /* Centra el SearchBox */
 }

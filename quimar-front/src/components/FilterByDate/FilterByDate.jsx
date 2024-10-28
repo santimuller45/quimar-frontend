@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./FilterByDate.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // REACT BOOSTRAP ----->
 import { Form, Row, Col } from "react-bootstrap";
@@ -17,17 +17,17 @@ import { useOrders } from "../../customHooks/useOrders.js";
 
 const FilterByDate = () => {
 
-    const { filterOrderByDate } = useOrders();
+    const { filterOrderByDate, getDateForOrders } = useOrders();
 
+    // ESTADOS PARA EL VALOR DEL SELECT
     const [day, setDay] = useState('');
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
 
-    const days = Array.from({ length: 31 }, (_, i) => i + 1);
-    const months = Array.from({ length: 12 }, (_, i) => i + 1);
-    const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 6 }, (_, i) => currentYear + i); // Años desde ahora hasta 5 años en el futuro
-
+    // FECHAS TRAIDAS DEL BACK PARA LAS ORDERS
+    const [ daysDate, setDaysDate ] = useState([]);
+    const [ monthsDate, setMonthsDate ] = useState([]);
+    const [ yearsDate, setYearsDate ] = useState([]);
 
     // Manejo del cambio en el SELECT
     const handleSelectChange = (e) => {
@@ -43,6 +43,22 @@ const FilterByDate = () => {
             filterOrderByDate( day, month, year );
         }
     };
+
+    useEffect(() => {
+        const fetchDates = async () => {
+            try {
+                const result = await getDateForOrders();
+                if (result) {
+                    setDaysDate(result.days);
+                    setMonthsDate(result.months);
+                    setYearsDate(result.years);
+                }
+            } catch (error) {
+                console.log(error.message || "Error fetching dates");
+            }
+        }
+        fetchDates();
+    },[getDateForOrders])
 
     return (
         <Form onSubmit={handleSubmit} className={style.form}>
@@ -62,7 +78,7 @@ const FilterByDate = () => {
                             className={style.select}
                         >
                             <option value={""} className={style.select}>DIA</option>
-                            {   days.map(d => (
+                            {   daysDate.map(d => (
                                 <option key={d} value={d}>{d}</option>
                             ))}
                         </Form.Select>
@@ -77,7 +93,7 @@ const FilterByDate = () => {
                             className={style.select}
                         >
                             <option value={""} className={style.select}>MES</option>
-                            {   months.map(m => (
+                            {   monthsDate.map(m => (
                                 <option key={m} value={m}>{m}</option>
                             ))}
                         </Form.Select>
@@ -92,14 +108,12 @@ const FilterByDate = () => {
                             className={style.select}
                         >
                             <option value={""} className={style.select}>AÑO</option>
-                            {   years.map(y => (
+                            {   yearsDate.map(y => (
                                 <option key={y} value={y}>{y}</option>
                             ))}
                         </Form.Select>
                     </Col>
-                </Row>
-
-                <Row>
+                    
                     <Col>
                         <button type="submit" className={style.searchButton}><FontAwesomeIcon icon={faMagnifyingGlass} /> Buscar</button>
                     </Col>

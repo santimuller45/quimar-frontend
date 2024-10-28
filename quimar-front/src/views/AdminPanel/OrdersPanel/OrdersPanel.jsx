@@ -63,15 +63,20 @@ const OrdersPanel = () => {
             <h2 className={style.title}>Panel de Pedidos</h2>
             <PanelNavBar isOrderPanel={true}/>
 
-            {loading && <LoadingComponent/> }
+            { loading && <LoadingComponent/> }
 
-            {!loading && currentOrders.map(orderList => (
-                <OrdersUserDetail
-                    key={orderList.id}
-                    orderBody={[orderList]}
-                    user={orderList.user}
-                />
-            ))}
+            {   currentOrders.length > 0
+                ?
+                currentOrders.map(orderList => (
+                    <OrdersUserDetail
+                        key={orderList.id}
+                        orderBody={[orderList]}
+                        user={orderList.user}
+                    />
+                ))
+                : <p className={style.centeredMessage}>No hay pedidos disponibles</p>
+            }
+
             
             <Row className="justify-content-center mt-4">
                 <Col xs="auto">

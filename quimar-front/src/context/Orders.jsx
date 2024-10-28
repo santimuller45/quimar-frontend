@@ -129,10 +129,19 @@ export function OrderProvider ({ children }) {
             throw error.response?.data?.message || error.message;
         }
     };
+
+    const getDateForOrders = async () => {
+        try {
+            const result = await axios.get('/getDate');
+            if (result) return result.data;
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
  
-     return (
-         <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser, filterOrderByDate }}>
-             {children}
-         </OrdersContext.Provider>
-     )
+    return (
+        <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser, filterOrderByDate, getDateForOrders }}>
+            {children}
+        </OrdersContext.Provider>
+    )
  };

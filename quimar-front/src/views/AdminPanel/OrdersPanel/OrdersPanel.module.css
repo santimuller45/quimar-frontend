@@ -35,3 +35,10 @@
     font-weight: bold; /* Negrita para destacar el total */
     margin: 0; /* Sin margen */
 }
+
+.centeredMessage {
+    text-align: center; /* Centra el texto horizontalmente */
+    margin-top: 10rem; /* Espaciado superior */
+    font-size: 1.5rem; /* Puedes ajustar el tamaño del texto */
+    color: #555; /* Color opcional */
+}
