@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import axios from 'axios';
+const urlApiOrders = import.meta.env.VITE_API_GET_ORDERS;
+const urlApiDates = import.meta.env.VITE_API_GET_DATES;
 
 // Define el contexto
 export const OrdersContext = createContext();
@@ -68,7 +70,7 @@ export function OrderProvider ({ children }) {
  
     const getAllOrders = async () => {
         try {
-            const response = await axios.get('/orders');
+            const response = await axios.get(urlApiOrders);
             dispatch({ 
                 type: ACTION_TYPES.GET_ALL_ORDERS, 
                 payload:  response.data,
@@ -76,21 +78,11 @@ export function OrderProvider ({ children }) {
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
-    }
- 
-    const setNewOrder = async (order) => {
-         try {
-             const { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } = order;
-             const response = (await axios.post('/orders/register-order', { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } )).data;
-             if (response) dispatch ({ type: ACTION_TYPES.SET_NEW_ORDER });
-         } catch (error) {
-            throw error.response?.data?.message || error.message;
-         }
     };
 
     const getByOrderID = async (orderID) => {
         try {
-            const response = await axios.get(`/orders/${orderID}`);
+            const response = await axios.get(`${urlApiOrders}/${orderID}`);
             if (response) {
                 dispatch ({
                     type: ACTION_TYPES.GET_ORDER_BY_ID,
@@ -104,7 +96,7 @@ export function OrderProvider ({ children }) {
 
     const getOrderByUser = async (userNumber) => {
         try {
-            const response = await axios.get(`/orders?userNumber=${userNumber}`);
+            const response = await axios.get(`${urlApiOrders}?userNumber=${userNumber}`);
             if (response) {
                 dispatch ({
                     type: ACTION_TYPES.GET_ORDER_BY_USER,
@@ -118,7 +110,7 @@ export function OrderProvider ({ children }) {
 
     const filterOrderByDate = async (day, month, year) => {
         try {
-            const response = await axios.get(`/orders/filter-order?day=${day}&month=${month}&year=${year}`);
+            const response = await axios.get(`${urlApiOrders}/filter-order?day=${day}&month=${month}&year=${year}`);
             if (response) {
                 dispatch ({
                     type: ACTION_TYPES.FILTER_BY_DATE,
@@ -132,15 +124,25 @@ export function OrderProvider ({ children }) {
 
     const getDateForOrders = async () => {
         try {
-            const result = await axios.get('/getDate');
+            const result = await axios.get(urlApiDates);
             if (result) return result.data;
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
     };
+
+    const setNewOrder = async (order) => {
+        try {
+            const { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } = order;
+            const response = (await axios.post(`${urlApiOrders}/register-order`, { listaPedido, amount, totalAmount, comentary, orderStatus, userEmail } )).data;
+            if (response) dispatch ({ type: ACTION_TYPES.SET_NEW_ORDER });
+        } catch (error) {
+           throw error.response?.data?.message || error.message;
+        }
+   };
  
     return (
-        <OrdersContext.Provider value={{ orderState, getAllOrders, setNewOrder, getByOrderID, getOrderByUser, filterOrderByDate, getDateForOrders }}>
+        <OrdersContext.Provider value={{ orderState, getAllOrders, getByOrderID, getOrderByUser, filterOrderByDate, getDateForOrders, setNewOrder }}>
             {children}
         </OrdersContext.Provider>
     )

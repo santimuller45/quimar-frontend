@@ -1,9 +1,13 @@
 import React from "react";
 import style from "./LandingPage.module.css";
 
-//LOGO ----->
+// LOGO ----->
 import logo from '../../assets/logo.png';
 //-------<
+
+// COMPONENTS ---->
+import { WhatsAppChat } from "../../components/indexComponents.js";
+// <---------------
 
 const LandingPage = () => (
     <>
@@ -55,6 +59,7 @@ const LandingPage = () => (
                 <h5>Gracias por elegir <strong>Quimar Distribuidora</strong>. Estamos aquí para ayudarle a hacer realidad sus proyectos con los mejores productos de ferretería.</h5>
             </div>
         </div>
+        <WhatsAppChat />
     </>
 );
 

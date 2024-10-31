@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import axios from 'axios';
+const urlApiProducts = import.meta.env.VITE_API_GET_PRODUCTS;
+const urlApiRubros = import.meta.env.VITE_API_GET_RUBROS;
 
 // Define el contexto
 export const ProductContext = createContext();
@@ -97,7 +99,7 @@ export const ProductProvider = ({ children }) => {
 
     const getAllProducts = async () => {
         try {
-            const result = (await axios.get('/productos')).data;
+            const result = (await axios.get(urlApiProducts)).data;
             dispatch({
                 type: ACTION_TYPES.GET_ALL_PRODUCTS,
                 payload: result
@@ -116,10 +118,10 @@ export const ProductProvider = ({ children }) => {
 
             // Verifica si 'product' es un nombre
             if (typeof product === 'string' && isNaN(product)) {
-                result = (await axios.get(`/productos?name=${product}`)).data;
+                result = (await axios.get(`${urlApiProducts}?name=${product}`)).data;
             } else {
                 // Si no es un nombre, asume que es un código
-                result = (await axios.get(`/productos?code=${product}`)).data;
+                result = (await axios.get(`${urlApiProducts}?code=${product}`)).data;
             }
     
             // Verifica si el resultado está vacío o no
@@ -142,7 +144,7 @@ export const ProductProvider = ({ children }) => {
 
     const addProduct = async (data) => {
         try {
-            const response = await axios.post('/productos/register-product', data, {
+            const response = await axios.post(`${urlApiProducts}/register-product`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -155,7 +157,7 @@ export const ProductProvider = ({ children }) => {
 
     const updateProducts = async (data) => {
         try {
-            const response = await axios.put('/productos/config-products', data, {
+            const response = await axios.put(`${urlApiProducts}/config-products`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -175,7 +177,7 @@ export const ProductProvider = ({ children }) => {
 
     const getAllRubros = async () => {
         try {
-            const result = (await axios.get('/rubro')).data;
+            const result = (await axios.get(urlApiRubros)).data;
             dispatch({
                 type: ACTION_TYPES.GET_ALL_RUBROS,
                 payload: result
@@ -190,7 +192,7 @@ export const ProductProvider = ({ children }) => {
 
     const addRubro = async (rubro) => {
         try {
-            const response = await axios.post('/rubro/register-rubro', rubro)
+            const response = await axios.post(`${urlApiRubros}/register-rubro`, rubro)
             return response.data;
         } catch (error) {
             throw error.response?.data?.message || error.message;
@@ -199,7 +201,7 @@ export const ProductProvider = ({ children }) => {
 
     const updateRubro = async (rubro) => {
         try {
-            const response = await axios.put('/rubro/config-rubro', rubro)
+            const response = await axios.put(`${urlApiRubros}/config-rubro`, rubro)
             return response.data;
         } catch (error) {
             throw error.response?.data?.message || error.message;

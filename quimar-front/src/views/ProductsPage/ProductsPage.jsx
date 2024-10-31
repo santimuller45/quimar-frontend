@@ -2,17 +2,18 @@ import React from "react";
 import style from './ProductsPage.module.css';
 import { useState, useEffect } from "react";
 
+// REACT BOOSTRAP ------>
+import { Row, Col } from 'react-bootstrap';
+// <---------------------
+
 // COMPONENTS ----->
-import { CardContainer, PaginationComponent, Filters } from "../../components/indexComponents.js";
+import { CardContainer, PaginationComponent, Filters, WhatsAppChat, LoadingComponent } from "../../components/indexComponents.js";
 // <----------------
 
 // CUSTOM HOOKS ---->
 import { useProducts } from "../../customHooks/useProducts.js";
 // <-----------------
 
-// REACT BOOSTRAP ------>
-import { Row, Col, Spinner } from 'react-bootstrap';
-// <---------------------
 
 const ProductsPage = () => {
 
@@ -57,9 +58,7 @@ const ProductsPage = () => {
                         {loading ? (
                             <Row className="justify-content-center mt-5">
                                 <Col xs="auto">
-                                    <Spinner animation="border" role="status">
-                                        <span className="visually-hidden">Cargando...</span>
-                                    </Spinner>
+                                    <LoadingComponent />
                                 </Col>
                             </Row>
                         ) : (
@@ -86,6 +85,7 @@ const ProductsPage = () => {
                     </section>
                 </Col>
             </Row>
+            <WhatsAppChat/>
         </div>
     )
 };

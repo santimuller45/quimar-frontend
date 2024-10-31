@@ -17,6 +17,7 @@ import OrderDetail from "./OrderDetail/OrderDetail.jsx";
 import OrdersUserDetail from "./OrdersUserDetail/OrdersUserDetail.jsx";
 import FilterByDate from "./FilterByDate/FilterByDate.jsx";
 import LoadingComponent from "./LoadingComponent/LoadingComponent.jsx";
+import WhatsAppChat from "./WhatsAppChat/WhatsAppChat.jsx"
 
 export { 
     Footer, 
@@ -37,5 +38,6 @@ export {
     OrderDetail,
     OrdersUserDetail,
     FilterByDate,
-    LoadingComponent, 
+    LoadingComponent,
+    WhatsAppChat, 
 };

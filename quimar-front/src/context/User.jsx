@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
+const urlApiUsers = import.meta.env.VITE_API_GET_USERS;
 
 export const UserContext = createContext();
 
@@ -76,7 +77,7 @@ export const UserProvider = ({ children }) => {
     // Registrar un nuevo usuario
     const registerUser = async (form) => {
         try {
-            await axios.post('/users/register', form);
+            await axios.post(`${urlApiUsers}/register`, form);
         } catch (error) {
             throw error.response ? error.response.data.error : error.message;
         }
@@ -85,7 +86,7 @@ export const UserProvider = ({ children }) => {
     // Iniciar sesión del usuario
     const userLogin = async (user) => {
         try {
-            const response = await axios.post('/users/login', user);
+            const response = await axios.post(`${urlApiUsers}/login`, user);
             dispatch({ 
                 type: USER_ACTION_TYPES.LOGIN_USER, 
                 payload: response.data 
@@ -104,7 +105,7 @@ export const UserProvider = ({ children }) => {
     // Obtener todos los usuarios
     const getAllUsers = async () => {
         try {
-            const response = (await axios('/users')).data;
+            const response = (await axios(urlApiUsers)).data;
             dispatch({ 
                 type: USER_ACTION_TYPES.GET_ALL_USERS, 
                 payload: response
@@ -123,7 +124,7 @@ export const UserProvider = ({ children }) => {
             } else {
                 queryParam = `userNumber=${input}`;
             }
-            const response = (await axios(`/users?${queryParam}`)).data;
+            const response = (await axios(`${urlApiUsers}?${queryParam}`)).data;
 
             dispatch ({
                 type: USER_ACTION_TYPES.GET_USER_BY,
@@ -140,7 +141,7 @@ export const UserProvider = ({ children }) => {
     // Reestablecer cuenta del usuario
     const updateUserPassword = async (user) => {
         try {
-            await axios.put('/users/update-password', user);
+            await axios.put(`${urlApiUsers}/update-password`, user);
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }
@@ -148,7 +149,7 @@ export const UserProvider = ({ children }) => {
 
     const updateUsers = async (user) => {
         try {
-            await axios.put('/users/config-users', user);
+            await axios.put(`${urlApiUsers}/config-users`, user);
         } catch (error) {
             throw error.response?.data?.message || error.message;
         }

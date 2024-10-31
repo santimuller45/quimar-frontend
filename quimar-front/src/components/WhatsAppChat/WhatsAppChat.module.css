@@ -1,0 +1,11 @@
+.whatsappicon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Asegúrate de que esté en la parte superior */
+}
+.whatsappicon img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Para hacer el ícono circular */
+}

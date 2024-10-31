@@ -10,7 +10,8 @@ import { useUser } from './customHooks/useUser.js';
 
 // URL DE RESPUESTA DEL BACKEND ---->
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+const apiUrl = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL = apiUrl;
 
 // URL PARA COMPARTIR
 // axios.defaults.baseURL = "https://zw1l1ft7-3001.brs.devtunnels.ms/"; 
