@@ -44,6 +44,11 @@
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
     font-weight: bold;
     font-size: 1.1rem; /* Reducido el tamaño del texto de la lista */
+    cursor: pointer;
+}
+
+.rubList li:hover {
+    color: #fff;
 }
 
 .footer {

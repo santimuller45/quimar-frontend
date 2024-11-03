@@ -3,7 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem; /* Añadir padding para evitar que el contenido quede pegado a los bordes */
+    padding: 2rem; /* Espaciado alrededor del contenido */
+    max-width: 100%; /* Asegura que el contenedor no exceda el ancho de la pantalla */
+    overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
 }
 
 /* Title Styles */
@@ -14,31 +16,33 @@
     flex-wrap: wrap;
     gap: 1rem;
     padding-top: 1rem;
-    font-size: 2.5rem; /* Ajustar el tamaño del texto para que se vea más equilibrado */
+    font-size: 2.5rem; /* Tamaño del texto */
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold; /* Utilizar font-weight 700 para un texto más destacado */
+    font-weight: bold; /* Negrita para mayor visibilidad */
     margin-bottom: 2rem; /* Espacio debajo del título */
 }
 
 /* Table Styles */
 .table {
-    width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
-    margin-bottom: 2rem; /* Espacio debajo de las tablas */
+    width: auto; /* Cambiado de 100% a auto */
+    max-width: 100%; /* Evita que la tabla se expanda más allá del contenedor */
+    margin-bottom: 2rem; /* Espacio debajo de la tabla */
 }
 
 /* Table Button Styles */
 .tableButtons {
     background: none;
     border: none;
-    color: #f8f9fa; /* Color del icono para contraste */
-    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
-    transition: color 0.3s ease; /* Transición para el cambio de color */
+    color: #f8f9fa; /* Color del icono */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: color 0.3s ease; /* Transición de color */
 }
 
 .tableButtons:hover {
-    color: #17a2b8; /* Color de hover para mejorar la interacción visual */
+    color: #17a2b8; /* Color de hover */
 }
 
+/* Summary Container */
 .summaryContainer {
     text-align: center; /* Centrar el texto */
     margin-top: 20px; /* Espaciado superior */
@@ -48,7 +52,7 @@
 
 .totalTitle {
     font-size: 1.5rem; /* Tamaño de fuente para el título */
-    margin-bottom: 5px; /* Espaciado inferior */
+    margin-bottom: 5px; /* Espacio debajo del título */
 }
 
 .totalAmount {
@@ -63,7 +67,7 @@
     flex-direction: row;
     gap: 1rem; /* Espacio entre los botones */
     margin-top: 2rem; /* Espacio arriba del contenedor de botones */
-    justify-content: center; /* Centrar los botones horizontalmente */
+    justify-content: center; /* Centrar botones horizontalmente */
 }
 
 .button {
@@ -73,11 +77,11 @@
 
 /* Table Customization */
 .table th, .table td {
-    text-align: center; /* Centrar el texto en las celdas de la tabla */
-    padding: 0.75rem; /* Padding para celdas de tabla */
+    text-align: center; /* Centrar el texto en las celdas */
+    padding: 0.75rem; /* Padding para celdas */
 }
 
-/* Make sure tables are responsive */
+/* Media Queries para Pantallas Pequeñas */
 @media (max-width: 768px) {
     .table {
         font-size: 0.875rem; /* Ajustar el tamaño de fuente en pantallas pequeñas */

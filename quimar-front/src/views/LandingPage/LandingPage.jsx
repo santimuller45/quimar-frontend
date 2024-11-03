@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import style from "./LandingPage.module.css";
 
 // LOGO ----->
@@ -9,7 +10,21 @@ import logo from '../../assets/logo.png';
 import { WhatsAppChat } from "../../components/indexComponents.js";
 // <---------------
 
-const LandingPage = () => (
+// CUSTOM HOOKS ---->
+import { useProducts } from "../../customHooks/useProducts.js";
+// <-----------------
+
+const LandingPage = () => {
+
+    const navigate = useNavigate();
+    const { filterByRubro } = useProducts();
+
+    const handleFilterBySubRubro = (name) => {
+        navigate('/products');
+        filterByRubro(name);
+    };
+
+    return (
     <>
         <div className={style.container}>
             <header className={style.headerLand}>
@@ -22,14 +37,14 @@ const LandingPage = () => (
             <section className={style.section}>
                 <h2 className={style.textSubTitle}>Nuestros Rubros</h2>
                 <ul className={style.rubList}>
-                    <li>QUIMICOS Y DILUYENTES</li>
-                    <li>ACCESORIOS PARA PINTURA</li>
-                    <li>ARTICULOS DE LIMPIEZA Y VARIOS</li>
-                    <li>ARTICULOS PARA LA CONSTRUCCION</li>
-                    <li>FERRETERIA</li>
-                    <li>PINTURAS</li>
-                    <li>ZINGUERIA</li>
-                    <li>MÁS...</li>
+                    <li onClick={() => handleFilterBySubRubro('Diluyentes')}>QUIMICOS Y DILUYENTES</li>
+                    <li onClick={() => handleFilterBySubRubro('Lijas y abrasivos')}>ACCESORIOS PARA PINTURA</li>
+                    <li onClick={() => handleFilterBySubRubro('Escobas y Acc. de Limpieza')}>ARTICULOS DE LIMPIEZA Y VARIOS</li>
+                    <li onClick={() => handleFilterBySubRubro('Cal viva - Yeso Paris - Cemento')}>ARTICULOS PARA LA CONSTRUCCION</li>
+                    <li onClick={() => handleFilterBySubRubro('Tornillos')}>FERRETERIA</li>
+                    <li onClick={() => handleFilterBySubRubro('Antioxidos')}>PINTURAS</li>
+                    <li onClick={() => handleFilterBySubRubro('Caballetes / Cumbreras para techos')}>ZINGUERIA</li>
+                    <li onClick={() => handleFilterBySubRubro('all')}>MÁS...</li>
                 </ul>
             </section>
             <section className={style.section}>
@@ -61,6 +76,6 @@ const LandingPage = () => (
         </div>
         <WhatsAppChat />
     </>
-);
+)};
 
 export default LandingPage;

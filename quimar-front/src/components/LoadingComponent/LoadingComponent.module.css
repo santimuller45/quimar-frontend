@@ -1,0 +1,8 @@
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh; /* O el tamaño que prefieras */
+    text-align: center;
+}

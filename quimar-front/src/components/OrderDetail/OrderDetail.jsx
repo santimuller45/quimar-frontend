@@ -13,61 +13,63 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const OrderDetail = ( { orderBody, isEditing, onAdd, onDecrement, onRemove } ) => {
     return (
-        <Table striped bordered hover variant="dark" className={style.table}>
-            <thead>
-                <tr className="text-center">
-                    <th>Código</th>
-                    <th>Detalle</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unidad</th>
-                    <th>Subtotal</th>
-                    {   isEditing
-                        ?
-                        <th>Eliminar</th>
-                        : null
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                { orderBody && orderBody.length > 0 ? (
-                    orderBody.map((body) => (
-                        <tr key={body.codigo} className="text-center">
-                            <td>{body.codigo}</td>
-                            <td>{body.name}</td>
-                            {   isEditing
-                                ?
-                                <td>
-                                    <Button onClick={() => onDecrement(body)} aria-label="Decrementar cantidad" className={style.tableButtons}>
-                                        <FontAwesomeIcon icon={faMinus} />
-                                    </Button>
-                                    {body.quantity} 
-                                    <Button onClick={() => onAdd(body)} aria-label="Incrementar cantidad" className={style.tableButtons}>
-                                        <FontAwesomeIcon icon={faPlus} />
-                                    </Button>
-                                </td>
-                                :
-                                <td>{body.quantity}</td>
-                            }
-                            <td>${body.price}</td>
-                            <td>${body.total}</td>
-                            {   isEditing
-                                ?
-                                <td>
-                                    <Button onClick={() => onRemove(body)} aria-label="Eliminar producto" className={style.tableButtons}>
-                                        <FontAwesomeIcon icon={faCircleXmark} />
-                                    </Button>
-                                </td>
-                                : null
-                            }
-                        </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan="6" className="text-center">No hay detalles de pedido disponibles.</td>
+        <div className={style.container}>
+            <Table striped bordered hover variant="dark" className={style.table}>
+                <thead>
+                    <tr className="text-center">
+                        <th>Código</th>
+                        <th>Detalle</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unidad</th>
+                        <th>Subtotal</th>
+                        {   isEditing
+                            ?
+                            <th>Eliminar</th>
+                            : null
+                        }
                     </tr>
-                )}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    { orderBody && orderBody.length > 0 ? (
+                        orderBody.map((body) => (
+                            <tr key={body.codigo} className="text-center">
+                                <td>{body.codigo}</td>
+                                <td>{body.name}</td>
+                                {   isEditing
+                                    ?
+                                    <td>
+                                        <Button onClick={() => onDecrement(body)} aria-label="Decrementar cantidad" className={style.tableButtons}>
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </Button>
+                                        {body.quantity} 
+                                        <Button onClick={() => onAdd(body)} aria-label="Incrementar cantidad" className={style.tableButtons}>
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </Button>
+                                    </td>
+                                    :
+                                    <td>{body.quantity}</td>
+                                }
+                                <td>${body.price}</td>
+                                <td>${body.total}</td>
+                                {   isEditing
+                                    ?
+                                    <td>
+                                        <Button onClick={() => onRemove(body)} aria-label="Eliminar producto" className={style.tableButtons}>
+                                            <FontAwesomeIcon icon={faCircleXmark} />
+                                        </Button>
+                                    </td>
+                                    : null
+                                }
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="6" className="text-center">No hay detalles de pedido disponibles.</td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
+        </div>
     )
 };
 

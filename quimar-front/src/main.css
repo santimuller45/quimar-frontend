@@ -26,8 +26,8 @@ body {
 }
 
 .content {
-  flex: 1; /* Hace que la sección principal ocupe todo el espacio disponible */
-  padding-bottom: 2rem; /* Opcional: espacio para que el contenido no toque el footer */
+  margin-top: 80px;
+  padding: 1rem;
 }
 
 .footer {

@@ -1,7 +1,7 @@
 import React from "react";
 import style from './UserNavBar.module.css';
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // REACT BOOSTRAP
 import { Nav, NavDropdown, Badge } from 'react-bootstrap';
@@ -40,38 +40,41 @@ const UserNavBar = () => {
 
     return (
         <Nav className="ms-auto">
-            <Nav.Link href="/order">
+            <Nav.Link as={Link} to="/order">
                 <span className={style.navTitle}>
                     <FontAwesomeIcon icon={faNoteSticky}/> Pedido <Badge >{shop.length}</Badge>
                 </span>
             </Nav.Link>
-            { localUser.email
-                ?
-                <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account">
-                    <NavDropdown.Item href="/account"><span className={style.navLink}>Mi Cuenta</span></NavDropdown.Item>
-                    <NavDropdown.Item href="/account/orders"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
-                    <NavDropdown.Item href="/change-password"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item><button onClick={logoutHandler} className={style.logButton}>Desconectar</button></NavDropdown.Item>
-                </NavDropdown>
-                :
-                <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser} /> Cuenta</span>} id="basic-nav-dropdown-account">
-                    <NavDropdown.Item href="/log-in"><span className={style.navLink}>Ingresar</span></NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/register"><span className={style.navLink}>Registrarme</span></NavDropdown.Item>
-                </NavDropdown>
-            }
-            {
-                localUser.admin
+
+            <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUser}/> Cuenta</span>} id="basic-nav-dropdown-account">
+                { localUser.email
+                    ?
+                    <>
+                        <NavDropdown.Item as={Link} to="/account"><span className={style.navLink}>Mi Cuenta</span></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/account/orders"><span className={style.navLink}>Mis pedidos</span></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/change-password"><span className={style.navLink}>Cambiar contraseña</span></NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item><button onClick={logoutHandler} className={style.logButton}>Desconectar</button></NavDropdown.Item>
+                    </>
+                    :
+                    <>
+                        <NavDropdown.Item as={Link} to="/log-in"><span className={style.navLink}>Ingresar</span></NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to="/register"><span className={style.navLink}>Registrarme</span></NavDropdown.Item>
+                    </>
+                }
+            </NavDropdown>
+
+            {   localUser.admin
                 ?
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUnlock}/> Admin</span>} id="basic-nav-dropdown-admin">
-                    <NavDropdown.Item href="/product-panel"><span className={style.navLink}><FontAwesomeIcon icon={faGears}/> Productos</span></NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/product-panel"><span className={style.navLink}><FontAwesomeIcon icon={faGears}/> Productos</span></NavDropdown.Item>
                     {/* <NavDropdown.Divider />
                     <NavDropdown.Item href="/rubro-panel"><span className={style.navLink}><FontAwesomeIcon icon={faSliders} /> Rubros</span></NavDropdown.Item> */}
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/account-panel"><span className={style.navLink}><FontAwesomeIcon icon={faUsers}/> Cuentas</span></NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/account-panel"><span className={style.navLink}><FontAwesomeIcon icon={faUsers}/> Cuentas</span></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/orders-panel"><span className={style.navLink}><FontAwesomeIcon icon={faFileCircleCheck} /> Pedidos</span></NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/orders-panel"><span className={style.navLink}><FontAwesomeIcon icon={faFileCircleCheck} /> Pedidos</span></NavDropdown.Item>
                 </NavDropdown>
                 : null
             }

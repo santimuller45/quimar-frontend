@@ -15,9 +15,10 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icon
 // <-------------------
 
 // COMPONENT ------->
-import { CustomAlert } from "../../components/indexComponents.js";
+import { CustomAlert, LoadingComponent } from "../../components/indexComponents.js";
 // <-----------------
 
+const fetchUrl = import.meta.env.VITE_API_GET_PRODUCTS;
 
 const ProductDetail = () => {
 
@@ -29,6 +30,8 @@ const ProductDetail = () => {
   const { state } = useUser();
   const { addToOrder } = useShop();
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToOrder = () => {
@@ -39,18 +42,23 @@ const ProductDetail = () => {
 
   const getProductById = async () => {
     try {
-      const result = (await axios(`/productos/${productID}`)).data;
+      const result = (await axios(`${fetchUrl}/${productID}`)).data;
       if (result) {
         setProduct(result);
       }
     } catch (error) {
-      throw error.response?.data?.message || error.message;
+      setError(error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     getProductById();
   }, [productID, state.user.email]);
+
+    if (loading) return <LoadingComponent/>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
       <div className={style.detailContainer}>

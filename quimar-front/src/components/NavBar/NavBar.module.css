@@ -1,12 +1,24 @@
 .nav {
     background-color: #333;
+    position: fixed; /* Fija el navbar en la parte superior */
+    top: 0; /* Asegura que esté en la parte superior */
+    left: 0; /* Asegura que esté alineado a la izquierda */
+    width: 100%; /* Asegura que el navbar ocupe todo el ancho */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
 .navLink {
+    text-decoration: none;
     color: #0194DC !important;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.2rem;
+    padding: 0.5rem 1rem; /* Añade espaciado alrededor de los enlaces */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.navLink:hover {
+    color: #fff; /* Cambia el color al pasar el mouse */
 }
 
 .logoSection {
@@ -21,4 +33,15 @@
     height: auto;
     max-height: 100%;
     object-fit: cover;
+}
+
+/* Media Queries para mejorar responsividad */
+@media (max-width: 768px) {
+    .navLink {
+        font-size: 1rem; /* Reduce el tamaño de la fuente en pantallas más pequeñas */
+    }
+    .logoSection {
+        width: 4rem; /* Ajusta el tamaño del logo */
+        height: 4rem;
+    }
 }

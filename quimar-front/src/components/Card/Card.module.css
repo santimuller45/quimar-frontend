@@ -9,7 +9,8 @@
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     background-color: #fff;
     width: 100%;
-    min-height: 12rem; /* Establece una altura mínima para todas las tarjetas */
+    min-height: 12rem; /* Altura mínima para todas las tarjetas */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
 
 .imageContainer {
@@ -36,10 +37,10 @@
 
 .cardTitle {
     color: #000;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.4rem;
     font-weight: bold;
-    min-height: 3rem; /* Establece una altura mínima para el título */
+    min-height: 3rem; /* Altura mínima para el título */
     line-height: 1.2; /* Controla la altura de la línea para manejar títulos largos */
     overflow: hidden; /* Oculta el texto desbordado */
     text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
@@ -50,15 +51,10 @@
     font-size: 1.2rem;
 }
 
-.cardStockSymbolCheck {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    color: green;
-}
+.cardStockSymbolCheck,
 .cardStockSymbolCross {
     margin-left: 1rem;
     font-size: 1.5rem;
-    color: red;
 }
 
 /* Custom button */
@@ -83,4 +79,42 @@
 
 .addButton:focus {
     outline: none;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .cardProduct {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        align-items: flex-start; /* Alinea el contenido al inicio */
+    }
+
+    .imageContainer {
+        width: 100%; /* Imagen ocupa el 100% del ancho en pantallas pequeñas */
+        height: auto; /* Permite que la altura sea automática */
+        margin-right: 0; /* Elimina el margen derecho */
+        margin-bottom: 1rem; /* Añade margen inferior para separar de texto */
+    }
+
+    .cardTitle {
+        font-size: 1.2rem; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+    }
+
+    .cardText {
+        font-size: 1rem; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+    }
+
+    .addButton {
+        width: 100%; /* Botón ocupa el 100% del ancho en pantallas pequeñas */
+        text-align: center; /* Centra el texto del botón */
+    }
+}
+
+@media (max-width: 480px) {
+    .cardTitle {
+        font-size: 1rem; /* Reduce aún más el tamaño de la fuente en pantallas extra pequeñas */
+    }
+
+    .cardText {
+        font-size: 0.9rem; /* Reduce el tamaño de la fuente aún más */
+    }
 }

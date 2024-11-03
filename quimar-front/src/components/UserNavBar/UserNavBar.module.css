@@ -6,10 +6,13 @@
 }
 
 .navLink {
+    text-decoration: none;
     color: #0194DC !important;
-    font-size: 1rem;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem; /* Añade espaciado alrededor de los enlaces */
+    transition: color 0.3s ease; /* Transición suave para el color */
 }
 
 .navLink:hover {

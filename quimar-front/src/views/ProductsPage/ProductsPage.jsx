@@ -22,7 +22,7 @@ const ProductsPage = () => {
     // <-----
     const { productState, filterByRubro } = useProducts();
     
-    const productsDB = productState.products;
+    const productsDB = productState.products || [];
 
     const [currentPage , setCurrentPage ] = useState(1);
     const productPerPage = 12;
@@ -43,31 +43,29 @@ const ProductsPage = () => {
     useEffect(() => {
         if (productState.products.length > 0) {
             setLoading(false); // Cambia a false cuando los productos estén cargados
+        } else {
+            setLoading(true); // Mantener loading si no hay productos
         }
     }, [productState.products]);
 
     return (
         <div className="container-fluid">
             <Row>
-                <Col md={3}>
-                    <Filters handleFilterBySubRubro={handleFilterBySubRubro}></Filters>
-                </Col>
-                <Col md={9}>
-                    <section>
-                        <h2 className={style.mainTitle}><strong>Nuestros Productos</strong></h2>
-                        {loading ? (
-                            <Row className="justify-content-center mt-5">
-                                <Col xs="auto">
-                                    <LoadingComponent />
-                                </Col>
-                            </Row>
-                        ) : (
-                            <>
+                {loading ? (
+                    <Col md={12}>
+                        <LoadingComponent />
+                    </Col>
+                ) : (
+                    <>
+                        <Col md={3}>
+                            <Filters handleFilterBySubRubro={handleFilterBySubRubro} />
+                        </Col>
+                        <Col md={9}>
+                            <section>
+                                <h2 className={style.mainTitle}><strong>Nuestros Productos</strong></h2>
                                 <Row>
                                     <Col>
-                                        <CardContainer 
-                                            currenProducts={currentProducts} 
-                                        />
+                                        <CardContainer currenProducts={currentProducts} />
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-4">
@@ -80,10 +78,10 @@ const ProductsPage = () => {
                                         />
                                     </Col>
                                 </Row>
-                            </>
-                        )}
-                    </section>
-                </Col>
+                            </section>
+                        </Col>
+                    </>
+                )}
             </Row>
             <WhatsAppChat/>
         </div>

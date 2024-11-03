@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
@@ -35,9 +35,6 @@ const CardProduct = (product) => {
         setShowAlert(true);
         setTimeout(() => setShowAlert(false), 2000);
     };
-
-    useEffect(() => {
-    },[state.user]);
 
     return (
         <>
