@@ -5,11 +5,11 @@ import style from "./CardContainer.module.css";
 import CardProduct from "../Card/Card.jsx";
 // <-------------------
 
-const CardContainer = ( { currenProducts } ) => {
+const CardContainer = ( { currentProducts } ) => {
 
     return (
         <div className={style.cardContainer}>
-          {currenProducts?.map((product,index) => (
+          {currentProducts?.map((product,index) => (
                 <CardProduct 
                     key={index}
                     id={product.id}

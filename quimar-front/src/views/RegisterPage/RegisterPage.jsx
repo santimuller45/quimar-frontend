@@ -26,6 +26,7 @@ const RegisterPage = () => {
     const [formData, setFormData] = useState({
         email: "",
         name: "",
+        fantasyname: "",
         phone: "",
         cuit: "",
         address: "",
@@ -56,7 +57,18 @@ const RegisterPage = () => {
         e.preventDefault();
 
         try {
-            await registerUser(formData);
+            const registerForm = {
+                email: formData.email,
+                name: formData.name + (formData.fantasyname ? ` (${formData.fantasyname})` : ""), // Solo agregamos "fantasyname" si no está vacío
+                phone: formData.phone,
+                cuit: formData.cuit,
+                address: formData.address,
+                city: formData.city,
+                state: formData.state,
+                postalCode: formData.postalCode,
+                confirm: formData.confirm
+            };
+            await registerUser(registerForm);
             Swal.fire ({
                 icon: 'success',
                 title: '¡Usuario creado correctamente! Espere a que su cuenta sea activada',
@@ -95,7 +107,7 @@ const RegisterPage = () => {
                 </Form.Group>
 
                 <Form.Group as={Col} md="4" controlId="formBasicName" className={style.container}>
-                    <Form.Label className={style.label}>Nombre</Form.Label>
+                    <Form.Label className={style.label}>Apellido Nombre / Razón Social</Form.Label>
                     <Form.Control
                         type="text"
                         name="name"
@@ -107,6 +119,21 @@ const RegisterPage = () => {
                         />
                     <Form.Control.Feedback type="invalid">
                         {errors.name}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} md="4" controlId="formBasicFantasyName" className={style.container}>
+                    <Form.Label className={style.label}>Nombre de fantasía - OPCIONAL</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="fantasyname"
+                        placeholder="Ingrese su nombre de fantasía"
+                        value={formData.fantasyname}
+                        onChange={handlerInputChange}
+                        className={style.text}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.fantasyname}
                     </Form.Control.Feedback>
                 </Form.Group>
                 

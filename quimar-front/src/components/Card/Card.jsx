@@ -55,7 +55,9 @@ const CardProduct = (product) => {
                     <Card.Text className={style.cardText}>Subrubro: {category}</Card.Text>
                     {   state.user.email
                         ?   <Card.Text className={style.cardText}>Precio: <strong>${price}</strong></Card.Text>
-                        :   null
+                        :   <Card.Text className={style.cardNoPrice}>
+                                Debes <Link to="/log-in" className={style.cardLink}>iniciar sesión</Link> o <Link to="/register" className={style.cardLink}>registrarte</Link> para ver los precios.
+                            </Card.Text>
                     }
                     { status === true
                         ? 

@@ -3,6 +3,7 @@ import React from "react";
 // REACT BOOSTRAP ---->
 import { Pagination } from 'react-bootstrap';
 // <-------------------
+
 function PaginationComponent({ itemsPerPage, itemsDB, paginado, currentPage }) {
     const totalPages = Math.ceil(itemsDB / itemsPerPage);
     const pageNumbers = [];
@@ -49,11 +50,29 @@ function PaginationComponent({ itemsPerPage, itemsDB, paginado, currentPage }) {
         }
     };
 
+    const firstPageHandler = () => {
+        if (currentPage > 1) {
+            paginado(1); // Lleva al usuario a la primera página
+        }
+    };
+
+    const lastPageHandler = () => {
+        if (currentPage < totalPages) {
+            paginado(totalPages); // Lleva al usuario a la última página
+        }
+    };
+
     return (
         <Pagination>
             {pageNumbers.length > 0 && (
                 <>
-                    <Pagination.Prev onClick={prevPageHandler} />
+                    {/* Botón para ir a la primera página */}
+                    <Pagination.First onClick={firstPageHandler} disabled={currentPage === 1}/>
+                    
+                    {/* Botón para ir a la página anterior */}
+                    <Pagination.Prev onClick={prevPageHandler} disabled={currentPage === 1} />
+                    
+                    {/* Páginas numeradas */}
                     {pageNumbers.map(number => (
                         <Pagination.Item
                             key={number}
@@ -63,10 +82,17 @@ function PaginationComponent({ itemsPerPage, itemsDB, paginado, currentPage }) {
                             {number}
                         </Pagination.Item>
                     ))}
+                    
+                    {/* Indicación de que hay más páginas al final */}
                     {endPage < totalPages && (
                         <Pagination.Ellipsis disabled />
                     )}
-                    <Pagination.Next onClick={nextPageHandler} />
+                    
+                    {/* Botón para ir a la página siguiente */}
+                    <Pagination.Next onClick={nextPageHandler} disabled={currentPage === totalPages} />
+                    
+                    {/* Botón para ir a la última página */}
+                    <Pagination.Last onClick={lastPageHandler} disabled={currentPage === totalPages} style={{ fontWeight: 'bold' }}/>
                 </>
             )}
         </Pagination>

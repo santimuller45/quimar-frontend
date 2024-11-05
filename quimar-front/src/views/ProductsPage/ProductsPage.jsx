@@ -63,9 +63,19 @@ const ProductsPage = () => {
                         <Col md={9}>
                             <section>
                                 <h2 className={style.mainTitle}><strong>Nuestros Productos</strong></h2>
+                                <Row className="justify-content-center mt-4">
+                                    <Col xs="auto">
+                                        <PaginationComponent 
+                                            itemsPerPage={productPerPage} 
+                                            itemsDB={productsDB.length} 
+                                            paginado={paginado} 
+                                            currentPage={currentPage}
+                                        />
+                                    </Col>
+                                </Row>
                                 <Row>
                                     <Col>
-                                        <CardContainer currenProducts={currentProducts} />
+                                        <CardContainer currentProducts={currentProducts} />
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-4">

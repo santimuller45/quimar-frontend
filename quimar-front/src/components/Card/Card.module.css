@@ -51,6 +51,17 @@
     font-size: 1.2rem;
 }
 
+.cardNoPrice {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.cardLink {
+    text-decoration: none;
+    color: #0194DC;
+}
+
 .cardStockSymbolCheck,
 .cardStockSymbolCross {
     margin-left: 1rem;
