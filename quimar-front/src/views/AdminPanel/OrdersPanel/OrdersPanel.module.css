@@ -1,3 +1,9 @@
+.containerFluid {
+    min-height: 100vh;  /* Asegura que el contenedor tenga al menos el 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+}
+
 .title {
     display: flex;
     justify-content: center;
@@ -40,5 +46,6 @@
     text-align: center; /* Centra el texto horizontalmente */
     margin-top: 10rem; /* Espaciado superior */
     font-size: 1.5rem; /* Puedes ajustar el tamaño del texto */
-    color: #555; /* Color opcional */
+    color: #000; /* Color opcional */
+    font-weight: bold;
 }

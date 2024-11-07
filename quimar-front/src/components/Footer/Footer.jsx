@@ -42,7 +42,7 @@ const Footer = () => {
                     <h6><FontAwesomeIcon icon={faWhatsapp}/> WHATSAPP: +54 9 291 443-8409</h6>
                     <h6><FontAwesomeIcon icon={faEnvelope}/> EMAIL: quimardistribuidora@hotmail.com</h6>
                     <h6><FontAwesomeIcon icon={faPhone}/> TELÉFONO: +54 9 291 443-8409</h6>
-                    <h6><FontAwesomeIcon icon={faGithub}/> DESARROLLADOR WEB: <Link to={'https://github.com/santimuller45'} className={style.linkGitHub}>SANTIAGO MULLER</Link></h6>
+                    <h6><FontAwesomeIcon icon={faGithub}/> DESARROLLADOR WEB: santiagomuller45@gmail.com</h6>
                 </nav>
             </div>
         </footer>

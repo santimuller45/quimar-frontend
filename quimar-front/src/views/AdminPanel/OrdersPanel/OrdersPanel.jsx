@@ -59,7 +59,7 @@ const OrdersPanel = () => {
     },[navigate, state.user.admin])
 
     return (
-        <div className="container-fluid">
+        <div className={style.containerFluid}>
             <h2 className={style.title}>Panel de Pedidos</h2>
             <PanelNavBar isOrderPanel={true}/>
 

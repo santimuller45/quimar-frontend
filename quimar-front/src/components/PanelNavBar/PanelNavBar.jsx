@@ -6,7 +6,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 //------------>
 
 // COMPONENTS ------>
-import { SearchBox, FilterByStatus, FilterByRubro, FilterByDate } from "../indexComponents.js";
+import { SearchBox, FilterByStatus, FilterByRubro, FilterByDate, RefreshComponent } from "../indexComponents.js";
 // <-----------------
 
 const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
@@ -20,6 +20,9 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                     {   isProductPanel
                         ?
                         <Nav className="me-auto">
+                            <Nav.Item className={style.navItem}>
+                                <RefreshComponent isProducts={true}/>
+                            </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 <button onClick={createProductSubmitHandler} className={style.buttonItem} aria-label="crear producto">
                                     Crear Producto
@@ -45,6 +48,9 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                     {   isUserPanel
                         ?
                         <Nav className="me-auto">
+                            <Nav.Item className={style.navItem}>
+                                <RefreshComponent isUsers={true}/>
+                            </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 N° Usuario / Nombre
                                 <SearchBox 
@@ -74,6 +80,9 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                     {   isOrderPanel
                         ?
                         <Nav className="me-auto">
+                            <Nav.Item className={style.navItem}>
+                                <RefreshComponent isOrders={true}/>
+                            </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 N° Pedido 
                                 <SearchBox 

@@ -1,8 +1,17 @@
 import React from "react";
 import style from './OrdersUserDetail.module.css';
 
+// GENERADOR DE PDF ----->
+import { generateOrderPDF } from "./generatePDF/generatePDF.js";
+// <----------------------
+
+// FONT-AWESOME -------> 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
+// <-------------------
+
 // REACT BOOSTRAP ---->
-import { Accordion, Table } from "react-bootstrap";
+import { Accordion, Table, Button } from "react-bootstrap";
 // <-------------------
 
 
@@ -74,6 +83,10 @@ const OrdersUserDetail = ({ orderBody= [], user= {} }) => {
                                     <h2 className={style.totalTitle}>Total del pedido</h2>
                                     <h3 className={style.totalAmount}>${order.totalAmount}</h3>
                                 </div>
+                                {/* Agregar el ícono para generar el PDF */}
+                                <Button variant="primary" onClick={() => generateOrderPDF(order, user)}>
+                                    <FontAwesomeIcon icon={faFilePdf} /> Generar PDF
+                                </Button>
                             </Accordion.Body>
                         </Accordion.Item>
                     ))
