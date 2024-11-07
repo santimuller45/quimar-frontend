@@ -55,7 +55,7 @@ const MyOrders = () => {
     }, [orderState.orders]);
 
     return (
-        <div className="container-fluid">
+        <div className={style.containerFluid}>
             <h2 className={style.title}>Mis Pedidos</h2>
             <OrdersUserDetail
                 orderBody={currentOrders}

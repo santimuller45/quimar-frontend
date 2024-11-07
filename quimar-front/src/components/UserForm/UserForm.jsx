@@ -87,7 +87,6 @@ const UserForm = ({ show, handleClose, user, isEditing, isAdmin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(form);
         try {
             if (isEditing) {
                 await updateUsers(form);
@@ -97,7 +96,7 @@ const UserForm = ({ show, handleClose, user, isEditing, isAdmin }) => {
                 showSuccessMessage('¡Usuario creado correctamente!');
             }
             handleClose();
-            getAllUsers();
+            await getAllUsers();
         } catch (error) {
             Swal.fire({
                 icon: 'error',

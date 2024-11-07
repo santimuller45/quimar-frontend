@@ -1,9 +1,7 @@
 .container {
+    min-height: 100vh;  /* Asegura que el contenedor tenga al menos el 100% de la altura de la ventana */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; /* Añadir padding para evitar que el contenido quede pegado a los bordes */
 }
 
 /* Title Styles */

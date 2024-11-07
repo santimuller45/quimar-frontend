@@ -24,9 +24,8 @@
 
 /* Table Styles */
 .table {
-    width: auto; /* Cambiado de 100% a auto */
-    max-width: 100%; /* Evita que la tabla se expanda más allá del contenedor */
-    margin-bottom: 2rem; /* Espacio debajo de la tabla */
+    flex-grow: 1; /* Hace que la tabla ocupe el espacio disponible */
+    overflow-y: auto; /* Permite desplazamiento si la tabla es más grande que el contenedor */
 }
 
 /* Table Button Styles */

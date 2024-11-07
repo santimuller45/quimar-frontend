@@ -31,15 +31,14 @@ const MyAccount = () => {
     const updateSubmitHandler = (user) => {
         setShowModifyUser(true);
         setViewUser(user);
-        console.log(user)
     };
 
     useEffect(() => {
         !state.user.email && navigate('/');
-    },[state.user.email]);
+    },[state.user]);
 
     return (
-        <div className="container">
+        <div className={style.containerFluid}>
             <h2 className={style.title}>Mis datos</h2>
             <div className={style.groupButtons}>
                 <button 
