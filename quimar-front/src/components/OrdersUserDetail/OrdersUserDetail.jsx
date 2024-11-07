@@ -82,11 +82,12 @@ const OrdersUserDetail = ({ orderBody= [], user= {} }) => {
                                     <p>{order.comentary ? order.comentary : "No hay comentarios"}</p>
                                     <h2 className={style.totalTitle}>Total del pedido</h2>
                                     <h3 className={style.totalAmount}>${order.totalAmount}</h3>
+                                    
+                                    {/* Agregar el ícono para generar el PDF */}
+                                    <Button variant="primary" onClick={() => generateOrderPDF(order, user)}>
+                                        <FontAwesomeIcon icon={faFilePdf} /> Generar PDF
+                                    </Button>
                                 </div>
-                                {/* Agregar el ícono para generar el PDF */}
-                                <Button variant="primary" onClick={() => generateOrderPDF(order, user)}>
-                                    <FontAwesomeIcon icon={faFilePdf} /> Generar PDF
-                                </Button>
                             </Accordion.Body>
                         </Accordion.Item>
                     ))
