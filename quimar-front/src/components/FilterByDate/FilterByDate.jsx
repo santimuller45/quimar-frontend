@@ -41,6 +41,9 @@ const FilterByDate = () => {
         e.preventDefault();
         if (day && month && year) {
             filterOrderByDate( day, month, year );
+            setDay('DIA');
+            setMonth('MES');
+            setYear('AÑO');
         }
     };
 

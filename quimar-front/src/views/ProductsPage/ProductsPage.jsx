@@ -24,7 +24,15 @@ const ProductsPage = () => {
     
     const productsDB = productState.products || [];
 
-    const [currentPage , setCurrentPage ] = useState(1);
+    // Revisar el estado almacenado en localStorage (si existe)
+    const storedPage = localStorage.getItem('currentPage') || 1;
+    const [currentPage, setCurrentPage] = useState(Number(storedPage));
+
+    useEffect(() => {
+        // Almacenar el número de página cada vez que cambie
+        localStorage.setItem('currentPage', currentPage);
+    }, [currentPage]);
+    
     const productPerPage = 12;
     const indexOfLastProduct = currentPage * productPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productPerPage;
