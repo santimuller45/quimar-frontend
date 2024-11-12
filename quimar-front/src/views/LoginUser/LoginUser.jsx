@@ -61,7 +61,7 @@ const LoginUser = () => {
     },[state]);
 
     return (
-        <div className="container">
+        <div className={style.containerFluid}>
             <h2 className={style.title}>Iniciar Sesión</h2>
             <Form onSubmit={submitLoginHandler}>
                 <Row>
