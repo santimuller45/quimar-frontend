@@ -59,7 +59,7 @@ const RegisterPage = () => {
         try {
             const registerForm = {
                 email: formData.email,
-                name: formData.name + (formData.fantasyname ? ` (${formData.fantasyname})` : ""), // Solo agregamos "fantasyname" si no está vacío
+                name: formData.name + (formData.fantasyname ? ` (${formData.fantasyname})` : ""),
                 phone: formData.phone,
                 cuit: formData.cuit,
                 address: formData.address,
