@@ -11,6 +11,7 @@ const ORDER_ACTION_TYPES = {
     REMOVE_FROM_ORDER : 'REMOVE_FROM_ORDER',
     CLEAN_ORDER : 'CLEAN_ORDER',
     TOTAL_ORDER: 'TOTAL_ORDER',
+    SET_QUANTITY: 'SET_QUANTITY',
 };
 
 const updateOrderLocalStorage = (state) => window.localStorage.setItem('order', JSON.stringify(state));
@@ -81,6 +82,20 @@ const orderReducer = ( state , action ) => {
             return []; 
         };
 
+        case ORDER_ACTION_TYPES.SET_QUANTITY: { // Nueva acción para actualizar la cantidad
+            const { id, quantity } = actionPayload;
+            const productIndex = state.findIndex(item => item.id === id);
+
+            if (productIndex >= 0) {
+                const newOrderState = structuredClone(state);
+                newOrderState[productIndex].quantity = quantity;
+                newOrderState[productIndex].total = parseFloat((quantity * newOrderState[productIndex].price).toFixed(2));
+                updateOrderLocalStorage(newOrderState);
+                return newOrderState;
+            }
+            return state;
+        };
+
         case ORDER_ACTION_TYPES.TOTAL_ORDER: {
             const total = state.reduce((sum, item) => sum + parseFloat(item.total), 0);
             return { ...state, total: parseFloat(total.toFixed(2)) }; // Redondear el total
@@ -105,13 +120,15 @@ export function ShopProvider ({ children }) {
 
     const clearOrder = () => dispatch({ type: ORDER_ACTION_TYPES.CLEAN_ORDER });
 
+    const setQuantity = (product, quantity) => dispatch({ type: ORDER_ACTION_TYPES.SET_QUANTITY, payload: { id: product.id, quantity } });
+
     const getTotalAmount = () => {
         const total = shopState.reduce((sum, item) => sum + parseFloat(item.total), 0);
         return total.toFixed(2); // Redondear a dos decimales
     };
 
     return (
-        <ShopContext.Provider value={{ shop : shopState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, totalOrderAmount: getTotalAmount() }}>
+        <ShopContext.Provider value={{ shop : shopState , addToOrder, decrementQuantity, removeFromOrder , clearOrder, setQuantity, totalOrderAmount: getTotalAmount() }}>
             {children}
         </ShopContext.Provider>
     )

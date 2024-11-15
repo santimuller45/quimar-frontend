@@ -152,9 +152,9 @@ const RegisterPage = () => {
                 <Form.Group as={Col} md="4" controlId="formBasicCuit" className={style.container}>
                     <Form.Label className={style.label}>CUIT/CUIL</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="number"
                         name="cuit"
-                        placeholder="Ingrese su CUIT/CUIL"
+                        placeholder="Ingrese su CUIT/CUIL sin guiones"
                         value={formData.cuit}
                         onChange={handlerInputChange}
                         isInvalid={!!errors.cuit}

@@ -9,6 +9,7 @@ export default function registerValidate(input) {
     if (!EMAIL_REGEX.test(input.email) && input.email.length > 0) errors.email = "El email es obligatorio.";
     if (!input.name) errors.name = "El nombre es obligatorio.";
     if (!input.cuit) errors.cuit = "El CUIT/CUIL es obligatorio.";
+    if (!Number(input.cuit)) errors.cuit = "El CUIT/CUIL no debe contener guiones.";
     if (!input.address) errors.address = "La dirección es obligatoria.";
     if (!input.city) errors.city = "La localidad es obligatoria.";
     if (!input.state) errors.state = "La provincia es obligatoria.";

@@ -8,10 +8,17 @@ import { Table, Button } from "react-bootstrap";
 //FONT-AWESOME ------->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+// import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 // <-------------------
 
-const OrderDetail = ( { orderBody, isEditing, onAdd, onDecrement, onRemove } ) => {
+const OrderDetail = ( { orderBody, isEditing, onRemove, setQuantity } ) => {
+
+    const handleQuantityChange = (product, newQuantity) => {
+        if (newQuantity >= 1 && newQuantity <= 999) {
+            setQuantity(product, newQuantity);
+        }
+    };
+
     return (
         <div className={style.container}>
             <Table striped bordered hover variant="dark" className={style.table}>
@@ -35,20 +42,20 @@ const OrderDetail = ( { orderBody, isEditing, onAdd, onDecrement, onRemove } ) =
                             <tr key={body.codigo} className="text-center">
                                 <td>{body.codigo}</td>
                                 <td>{body.name}</td>
-                                {   isEditing
-                                    ?
+                                {isEditing ? (
                                     <td>
-                                        <Button onClick={() => onDecrement(body)} aria-label="Decrementar cantidad" className={style.tableButtons}>
-                                            <FontAwesomeIcon icon={faMinus} />
-                                        </Button>
-                                        {body.quantity} 
-                                        <Button onClick={() => onAdd(body)} aria-label="Incrementar cantidad" className={style.tableButtons}>
-                                            <FontAwesomeIcon icon={faPlus} />
-                                        </Button>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="999"
+                                            value={body.quantity}
+                                            onChange={(e) => handleQuantityChange(body, Number(e.target.value))}
+                                            className={style.quantityInput}
+                                        />
                                     </td>
-                                    :
+                                ) : (
                                     <td>{body.quantity}</td>
-                                }
+                                )}
                                 <td>${body.price}</td>
                                 <td>${body.total}</td>
                                 {   isEditing

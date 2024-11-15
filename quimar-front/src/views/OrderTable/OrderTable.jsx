@@ -19,7 +19,7 @@ import { OrderDetail } from "../../components/indexComponents.js";
 const OrderTable = () => {
 
     const navigate = useNavigate();
-    const { shop, addToOrder, decrementQuantity, removeFromOrder, clearOrder, totalOrderAmount } = useShop();
+    const { shop, removeFromOrder, clearOrder, totalOrderAmount, setQuantity } = useShop();
     const { state } = useUser();
 
     const submitHandler = () => {
@@ -38,9 +38,8 @@ const OrderTable = () => {
             <OrderDetail
                 orderBody={shop}
                 isEditing={true}
-                onAdd={addToOrder}
-                onDecrement={decrementQuantity}
                 onRemove={removeFromOrder}
+                setQuantity={setQuantity}
             />
             {/* TOTAL DEL PEDIDO */}
             <div className={style.summaryContainer}>

@@ -28,6 +28,28 @@
     overflow-y: auto; /* Permite desplazamiento si la tabla es más grande que el contenedor */
 }
 
+.quantityInput {
+    width: 60px; /* Ajusta según el espacio disponible */
+    background-color: #343a40; /* Fondo oscuro para combinar con la tabla */
+    color: #ffffff; /* Texto claro */
+    border: 1px solid #6c757d; /* Borde gris */
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center; /* Centrar el texto */
+    font-weight: bold;
+    font-size: 1rem; /* Ajuste de tamaño de fuente */
+    outline: none;
+}
+
+.quantityInput:hover {
+    border-color: #adb5bd; /* Borde claro al pasar el cursor */
+}
+
+.quantityInput:focus {
+    border-color: #ffffff; /* Borde blanco al enfocar */
+    background-color: #495057; /* Un poco más claro al enfocar */
+}
+
 /* Table Button Styles */
 .tableButtons {
     background: none;
