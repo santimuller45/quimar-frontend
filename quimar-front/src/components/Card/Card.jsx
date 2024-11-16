@@ -66,14 +66,13 @@ const CardProduct = (product) => {
                             </Card.Text>
                         : 
                             <Card.Text className={style.cardText}>Stock disponible 
-                                <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
+                                <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross} style={{ color: 'red' }}/>
                             </Card.Text>
                     }
-                    {   state.user.email
+                    {   state.user.email && status === true
                         ?   <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
                         :   null
                     }
-                   
                 </Card.Body>
             </Card>
             { showAlert && ( <CustomAlert message="¡Producto agregado al pedido! " onClose={() => setShowAlert(false)} type={true} /> )}
