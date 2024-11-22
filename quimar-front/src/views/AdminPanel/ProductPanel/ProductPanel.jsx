@@ -72,7 +72,7 @@ const ProductPanel = () => {
                         <th>Código</th>
                         <th>Detalle</th>
                         <th>Precio</th>
-                        <th>Rubro</th>
+                        <th>Subrubro</th>
                         <th>Descripción</th>
                         <th>Estado</th>
                         <th>Modificar</th>
