@@ -12,9 +12,9 @@ import { useUser } from "../../customHooks/useUser.js";
 import { useOrders } from "../../customHooks/useOrders.js";
 // <------------------
 
-const RefreshComponent = ({ isProducts, isOrders, isUsers }) => {
+const RefreshComponent = ({ isProducts, isOrders, isUsers, isRubros }) => {
 
-    const { getAllProducts } = useProducts();
+    const { getAllProducts, getAllRubros } = useProducts();
     const { getAllOrders } = useOrders();
     const { getAllUsers } = useUser();
 
@@ -25,6 +25,8 @@ const RefreshComponent = ({ isProducts, isOrders, isUsers }) => {
             await getAllOrders();
         } else if (isUsers) {
             await getAllUsers();
+        } else if (isRubros) {
+            await getAllRubros();
         }
     };
 

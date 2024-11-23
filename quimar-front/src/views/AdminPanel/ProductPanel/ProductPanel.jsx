@@ -57,6 +57,17 @@ const ProductPanel = () => {
     const handleCloseCreateProduct = () => setShowCreateProduct(false);
     const createProductSubmitHandler = () => setShowCreateProduct(true);
 
+    // ESTADO DE SELECCIÓN DE PRODUCTOS PARA EL INCREMENTO O DECREMENTO DE PRECIO
+    const [selectedProducts, setSelectedProducts] = useState([]);
+
+    const handleCheckboxChange = (productId) => {
+        setSelectedProducts((prevSelected) =>
+            prevSelected.includes(productId)
+                ? prevSelected.filter((id) => id !== productId) // Deseleccionar
+                : [...prevSelected, productId] // Seleccionar
+        );
+    };
+
     useEffect(() => {
         if (!state.user.admin) navigate('/');
     }, [ state.user.admin, navigate, showModifyProduct, showCreateProduct, productState.products ]);
@@ -76,6 +87,7 @@ const ProductPanel = () => {
                         <th>Descripción</th>
                         <th>Estado</th>
                         <th>Modificar</th>
+                        <th>Seleccionar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,6 +117,13 @@ const ProductPanel = () => {
                                     <Button onClick={() => updateSubmitHandler(product)} className={style.tableButtons} aria-label="modificar producto">
                                         <FontAwesomeIcon icon={faGear} />
                                     </Button>
+                                </td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedProducts.includes(product.id)}
+                                        onChange={() => handleCheckboxChange(product.id)}
+                                    />
                                 </td>
                             </tr>
                         )))   

@@ -68,6 +68,9 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                     {   isRubroPanel
                         ?
                         <Nav className="me-auto">
+                            <Nav.Item className={style.navItem}>
+                                <RefreshComponent isRubros={true}/>
+                            </Nav.Item>
                             <Nav.Item>
                                 <button onClick={createRubroSubmitHandler} className={style.buttonItem} aria-label="crear rubro">
                                     Crear Rubro
