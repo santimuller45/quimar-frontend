@@ -66,6 +66,7 @@ const ProductPanel = () => {
                 ? prevSelected.filter((id) => id !== productId) // Deseleccionar
                 : [...prevSelected, productId] // Seleccionar
         );
+        {console.log(selectedProducts)};
     };
 
     useEffect(() => {
