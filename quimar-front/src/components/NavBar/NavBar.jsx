@@ -46,7 +46,6 @@ const NavBar = () => {
                         <Nav.Link as={Link} to="/contact-us" className={style.navLink}>Contacto</Nav.Link>
                         <Nav.Link as={Link} to="/about-us" className={style.navLink}>Nosotros</Nav.Link>
                         <Nav.Link className={style.navLink} onClick={handleProductsClick}>Productos</Nav.Link>
-                        <Nav.Link as={Link} to="/products" className={style.navLink}>Productos</Nav.Link>
                     </Nav>
                     {/* SEARCHBAR */}
                     <SearchBox 
