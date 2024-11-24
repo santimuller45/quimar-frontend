@@ -111,7 +111,7 @@ const ProductPriceForm = ({ show, handleClose, products }) => {
                                     />
                                 )))
                                 :
-                                (<p>No hay productos seleccionados.</p>)
+                                (<p>No hay productos seleccionados</p>)
                             }
                         </Col>
                     </Form.Group>
