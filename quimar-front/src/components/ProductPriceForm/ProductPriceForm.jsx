@@ -39,10 +39,23 @@ const ProductPriceForm = ({ show, handleClose, products }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setForm((prevForm) => ({
-            ...prevForm,
-            [name]: value,
-        }));
+    
+        if (name === "value") {
+            // Asegurar que el valor esté entre 0 y 100 y permitir decimales
+            const parsedValue = parseFloat(value);
+            if (value === "" || (parsedValue >= 0 && parsedValue <= 100)) {
+                setForm((prevForm) => ({
+                    ...prevForm,
+                    [name]: value, // Guardar como cadena para permitir edición
+                }));
+            }
+        } else {
+            // Manejo general para otros campos
+            setForm((prevForm) => ({
+                ...prevForm,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSelectChange = (e) => {
@@ -138,12 +151,7 @@ const ProductPriceForm = ({ show, handleClose, products }) => {
                             value={form.value}
                             onChange={handleInputChange}
                             placeholder="Ingrese el porcentaje (sin %)"
-                            min="0"
-                            max="100"
-                            onInput={(e) => {
-                                if (e.target.value > 100) e.target.value = 100;
-                                if (e.target.value < 0) e.target.value = 0;
-                            }}
+                            step="0.1"
                         />
                     </Form.Group>
 
