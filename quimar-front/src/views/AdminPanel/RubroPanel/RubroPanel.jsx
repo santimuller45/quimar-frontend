@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP ----->
-import { Accordion } from "react-bootstrap";
+import { Accordion, Spinner } from "react-bootstrap";
 // <--------------------
 
 //FONT-AWESOME ------->
@@ -18,14 +18,14 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <-------------------
 
 // COMPONENTS -------->
-import { PanelNavBar, RubroForm } from "../../../components/indexComponents.js";
+import { PanelNavBar, RubroForm, LoadingComponent } from "../../../components/indexComponents.js";
 // <-------------------
 
 const RubroPanel = () => {
 
     const navigate = useNavigate();
     const { state } = useUser();
-    const { productState } = useProducts();
+    const { productState, getAllRubros } = useProducts();
     const rubros = productState.rubros || [];
 
     const [activeKey, setActiveKey] = useState(null);
@@ -37,6 +37,10 @@ const RubroPanel = () => {
     useEffect(() => {
         if (!state.user.admin) navigate('/');
     },[ state.user.admin, navigate, productState ])
+
+    useEffect(() => {
+        getAllRubros();
+    },[])
 
     // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddRubro
     const [showCreateRubro, setShowCreateRubro] = useState(false);
@@ -78,9 +82,12 @@ const RubroPanel = () => {
                             </Accordion.Body>
                         </Accordion.Item>
                 ))
-                ) : (
-                    <p>No hay rubros disponibles.</p>
-                )}
+                ) 
+                : 
+                (
+                    <LoadingComponent/>
+                )
+                }
             </Accordion>
             {/* MODAL PARA AGREGAR NUEVO RUBRO */}
             <RubroForm

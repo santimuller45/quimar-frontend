@@ -19,6 +19,7 @@ import FilterByDate from "./FilterByDate/FilterByDate.jsx";
 import LoadingComponent from "./LoadingComponent/LoadingComponent.jsx";
 import WhatsAppChat from "./WhatsAppChat/WhatsAppChat.jsx";
 import RefreshComponent from "./RefreshComponent/RefreshComponent.jsx";
+import ProductPriceForm from "./ProductPriceForm/ProductPriceForm.jsx";
 
 export { 
     Footer, 
@@ -41,5 +42,6 @@ export {
     FilterByDate,
     LoadingComponent,
     WhatsAppChat,
-    RefreshComponent, 
+    RefreshComponent,
+    ProductPriceForm, 
 };

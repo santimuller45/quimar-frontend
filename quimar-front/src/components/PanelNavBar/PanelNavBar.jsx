@@ -9,7 +9,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { SearchBox, FilterByStatus, FilterByRubro, FilterByDate, RefreshComponent } from "../indexComponents.js";
 // <-----------------
 
-const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
+const PanelNavBar = ({ createProductSubmitHandler, updateProductPriceSubmitHandler, createRubroSubmitHandler, isProductPanel, isUserPanel, isRubroPanel, isOrderPanel }) => {
 
     return (
         <Navbar expand="lg" className={style.nav}>
@@ -29,7 +29,7 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                                 </button>
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
-                                Nombre / Código
+                                Nombre/Código
                                 <SearchBox 
                                     urlNavigate={'/product-panel'} 
                                     isProduct={true}
@@ -40,6 +40,11 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                             </Nav.Item>
                             <Nav.Item className={style.navItem}>
                                 <FilterByRubro/>
+                            </Nav.Item>
+                            <Nav.Item className={style.navItem}>
+                                <button onClick={updateProductPriceSubmitHandler} className={style.buttonItem} aria-label="update product price">
+                                    Actualizar Precios
+                                </button>
                             </Nav.Item>
                         </Nav>
                         : null
@@ -71,7 +76,7 @@ const PanelNavBar = ({ createProductSubmitHandler, createRubroSubmitHandler, isP
                             <Nav.Item className={style.navItem}>
                                 <RefreshComponent isRubros={true}/>
                             </Nav.Item>
-                            <Nav.Item>
+                            <Nav.Item className={style.navItem}>
                                 <button onClick={createRubroSubmitHandler} className={style.buttonItem} aria-label="crear rubro">
                                     Crear Rubro
                                 </button>

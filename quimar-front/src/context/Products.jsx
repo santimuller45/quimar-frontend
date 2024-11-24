@@ -3,6 +3,7 @@ import axios from 'axios';
 // RUTAS DE PRODUCTOS
 const urlApiGetProducts = import.meta.env.VITE_API_GET_PRODUCTS;
 const urlApiPutProducts = import.meta.env.VITE_API_PUT_PRODUCTS;
+const urlApiPutPriceProducts = import.meta.env.VITE_API_PUT_PRICE_PRODUCTS;
 const urlApiPostProducts = import.meta.env.VITE_API_POST_PRODUCTS;
 // RUTAS DE RUBROS
 const urlApiGetRubros = import.meta.env.VITE_API_GET_RUBROS;
@@ -174,6 +175,15 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const updatePriceProducts = async (form) => {
+        try {
+            const response = await axios.put(urlApiPutPriceProducts,  { form } );
+            return response.data;
+        } catch (error) {
+            throw error.response?.data?.message || error.message;
+        }
+    };
+
     const filterByProductStatus = (status) => {
         dispatch({
             type: ACTION_TYPES.FILTER_BY_PRODUCT_STATUS,
@@ -222,7 +232,21 @@ export const ProductProvider = ({ children }) => {
     };
 
     return (
-        <ProductContext.Provider value={{ productState, getAllProducts, getProductByName, filterByProductStatus, getAllRubros, addProduct, updateProducts, addRubro, updateRubro, filterByRubro }}>
+        <ProductContext.Provider 
+            value={{ 
+                productState, 
+                getAllProducts, 
+                getProductByName, 
+                filterByProductStatus, 
+                getAllRubros, 
+                addProduct, 
+                updateProducts,
+                updatePriceProducts, 
+                addRubro, 
+                updateRubro, 
+                filterByRubro 
+                }}
+        >
             {children}
         </ProductContext.Provider>
     );

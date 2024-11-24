@@ -19,7 +19,7 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENT ------->
-import { PaginationComponent, PanelNavBar, ProductForm } from "../../../components/indexComponents.js";
+import { PaginationComponent, PanelNavBar, ProductForm, ProductPriceForm } from "../../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
@@ -59,14 +59,22 @@ const ProductPanel = () => {
 
     // ESTADO DE SELECCIÓN DE PRODUCTOS PARA EL INCREMENTO O DECREMENTO DE PRECIO
     const [selectedProducts, setSelectedProducts] = useState([]);
+    const [showUpdateProductPrice, setShowUpdateProductPrice] = useState(false);
+    const handleCloseUpdateProductPrice = () => setShowUpdateProductPrice(false);
+    const updateProductPriceSubmitHandler = () => setShowUpdateProductPrice(true);
 
-    const handleCheckboxChange = (productId) => {
-        setSelectedProducts((prevSelected) =>
-            prevSelected.includes(productId)
-                ? prevSelected.filter((id) => id !== productId) // Deseleccionar
-                : [...prevSelected, productId] // Seleccionar
-        );
-        {console.log(selectedProducts)};
+    const handleCheckboxChange = (product) => {
+        setSelectedProducts((prevSelected) => {
+            const isAlreadySelected = prevSelected.some((item) => item.id === product.id);
+    
+            if (isAlreadySelected) {
+                // Deseleccionar: Filtra el producto fuera de la lista
+                return prevSelected.filter((item) => item.id !== product.id);
+            } else {
+                // Seleccionar: Añade el producto completo
+                return [...prevSelected, { id: product.id, name: product.name, codigo: product.codigo }];
+            }
+        });
     };
 
     useEffect(() => {
@@ -77,7 +85,7 @@ const ProductPanel = () => {
     return (
         <div className="container-fluid">
             <h2 className={style.title}>Panel de Productos</h2>
-            <PanelNavBar isProductPanel={true} createProductSubmitHandler={createProductSubmitHandler} />
+            <PanelNavBar isProductPanel={true} createProductSubmitHandler={createProductSubmitHandler} updateProductPriceSubmitHandler={updateProductPriceSubmitHandler} />
             <Table striped bordered hover variant="dark" className={style.table}>
                 <thead>
                     <tr className="text-center">
@@ -122,8 +130,8 @@ const ProductPanel = () => {
                                 <td>
                                     <input
                                         type="checkbox"
-                                        checked={selectedProducts.includes(product.id)}
-                                        onChange={() => handleCheckboxChange(product.id)}
+                                        checked={selectedProducts.some((item) => item.id === product.id)}
+                                        onChange={() => handleCheckboxChange(product)}
                                     />
                                 </td>
                             </tr>
@@ -149,6 +157,12 @@ const ProductPanel = () => {
                 <ProductForm
                     show={showCreateProduct} 
                     handleClose={handleCloseCreateProduct}
+                />
+                {/* MODAL PARA MODIFICAR LOS PRECIOS */}
+                <ProductPriceForm
+                    show={showUpdateProductPrice}
+                    handleClose={handleCloseUpdateProductPrice}
+                    products={selectedProducts}
                 />
             </Table>
             <Row className="justify-content-center mt-4">

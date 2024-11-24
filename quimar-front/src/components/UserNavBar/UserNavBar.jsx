@@ -9,7 +9,7 @@ import { Nav, NavDropdown, Badge } from 'react-bootstrap';
 
 //FONT-AWESOME ------->
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUnlock, faUsers, faGears, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUnlock, faUsers, faGears, faFileCircleCheck, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { faNoteSticky } from "@fortawesome/free-regular-svg-icons";
 // <-------------------
 
@@ -69,8 +69,8 @@ const UserNavBar = () => {
                 ?
                 <NavDropdown title={<span className={style.navTitle}><FontAwesomeIcon icon={faUnlock}/> Admin</span>} id="basic-nav-dropdown-admin">
                     <NavDropdown.Item as={Link} to="/product-panel"><span className={style.navLink}><FontAwesomeIcon icon={faGears}/> Productos</span></NavDropdown.Item>
-                    {/* <NavDropdown.Divider />
-                    <NavDropdown.Item href="/rubro-panel"><span className={style.navLink}><FontAwesomeIcon icon={faSliders} /> Rubros</span></NavDropdown.Item> */}
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="/rubro-panel"><span className={style.navLink}><FontAwesomeIcon icon={faSliders} /> Rubros</span></NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item as={Link} to="/account-panel"><span className={style.navLink}><FontAwesomeIcon icon={faUsers}/> Cuentas</span></NavDropdown.Item>
                     <NavDropdown.Divider />
