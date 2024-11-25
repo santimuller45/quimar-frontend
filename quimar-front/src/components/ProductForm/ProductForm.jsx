@@ -19,8 +19,7 @@ import { validateProduct } from "./validate.js";
 
 const ProductForm = ({ show, handleClose, product, isEditing }) => {
 
-    const navigate = useNavigate();
-    const { productState, addProduct, updateProducts, getAllProducts } = useProducts();
+    const { productState, addProduct, updateProducts } = useProducts();
     const rubros = productState.rubros.flatMap(elem => elem?.subRubro || []);
 
     const [form, setForm] = useState({
@@ -130,15 +129,12 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
             });
 
             handleClose();
-            await getAllProducts();
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text:  error || error?.message || 'Error al procesar la solicitud'
             });
-        } finally {
-            navigate('/product-panel');
         }
     };
 
