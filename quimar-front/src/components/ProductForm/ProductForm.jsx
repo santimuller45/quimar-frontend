@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP ----->
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
@@ -18,6 +19,7 @@ import { validateProduct } from "./validate.js";
 
 const ProductForm = ({ show, handleClose, product, isEditing }) => {
 
+    const navigate = useNavigate();
     const { productState, addProduct, updateProducts, getAllProducts } = useProducts();
     const rubros = productState.rubros.flatMap(elem => elem?.subRubro || []);
 
@@ -128,13 +130,15 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
             });
 
             handleClose();
-            getAllProducts();
+            await getAllProducts();
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text:  error || error?.message || 'Error al procesar la solicitud'
             });
+        } finally {
+            navigate('/product-panel');
         }
     };
 
