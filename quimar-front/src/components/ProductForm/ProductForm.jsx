@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP ----->
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
@@ -19,7 +18,7 @@ import { validateProduct } from "./validate.js";
 
 const ProductForm = ({ show, handleClose, product, isEditing }) => {
 
-    const { productState, addProduct, updateProducts } = useProducts();
+    const { productState, addProduct, updateProducts, getAllProducts } = useProducts();
     const rubros = productState.rubros.flatMap(elem => elem?.subRubro || []);
 
     const [form, setForm] = useState({
@@ -129,6 +128,7 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
             });
 
             handleClose();
+            await getAllProducts();
         } catch (error) {
             Swal.fire({
                 icon: 'error',
