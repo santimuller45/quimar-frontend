@@ -81,6 +81,44 @@
     font-size: 1.5rem;
 }
 
+.inputGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.quantityInput {
+    width: 60px; /* Ajusta según el espacio disponible */
+    background-color: #0194DC; /* Fondo oscuro para combinar con la tabla */
+    color: #ffffff; /* Texto claro */
+    border: none; /* Borde gris */
+    border-radius: 6px;
+    padding: 4px;
+    text-align: center; /* Centrar el texto */
+    font-weight: bold;
+    font-size: 1rem; /* Ajuste de tamaño de fuente */
+    outline: none;
+}
+
+.quantityInput:hover {
+    border-color: #adb5bd; /* Borde claro al pasar el cursor */
+}
+
+.quantityInput:focus {
+    border-color: #ffffff; /* Borde blanco al enfocar */
+    background-color: #0194DC; /* Un poco más claro al enfocar */
+}
+
 /* Custom button */
 .addButton {
     align-self: start;

@@ -24,13 +24,13 @@ const orderReducer = ( state , action ) => {
 
         case ORDER_ACTION_TYPES.ADD_TO_ORDER: {
 
-            const { id } = actionPayload;
+            const { id, quantity } = actionPayload;
             const productInOrder = state.findIndex(item => item.id === id);
 
             if (productInOrder >= 0) {
                 const newOrderState = structuredClone(state);
-                newOrderState[productInOrder].quantity += 1;
-                newOrderState[productInOrder].total = parseFloat((newOrderState[productInOrder].total + parseFloat(newOrderState[productInOrder].price)).toFixed(2));
+                newOrderState[productInOrder].quantity += quantity;
+                newOrderState[productInOrder].total = parseFloat((newOrderState[productInOrder].quantity * newOrderState[productInOrder].price).toFixed(2));
                 updateOrderLocalStorage(newOrderState);
                 return newOrderState;
             }
@@ -40,9 +40,9 @@ const orderReducer = ( state , action ) => {
                 ...state,
                 {
                     ...actionPayload,
-                    quantity: 1,
+                    quantity: quantity,
                     price: parseFloat(actionPayload.price),
-                    total: parseFloat(actionPayload.price),
+                    total: parseFloat((quantity * actionPayload.price).toFixed(2)),
                 }
             ];
             
@@ -112,7 +112,7 @@ export function ShopProvider ({ children }) {
    const [ shopState , dispatch ] = useReducer( orderReducer, initialState);
 
 
-    const addToOrder = product => dispatch({ type: ORDER_ACTION_TYPES.ADD_TO_ORDER, payload: product });
+    const addToOrder = (product, quantity) => dispatch({ type: ORDER_ACTION_TYPES.ADD_TO_ORDER, payload:{ ...product, quantity} });
 
     const decrementQuantity = product => dispatch({ type: ORDER_ACTION_TYPES.DECREMENT_QUANTITY, payload: product });
 

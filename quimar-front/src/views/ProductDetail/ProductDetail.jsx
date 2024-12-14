@@ -25,6 +25,7 @@ const ProductDetail = () => {
   // DATOS DEL PRODUCTO
   const { productID } = useParams();
   const [product, setProduct] = useState({});
+  const [productQuantity, setProductQuantity] = useState(1);
 
   // FUNCIONES DE REDUCER
   const { state } = useUser();
@@ -35,10 +36,19 @@ const ProductDetail = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToOrder = () => {
-    addToOrder(product);
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 2000);
+    if (productQuantity > 0 && productQuantity <= 999) {
+      addToOrder(product, productQuantity); // Pasar la cantidad
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 2000);
+      setProductQuantity(1); // Reiniciar la cantidad después de agregar
+    }
   };
+
+  const handleQuantityChange = (newQuantity) => {
+    if (newQuantity >= 1 && newQuantity <= 999) {
+        setProductQuantity(newQuantity);
+    }
+  }
 
   const getProductById = async () => {
     try {
@@ -83,14 +93,24 @@ const ProductDetail = () => {
                         <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
                       </p>
                 }
-                { state.user.email
-                  ?
-                    <>
-                      <p className={style.price}>${product.price}</p>
-                      <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
-                    </>
-                  : null
-                }
+                { state.user.email && product.status === true && (
+                  <div className={style.buttonGroup}>
+                    <p className={style.price}>${product.price}</p>
+                    <div className={style.inputGroup}>
+                      <p className={style.cardText}><strong>Cantidad:</strong></p>
+                      <input
+                          type="number"
+                          min="1"
+                          max="999"
+                          value={productQuantity}
+                          onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
+                          className={style.quantityInput}
+                          placeholder="Cantidad"
+                      />
+                    </div>
+                    <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
+                  </div>
+                )}
                 <div className={style.descriptionSection}>
                     <h2 className={style.descriptionTitle}>Descripción del producto</h2>
                     <p className={style.descriptionText}>{product.descripcion}</p>
