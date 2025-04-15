@@ -1,6 +1,6 @@
 import React from "react";
-import style from './SearchBox.module.css';
-import { useState } from "react";
+import style from "./SearchBox.module.css";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // CUSTOM HOOK ---->
@@ -10,91 +10,97 @@ import { useOrders } from "../../customHooks/useOrders.js";
 // <----------------
 
 // REACT BOOSTRAP
-import { Form, Col, Row, Button } from 'react-bootstrap';
+import { Form, Col, Row, Button } from "react-bootstrap";
 //------------>
 
 //FONT-AWESOME ------->
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 // <-------------------
 
 const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
+  // HOOKS
+  const { getProductByName, getAllProducts } = useProducts();
+  const { getByOrderID, getOrderByUser, getAllOrders } = useOrders();
+  const { getAllUsers, getUserByNameOrNumber } = useUser();
 
-    // HOOKS
-    const { getProductByName, getAllProducts } = useProducts();
-    const { getByOrderID, getOrderByUser, getAllOrders } = useOrders();
-    const { getAllUsers, getUserByNameOrNumber } = useUser();
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
+  const inputHandler = (e) => {
+    setInput(e.target.value);
+  };
 
-    const [ input , setInput ] = useState('');
-    const navigate = useNavigate();
+  const searchBoxHandler = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
 
-    const inputHandler = (e) => {
-        setInput(e.target.value);
-    };
+    try {
+      if (isProduct) {
+        await getProductByName(input);
+      } else if (isUser) {
+        await getUserByNameOrNumber(input);
+      } else if (isOrder) {
+        await getByOrderID(input);
+      } else if (userOrder) {
+        await getOrderByUser(input);
+      }
 
-    const searchBoxHandler = async (e) => {
-        e.preventDefault();
-        if (!input.trim()) return;
+      setInput("");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate(urlNavigate);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-        try {
-            if (isProduct) {
-                await getProductByName(input);
-            } else if (isUser) {
-                await getUserByNameOrNumber(input);
-            } else if (isOrder) {
-                await getByOrderID(input);
-            } else if (userOrder) {
-                await getOrderByUser(input);
-            }
+  const resetHandler = async () => {
+    setInput("");
+    try {
+      if (isProduct) {
+        await getAllProducts();
+      } else if (isOrder) {
+        await getAllOrders();
+      } else if (isUser) {
+        await getAllUsers();
+      }
+    } catch (error) {
+      console.error("Error fetching all data:", error);
+    }
+  };
 
-            setInput("");
-            navigate(urlNavigate);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
-    const resetHandler = async () => {
-        setInput('');
-        try {
-            if (isProduct) {
-                await getAllProducts();
-            } else if (isOrder) {
-                await getAllOrders();
-            } else if (isUser) {
-                await getAllUsers();
-            }
-        } catch (error) {
-            console.error("Error fetching all data:", error);
-        }
-    };
-
-    return (
-        <Form onSubmit={searchBoxHandler} className={style.searchForm}>
-            <Row>
-                <Col>
-                    <div className={style.searchContainer}>
-                        <Form.Control
-                            name="input"
-                            type="text"
-                            placeholder="Buscar..."
-                            className={style.searchInput}
-                            value={input}
-                            onChange={inputHandler}
-                        />
-                        <Button type="submit" className={style.searchButton}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Button>
-                        <Button onClick={() => resetHandler()} className={style.resetButton}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
-        </Form>
-    )
+  return (
+    <Form onSubmit={searchBoxHandler} className={style.searchForm}>
+      <Row>
+        <Col>
+          <div className={style.searchContainer}>
+            <Form.Control
+              name="input"
+              type="text"
+              placeholder="Buscar..."
+              className={style.searchInput}
+              value={input}
+              onChange={inputHandler}
+            />
+            <Button type="submit" className={style.searchButton}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </Button>
+            <Button
+              onClick={() => resetHandler()}
+              className={style.resetButton}
+            >
+              <FontAwesomeIcon icon={faCircleXmark} />
+            </Button>
+          </div>
+        </Col>
+      </Row>
+    </Form>
+  );
 };
 
 export default SearchBox;
