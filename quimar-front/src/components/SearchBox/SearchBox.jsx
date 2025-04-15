@@ -19,12 +19,17 @@ import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 // <-------------------
 
+// ---- COMPONENTS ----
+import { LoadingComponent } from "../indexComponents.js";
+// --------------------
+
 const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
   // HOOKS
   const { getProductByName, getAllProducts } = useProducts();
   const { getByOrderID, getOrderByUser, getAllOrders } = useOrders();
   const { getAllUsers, getUserByNameOrNumber } = useUser();
 
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const navigate = useNavigate();
 
@@ -36,6 +41,7 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
     e.preventDefault();
     if (!input.trim()) return;
 
+    setLoading(true);
     try {
       if (isProduct) {
         await getProductByName(input);
@@ -52,11 +58,15 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
       navigate(urlNavigate);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const resetHandler = async () => {
     setInput("");
+    setLoading(true);
+
     try {
       if (isProduct) {
         await getAllProducts();
@@ -67,12 +77,16 @@ const SearchBox = ({ urlNavigate, isProduct, isUser, isOrder, userOrder }) => {
       }
     } catch (error) {
       console.error("Error fetching all data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  if (loading) return <LoadingComponent />;
 
   return (
     <Form onSubmit={searchBoxHandler} className={style.searchForm}>

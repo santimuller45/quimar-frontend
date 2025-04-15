@@ -1,8 +1,17 @@
 .loadingContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    height: 100vh; /* O el tamaño que prefieras */
-    text-align: center;
+  position: fixed; /* Se posiciona sobre todo el contenido */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Ocupa todo el ancho de la ventana */
+  height: 100vh; /* Ocupa todo el alto de la ventana */
+  display: flex; /* Centrado del contenido */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Fondo blanco semi-transparente */
+  z-index: 9999; /* Se asegura de estar por encima de otros elementos */
 }
