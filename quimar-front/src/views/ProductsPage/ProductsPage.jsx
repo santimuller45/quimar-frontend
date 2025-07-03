@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 import style from "./ProductsPage.module.css";
 import { useState, useEffect } from "react";
 
@@ -26,7 +26,10 @@ const ProductsPage = () => {
   // <-----
   const { productState, filterByRubro } = useProducts();
 
-  const productsDB = productState.products || [];
+  const productsDB = useMemo(
+    () => productState.products || [],
+    [productState.products]
+  );
 
   // Revisar el estado almacenado en localStorage (si existe)
   const storedPage = localStorage.getItem("currentPage") || 1;
@@ -40,10 +43,10 @@ const ProductsPage = () => {
   const productPerPage = 12;
   const indexOfLastProduct = currentPage * productPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-  const currentProducts = productsDB.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+
+  const currentProducts = useMemo(() => {
+    return productsDB.slice(indexOfFirstProduct, indexOfLastProduct);
+  }, [productsDB, indexOfFirstProduct, indexOfLastProduct]);
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
