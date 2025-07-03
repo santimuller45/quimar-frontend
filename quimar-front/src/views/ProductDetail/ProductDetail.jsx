@@ -1,8 +1,11 @@
-import React from "react";
-import style from './ProductDetail.module.css';
+import style from "./ProductDetail.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
+// ---- LOGO ----
+import logo from "../../assets/logo.png";
+// --------------
 
 // CUSTOM HOOK ---->
 import { useShop } from "../../customHooks/useShop.js";
@@ -10,17 +13,24 @@ import { useUser } from "../../customHooks/useUser.js";
 // <----------------
 
 // FONT-AWESOME ------->
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleCheck,
+  faCircleXmark,
+} from "@fortawesome/free-regular-svg-icons";
 // <-------------------
 
 // COMPONENT ------->
-import { CustomAlert, LoadingComponent } from "../../components/indexComponents.js";
+import {
+  CustomAlert,
+  LoadingComponent,
+} from "../../components/indexComponents.js";
 // <-----------------
 
 const fetchUrl = import.meta.env.VITE_API_GET_PRODUCTS;
 
 const ProductDetail = () => {
+  const [imageError, setImageError] = useState(false);
 
   // DATOS DEL PRODUCTO
   const { productID } = useParams();
@@ -46,9 +56,9 @@ const ProductDetail = () => {
 
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity >= 1 && newQuantity <= 999) {
-        setProductQuantity(newQuantity);
+      setProductQuantity(newQuantity);
     }
-  }
+  };
 
   const getProductById = async () => {
     try {
@@ -67,58 +77,85 @@ const ProductDetail = () => {
     getProductById();
   }, [productID, state.user.email]);
 
-    if (loading) return <LoadingComponent/>;
-    if (error) return <p>Error: {error}</p>;
+  useEffect(() => {
+    setImageError(false);
+  }, [productID]);
 
-    return (
-      <div className={style.detailContainer}>
-            <div className={style.imageSection}>
-                <img 
-                    src={product.imagen} 
-                    alt={product.name} 
-                    className={style.productImage}
-                />
-            </div>
-            <div className={style.detailsSection}>
-                <h1 className={style.cardTitle}>{product.name}</h1>
-                <p className={style.cardText}>Código del producto: <strong>{product.codigo}</strong></p>
-                <p className={style.cardText}>Subrubro: {product.category}</p>
-                { product.status === true
-                    ? 
-                      <p className={style.cardText}>Stock disponible 
-                        <FontAwesomeIcon icon={faCircleCheck} className={style.cardStockSymbolCheck} style={{ color: 'green' }}/>
-                      </p>
-                    : 
-                      <p className={style.cardText}>Stock disponible 
-                        <FontAwesomeIcon icon={faCircleXmark} className={style.cardStockSymbolCross}/>
-                      </p>
+  if (loading) return <LoadingComponent />;
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div className={style.detailContainer}>
+      <div className={style.imageSection}>
+        <img
+          src={imageError ? logo : product.imagen}
+          alt={product.name}
+          onError={() => setImageError(true)}
+          className={style.productImage}
+        />
+      </div>
+      <div className={style.detailsSection}>
+        <h1 className={style.cardTitle}>{product.name}</h1>
+        <p className={style.cardText}>
+          Código del producto: <strong>{product.codigo}</strong>
+        </p>
+        <p className={style.cardText}>Subrubro: {product.category}</p>
+        {product.status === true ? (
+          <p className={style.cardText}>
+            Stock disponible
+            <FontAwesomeIcon
+              icon={faCircleCheck}
+              className={style.cardStockSymbolCheck}
+              style={{ color: "green" }}
+            />
+          </p>
+        ) : (
+          <p className={style.cardText}>
+            Stock disponible
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className={style.cardStockSymbolCross}
+            />
+          </p>
+        )}
+        {state.user.email && product.status === true && (
+          <div className={style.buttonGroup}>
+            <p className={style.price}>${product.price}</p>
+            <div className={style.inputGroup}>
+              <p className={style.cardText}>
+                <strong>Cantidad:</strong>
+              </p>
+              <input
+                type="number"
+                min="1"
+                max="999"
+                value={productQuantity}
+                onChange={(e) =>
+                  handleQuantityChange(parseInt(e.target.value) || 1)
                 }
-                { state.user.email && product.status === true && (
-                  <div className={style.buttonGroup}>
-                    <p className={style.price}>${product.price}</p>
-                    <div className={style.inputGroup}>
-                      <p className={style.cardText}><strong>Cantidad:</strong></p>
-                      <input
-                          type="number"
-                          min="1"
-                          max="999"
-                          value={productQuantity}
-                          onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                          className={style.quantityInput}
-                          placeholder="Cantidad"
-                      />
-                    </div>
-                    <button className={style.addButton} onClick={handleAddToOrder}>Agregar al Pedido</button>
-                  </div>
-                )}
-                <div className={style.descriptionSection}>
-                    <h2 className={style.descriptionTitle}>Descripción del producto</h2>
-                    <p className={style.descriptionText}>{product.descripcion}</p>
-                </div>
+                className={style.quantityInput}
+                placeholder="Cantidad"
+              />
             </div>
-            { showAlert && ( <CustomAlert message="¡Producto agregado al pedido! " onClose={() => setShowAlert(false)} type={true} /> )}
+            <button className={style.addButton} onClick={handleAddToOrder}>
+              Agregar al Pedido
+            </button>
+          </div>
+        )}
+        <div className={style.descriptionSection}>
+          <h2 className={style.descriptionTitle}>Descripción del producto</h2>
+          <p className={style.descriptionText}>{product.descripcion}</p>
         </div>
-    )
+      </div>
+      {showAlert && (
+        <CustomAlert
+          message="¡Producto agregado al pedido! "
+          onClose={() => setShowAlert(false)}
+          type={true}
+        />
+      )}
+    </div>
+  );
 };
 
 export default ProductDetail;
