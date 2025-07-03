@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // CUSTOM HOOK ---->
-import { useProducts } from './customHooks/useProducts.js';
-import { useUser } from './customHooks/useUser.js';
+import { useProducts } from "./customHooks/useProducts.js";
+import { useUser } from "./customHooks/useUser.js";
 // <----------------
 
 // URL DE RESPUESTA DEL BACKEND ---->
@@ -14,21 +14,21 @@ const apiUrl = import.meta.env.VITE_API_URL;
 axios.defaults.baseURL = apiUrl;
 
 // URL PARA COMPARTIR
-// axios.defaults.baseURL = "https://zw1l1ft7-3001.brs.devtunnels.ms/"; 
+// axios.defaults.baseURL = "https://zw1l1ft7-3001.brs.devtunnels.ms/";
 
 //<-----------------------------------------------
 
 // VIEWS ------>
-import { 
-  LandingPage, 
+import {
+  LandingPage,
   AccountPanel,
   ProductPanel,
   OrdersPanel,
-  RubroPanel, 
-  MyAccount, 
-  ProductsPage, 
-  AboutUs, 
-  Contact, 
+  RubroPanel,
+  MyAccount,
+  ProductsPage,
+  AboutUs,
+  Contact,
   ProductDetail,
   RegisterPage,
   LoginUser,
@@ -36,16 +36,15 @@ import {
   ChangePassword,
   OrderTable,
   OrderCheckout,
-  MyOrders 
-} from './views/indexViews.js';
+  MyOrders,
+} from "./views/indexViews.js";
 //<-------------
 
 // COMPONENTES ----->
-import { NavBar, Footer } from './components/indexComponents.js'
+import { NavBar, Footer } from "./components/indexComponents.js";
 //<------------------
 
 function App() {
-
   const { getAllProducts, getAllRubros } = useProducts();
   const { getAllUsers } = useUser();
 
@@ -53,39 +52,39 @@ function App() {
     getAllProducts();
     getAllRubros();
     getAllUsers();
-  },[]);
+  }, []);
 
   return (
     <div className="App">
       {/* HEADER */}
-      <NavBar/>
+      <NavBar />
       {/* HEADER */}
       <div className="content">
         <Routes>
-          <Route path='/' element={<LandingPage/>}></Route>
-          <Route path='/products' element={<ProductsPage/>}></Route>
-          <Route path='/product-panel' element={<ProductPanel/>}></Route>
-          <Route path='/detail/:productID' element={<ProductDetail/>} />
-          <Route path='/orders-panel' element={<OrdersPanel/>}></Route>
-          <Route path='/rubro-panel' element={<RubroPanel/>}></Route>
-          <Route path='/account' element={<MyAccount/>}></Route>
-          <Route path='/account/orders' element={<MyOrders/>}></Route>
-          <Route path='/account-panel' element={<AccountPanel/>}></Route>
-          <Route path='/contact-us' element={<Contact/>}></Route>
-          <Route path='/about-us' element={<AboutUs/>}></Route>
-          <Route path='/register' element={<RegisterPage/>}></Route>
-          <Route path='/log-in' element={<LoginUser/>}></Route>
-          <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
-          <Route path='/change-password' element={<ChangePassword/>}></Route>
-          <Route path='/order' element={<OrderTable/>}></Route>
-          <Route path='/order-checkout' element={<OrderCheckout/>}></Route>
+          <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/products" element={<ProductsPage />}></Route>
+          <Route path="/product-panel" element={<ProductPanel />}></Route>
+          <Route path="/detail/:productID" element={<ProductDetail />} />
+          <Route path="/orders-panel" element={<OrdersPanel />}></Route>
+          <Route path="/rubro-panel" element={<RubroPanel />}></Route>
+          <Route path="/account" element={<MyAccount />}></Route>
+          <Route path="/account/orders" element={<MyOrders />}></Route>
+          <Route path="/account-panel" element={<AccountPanel />}></Route>
+          <Route path="/contact-us" element={<Contact />}></Route>
+          <Route path="/about-us" element={<AboutUs />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/log-in" element={<LoginUser />}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+          <Route path="/change-password" element={<ChangePassword />}></Route>
+          <Route path="/order" element={<OrderTable />}></Route>
+          <Route path="/order-checkout" element={<OrderCheckout />}></Route>
         </Routes>
       </div>
       {/* FOOTER */}
-      <Footer/>
+      <Footer />
       {/* FOOTER */}
     </div>
   );
-};
+}
 
 export default App;
