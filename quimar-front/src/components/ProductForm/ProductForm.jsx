@@ -16,27 +16,30 @@ import { LoadingComponent } from "../indexComponents.js";
 import Swal from "sweetalert2";
 // <-----------------
 
-// VALIDATE -------->
+// ---- VALIDATE ----
 import { validateProduct } from "./validate.js";
-// <-----------------
+// ------------------
+
+const initialFormState = {
+  id: "",
+  codigo: "",
+  name: "",
+  price: "",
+  imagen: null,
+  category: "",
+  descripcion: "",
+  status: false,
+};
 
 const ProductForm = ({ show, handleClose, product, isEditing }) => {
   const [loading, setLoading] = useState(false);
 
   const { productState, addProduct, updateProducts, getAllProducts } =
     useProducts();
-  const rubros = productState.rubros.flatMap((elem) => elem?.subRubro || []);
+  const rubros =
+    productState?.rubros?.flatMap((elem) => elem?.subRubro || []) || [];
 
-  const [form, setForm] = useState({
-    id: "",
-    codigo: "",
-    name: "",
-    price: "",
-    imagen: null,
-    category: "",
-    descripcion: "",
-    status: false,
-  });
+  const [form, setForm] = useState(initialFormState);
 
   useEffect(() => {
     if (isEditing && product) {
@@ -112,6 +115,17 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
       }
     });
 
+    if (
+      form.imagen &&
+      !["image/jpeg", "image/png", "image/webp"].includes(form.imagen.type)
+    ) {
+      return Swal.fire({
+        icon: "error",
+        title: "Tipo de archivo no válido",
+        text: "Solo se permiten imágenes JPG, PNG o WEBP.",
+      });
+    }
+
     setLoading(true);
     try {
       if (isEditing) {
@@ -125,19 +139,10 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
       }
 
       // Reiniciar el formulario
-      setForm({
-        id: "",
-        codigo: "",
-        name: "",
-        price: "",
-        imagen: null,
-        category: "",
-        descripcion: "",
-        status: false,
-      });
+      setForm(initialFormState);
 
-      handleClose();
       await getAllProducts();
+      handleClose();
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -224,14 +229,6 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Seleccione la imagen para el producto</Form.Label>
-            <Form.Control
-              type="file"
-              name="imagen"
-              onChange={handleInputChange}
-            />
-          </Form.Group>
           {isEditing && product?.imagen && (
             <div className="text-center mb-3">
               <img
@@ -242,6 +239,14 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
               <p style={{ fontSize: "0.9rem", color: "#666" }}>Imagen actual</p>
             </div>
           )}
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Seleccione la imagen para el producto</Form.Label>
+            <Form.Control
+              type="file"
+              name="imagen"
+              onChange={handleInputChange}
+            />
+          </Form.Group>
           <Form.Group controlId="formBasicStatus" className="mb-3">
             <Form.Check
               label="Activar Producto"
