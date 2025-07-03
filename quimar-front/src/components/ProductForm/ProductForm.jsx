@@ -116,9 +116,11 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
     try {
       if (isEditing) {
         await updateProducts(data);
+        setLoading(false);
         showSuccessMessage("¡Producto actualizado correctamente!");
       } else {
         await addProduct(data);
+        setLoading(false);
         showSuccessMessage("¡Producto creado correctamente!");
       }
 
@@ -142,8 +144,6 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         title: "Error",
         text: error || error?.message || "Error al procesar la solicitud",
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -232,6 +232,16 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
               onChange={handleInputChange}
             />
           </Form.Group>
+          {isEditing && product?.imagen && (
+            <div className="text-center mb-3">
+              <img
+                src={product.imagen}
+                alt="Imagen actual del producto"
+                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              />
+              <p style={{ fontSize: "0.9rem", color: "#666" }}>Imagen actual</p>
+            </div>
+          )}
           <Form.Group controlId="formBasicStatus" className="mb-3">
             <Form.Check
               label="Activar Producto"
