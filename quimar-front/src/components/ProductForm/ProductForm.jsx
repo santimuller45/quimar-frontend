@@ -130,11 +130,9 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
     try {
       if (isEditing) {
         await updateProducts(data);
-        setLoading(false);
         showSuccessMessage("¡Producto actualizado correctamente!");
       } else {
         await addProduct(data);
-        setLoading(false);
         showSuccessMessage("¡Producto creado correctamente!");
       }
 
@@ -149,6 +147,8 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         title: "Error",
         text: error || error?.message || "Error al procesar la solicitud",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
