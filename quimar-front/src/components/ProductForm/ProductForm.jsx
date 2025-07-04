@@ -111,8 +111,13 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
     const data = new FormData();
     Object.keys(form).forEach((key) => {
       if (form[key] !== null && form[key] !== undefined) {
-        if (key === "imagen" && !(form[key] instanceof File)) return;
-        data.append(key, form[key]);
+        if (key === "imagen") {
+          if (form[key] instanceof File) {
+            data.append("imagen", form[key]);
+          }
+        } else {
+          data.append(key, form[key]);
+        }
       }
     });
 
