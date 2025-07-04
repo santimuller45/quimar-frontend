@@ -107,20 +107,6 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
       });
     }
 
-    // SE DEBE CREAR EL FORMULARIO UTILIZANDO LA FUNCION FORMDATA PARA QUE SE PUEDA ENVIAR EL FORMULARIO CON LA IMAGEN AL BACK
-    const data = new FormData();
-    Object.keys(form).forEach((key) => {
-      if (form[key] !== null && form[key] !== undefined) {
-        if (key === "imagen") {
-          if (form[key] instanceof File) {
-            data.append("imagen", form[key]);
-          }
-        } else {
-          data.append(key, form[key]);
-        }
-      }
-    });
-
     if (
       form.imagen &&
       !["image/jpeg", "image/png", "image/webp"].includes(form.imagen.type)
@@ -130,6 +116,25 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         title: "Tipo de archivo no válido",
         text: "Solo se permiten imágenes JPG, PNG o WEBP.",
       });
+    }
+
+    // SE DEBE CREAR EL FORMULARIO UTILIZANDO LA FUNCION FORMDATA PARA QUE SE PUEDA ENVIAR EL FORMULARIO CON LA IMAGEN AL BACK
+    const data = new FormData();
+    Object.keys(form).forEach((key) => {
+      if (form[key] !== null && form[key] !== undefined) {
+        if (key === "imagen") {
+          if (form[key] instanceof File && form[key].size > 0) {
+            data.append("imagen", form[key]);
+          }
+        } else {
+          data.append(key, form[key]);
+        }
+      }
+    });
+
+    console.log("Contenido del FormData:");
+    for (let [key, value] of data.entries()) {
+      console.log(key, value);
     }
 
     setLoading(true);
