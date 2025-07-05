@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // REACT BOOSTRAP ----->
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
@@ -25,7 +25,8 @@ const initialFormState = {
   codigo: "",
   name: "",
   price: "",
-  imagen: null,
+  imagenFile: null,
+  imagenUrl: "",
   category: "",
   descripcion: "",
   status: false,
@@ -48,7 +49,8 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
         codigo: product.codigo || "",
         name: product.name || "",
         price: product.price || "",
-        imagen: null,
+        imagenFile: null,
+        imagenUrl: product.imagen || "",
         category: product.category || "",
         descripcion: product.descripcion || "",
         status: product.status || false,
@@ -60,10 +62,10 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
   const handleInputChange = (e) => {
     e.preventDefault();
     const { name, value, type, files } = e.target;
-    setForm({
-      ...form,
+    setForm((prevForm) => ({
+      ...prevForm,
       [name]: type === "file" ? files[0] : value,
-    });
+    }));
   };
 
   // Manejo del cambio en el SELECT
@@ -120,15 +122,20 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
 
     // SE DEBE CREAR EL FORMULARIO UTILIZANDO LA FUNCION FORMDATA PARA QUE SE PUEDA ENVIAR EL FORMULARIO CON LA IMAGEN AL BACK
     const data = new FormData();
-    Object.keys(form).forEach((key) => {
-      if (form[key] !== null && form[key] !== undefined) {
-        if (key === "imagen") {
-          if (form[key] instanceof File && form[key].size > 0) {
-            data.append("imagen", form[key]);
-          }
-        } else {
-          data.append(key, form[key]);
-        }
+
+    if (form.imagenFile instanceof File && form.imagenFile.size > 0) {
+      data.append("imagen", form.imagenFile);
+    } else if (form.imagenUrl?.trim()) {
+      data.append("imagen", form.imagenUrl.trim());
+    }
+
+    Object.entries(form).forEach((key, value) => {
+      if (
+        !["imagenFile", "imagenUrl"].includes(key) &&
+        value !== null &&
+        value !== undefined
+      ) {
+        data.append(key, value);
       }
     });
 
@@ -254,10 +261,22 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
             <Form.Label>Seleccione la imagen para el producto</Form.Label>
             <Form.Control
               type="file"
-              name="imagen"
+              name="imagenFile"
               onChange={handleInputChange}
             />
           </Form.Group>
+
+          <Form.Group controlId="formManualURL" className="mb-3">
+            <Form.Label>O ingresar URL de imagen (opcional)</Form.Label>
+            <Form.Control
+              type="text"
+              name="imagenUrl"
+              value={form.imagenUrl}
+              onChange={handleInputChange}
+              placeholder="https://ik.imagekit.io/.../nombre.jpg"
+            />
+          </Form.Group>
+
           <Form.Group controlId="formBasicStatus" className="mb-3">
             <Form.Check
               label="Activar Producto"
