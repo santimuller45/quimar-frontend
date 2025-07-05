@@ -129,7 +129,7 @@ const ProductForm = ({ show, handleClose, product, isEditing }) => {
       data.append("imagen", form.imagenUrl.trim());
     }
 
-    Object.entries(form).forEach((key, value) => {
+    Object.entries(form).forEach(([key, value]) => {
       if (
         !["imagenFile", "imagenUrl"].includes(key) &&
         value !== null &&
