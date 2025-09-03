@@ -1,6 +1,6 @@
 import React from "react";
-import style from './ProductPanel.module.css'
-import { useState ,useEffect } from "react";
+import style from "./ProductPanel.module.css";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // REACT BOOSTRAP --------->
@@ -8,9 +8,12 @@ import { Table, Button, Spinner, Row, Col } from "react-bootstrap";
 // <------------------------
 
 //FONT-AWESOME ------->
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleXmark,
+  faCircleCheck,
+} from "@fortawesome/free-regular-svg-icons";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 // <-------------------
 
 // CUSTOM HOOK ---->
@@ -19,164 +22,243 @@ import { useUser } from "../../../customHooks/useUser.js";
 // <----------------
 
 // COMPONENT ------->
-import { PaginationComponent, PanelNavBar, ProductForm, ProductPriceForm } from "../../../components/indexComponents.js";
+import {
+  PaginationComponent,
+  PanelNavBar,
+  ProductForm,
+  ProductPriceForm,
+} from "../../../components/indexComponents.js";
 // <-----------------
 
 const ProductPanel = () => {
+  const { productState } = useProducts();
+  const { state } = useUser();
+  const navigate = useNavigate();
 
-    const { productState } = useProducts();
-    const { state } = useUser();
-    const navigate = useNavigate();
+  // ESTADOS DE PAGINADO ------>
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsDB = productState.products;
+  const productPerPage = 20;
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProducts = productsDB.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
-    // ESTADOS DE PAGINADO ------>
-    const [currentPage , setCurrentPage ] = useState(1);
-    const productsDB = productState.products;
-    const productPerPage = 20;
-    const indexOfLastProduct = currentPage * productPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-    const currentProducts = productsDB.slice( indexOfFirstProduct, indexOfLastProduct );
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  // <--------------------------
 
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-    // <--------------------------
+  // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
+  const [viewProduct, setViewProduct] = useState({});
+  const [showModifyProduct, setShowModifyProduct] = useState(false);
 
-    // CREO ESTADOS PARA MOSTRAR O NO EL COMPONENTE ModifyProduct
-    const [viewProduct, setViewProduct] = useState({});
-    const [showModifyProduct, setShowModifyProduct] = useState(false);
+  const handleCloseModifyProduct = () => setShowModifyProduct(false);
 
-    const handleCloseModifyProduct = () => setShowModifyProduct(false);
-    
-    const updateSubmitHandler = (product) => {
-        setShowModifyProduct(true);
-        setViewProduct(product);
-    };
+  const updateSubmitHandler = (product) => {
+    setShowModifyProduct(true);
+    setViewProduct(product);
+  };
 
-    // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
-    const [showCreateProduct, setShowCreateProduct] = useState(false);
-    const handleCloseCreateProduct = () => setShowCreateProduct(false);
-    const createProductSubmitHandler = () => setShowCreateProduct(true);
+  // CREO UN ESTADO PARA MOSTRAR O NO EL COMPONENTE AddProduct
+  const [showCreateProduct, setShowCreateProduct] = useState(false);
+  const handleCloseCreateProduct = () => setShowCreateProduct(false);
+  const createProductSubmitHandler = () => setShowCreateProduct(true);
 
-    // ESTADO DE SELECCIÓN DE PRODUCTOS PARA EL INCREMENTO O DECREMENTO DE PRECIO
-    const [selectedProducts, setSelectedProducts] = useState([]);
-    const [showUpdateProductPrice, setShowUpdateProductPrice] = useState(false);
-    const handleCloseUpdateProductPrice = () => setShowUpdateProductPrice(false);
-    const updateProductPriceSubmitHandler = () => setShowUpdateProductPrice(true);
+  // ESTADO PARA SELECCIONAR TODOS LOS PRODUCTOS DE LA LISTA
+  const [allSelected, setAllSelected] = useState(false);
+  const toggleSelectAll = () => {
+    if (allSelected) {
+      // Deselecciona todos los productos visibles
+      const updatedSelected = selectedProducts.filter(
+        (selected) =>
+          !currentProducts.some((product) => product.id === selected.id)
+      );
+      setSelectedProducts(updatedSelected);
+    } else {
+      // Agrega los productos visibles que aún no están seleccionados
+      const newSelections = currentProducts
+        .filter(
+          (product) =>
+            !selectedProducts.some((selected) => selected.id === product.id)
+        )
+        .map((product) => ({
+          id: product.id,
+          name: product.name,
+          codigo: product.codigo,
+        }));
+      setSelectedProducts([...selectedProducts, ...newSelections]);
+    }
 
-    const handleCheckboxChange = (product) => {
-        setSelectedProducts((prevSelected) => {
-            const isAlreadySelected = prevSelected.some((item) => item.id === product.id);
-    
-            if (isAlreadySelected) {
-                // Deseleccionar: Filtra el producto fuera de la lista
-                return prevSelected.filter((item) => item.id !== product.id);
-            } else {
-                // Seleccionar: Añade el producto completo
-                return [...prevSelected, { id: product.id, name: product.name, codigo: product.codigo }];
-            }
-        });
-    };
+    setAllSelected(!allSelected);
+  };
 
-    useEffect(() => {
-        if (!state.user.admin) navigate('/');
-    }, [ state.user.admin, navigate, showModifyProduct, showCreateProduct, productState.products ]);
+  // ESTADO DE SELECCIÓN DE PRODUCTOS PARA EL INCREMENTO O DECREMENTO DE PRECIO
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [showUpdateProductPrice, setShowUpdateProductPrice] = useState(false);
+  const handleCloseUpdateProductPrice = () => setShowUpdateProductPrice(false);
+  const updateProductPriceSubmitHandler = () => setShowUpdateProductPrice(true);
 
+  const handleCheckboxChange = (product) => {
+    setSelectedProducts((prevSelected) => {
+      const isAlreadySelected = prevSelected.some(
+        (item) => item.id === product.id
+      );
 
-    return (
-        <div className="container-fluid">
-            <h2 className={style.title}>Panel de Productos</h2>
-            <PanelNavBar isProductPanel={true} createProductSubmitHandler={createProductSubmitHandler} updateProductPriceSubmitHandler={updateProductPriceSubmitHandler} />
-            <Table striped bordered hover variant="dark" className={style.table}>
-                <thead>
-                    <tr className="text-center">
-                        <th>Código</th>
-                        <th>Detalle</th>
-                        <th>Precio</th>
-                        <th>Subrubro</th>
-                        <th>Descripción</th>
-                        <th>Estado</th>
-                        <th>Modificar</th>
-                        <th>Seleccionar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { currentProducts?.length > 0 
-                        ? 
-                        (currentProducts.map(product => (
-                            <tr key={product.id} className="text-center">
-                                <td>{product.codigo}</td>
-                                <td>{product.name}</td>
-                                <td>${product.price}</td>
-                                <td>{product.category}</td>
-                                <td>{product.descripcion}</td>
-                                <td>{product.status 
-                                    ? 
-                                        <>
-                                            <h6 style={{ color: 'green' }}>Activado</h6>
-                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }}/>
-                                        </> 
-                                    : 
-                                        <>
-                                            <h6 style={{ color: 'red' }}>Desactivado</h6>
-                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }}/>
-                                        </>
-                                    }
-                                </td>
-                                <td>
-                                    <Button onClick={() => updateSubmitHandler(product)} className={style.tableButtons} aria-label="modificar producto">
-                                        <FontAwesomeIcon icon={faGear} />
-                                    </Button>
-                                </td>
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedProducts.some((item) => item.id === product.id)}
-                                        onChange={() => handleCheckboxChange(product)}
-                                    />
-                                </td>
-                            </tr>
-                        )))   
-                        : 
-                        (<tr>
-                            <td colSpan="7" className="text-center">
-                                <Spinner animation="border" role="status">
-                                    <span className="visually-hidden">Cargando...</span>
-                                </Spinner>
-                            </td>
-                        </tr>)
-                    }
-                </tbody>
-                {/* MODAL DE MODIFICAR PRODUCTO */}
-                <ProductForm
-                    show={showModifyProduct} 
-                    handleClose={handleCloseModifyProduct} 
-                    product={viewProduct} 
-                    isEditing={true}  
-                />
-                {/* MODAL DE CREAR PRODUCTO */}
-                <ProductForm
-                    show={showCreateProduct} 
-                    handleClose={handleCloseCreateProduct}
-                />
-                {/* MODAL PARA MODIFICAR LOS PRECIOS */}
-                <ProductPriceForm
-                    show={showUpdateProductPrice}
-                    handleClose={handleCloseUpdateProductPrice}
-                    products={selectedProducts}
-                />
-            </Table>
-            <Row className="justify-content-center mt-4">
-                <Col xs="auto">
-                    <PaginationComponent 
-                        itemsPerPage={productPerPage} 
-                        itemsDB={productsDB.length} 
-                        paginado={paginado} 
-                        currentPage={currentPage}
-                    />
-                </Col>
-            </Row>
-        </div>
+      if (isAlreadySelected) {
+        // Deseleccionar: Filtra el producto fuera de la lista
+        return prevSelected.filter((item) => item.id !== product.id);
+      } else {
+        // Seleccionar: Añade el producto completo
+        return [
+          ...prevSelected,
+          { id: product.id, name: product.name, codigo: product.codigo },
+        ];
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (!state.user.admin) navigate("/");
+  }, [
+    state.user.admin,
+    navigate,
+    showModifyProduct,
+    showCreateProduct,
+    productState.products,
+  ]);
+
+  useEffect(() => {
+    const allCurrentSelected = currentProducts.every((product) =>
+      selectedProducts.some((selected) => selected.id === product.id)
     );
+    setAllSelected(allCurrentSelected);
+  }, [selectedProducts, currentProducts]);
+
+  return (
+    <div className="container-fluid">
+      <h2 className={style.title}>Panel de Productos</h2>
+      <PanelNavBar
+        isProductPanel={true}
+        createProductSubmitHandler={createProductSubmitHandler}
+        updateProductPriceSubmitHandler={updateProductPriceSubmitHandler}
+      />
+      <Table striped bordered hover variant="dark" className={style.table}>
+        <thead>
+          <tr className="text-center">
+            <th>Código</th>
+            <th>Detalle</th>
+            <th>Precio</th>
+            <th>Subrubro</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Modificar</th>
+            <th
+              style={{
+                margin: 3,
+                width: "5%",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={allSelected}
+                onChange={toggleSelectAll}
+                title="Seleccionar/Deseleccionar todos los productos de la página"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentProducts?.length > 0 ? (
+            currentProducts.map((product) => (
+              <tr key={product.id} className="text-center">
+                <td>{product.codigo}</td>
+                <td>{product.name}</td>
+                <td>${product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.descripcion}</td>
+                <td>
+                  {product.status ? (
+                    <>
+                      <h6 style={{ color: "green" }}>Activado</h6>
+                      <FontAwesomeIcon
+                        icon={faCircleCheck}
+                        style={{ color: "green" }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <h6 style={{ color: "red" }}>Desactivado</h6>
+                      <FontAwesomeIcon
+                        icon={faCircleXmark}
+                        style={{ color: "red" }}
+                      />
+                    </>
+                  )}
+                </td>
+                <td>
+                  <Button
+                    onClick={() => updateSubmitHandler(product)}
+                    className={style.tableButtons}
+                    aria-label="modificar producto"
+                  >
+                    <FontAwesomeIcon icon={faGear} />
+                  </Button>
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedProducts.some(
+                      (item) => item.id === product.id
+                    )}
+                    onChange={() => handleCheckboxChange(product)}
+                  />
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="7" className="text-center">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Cargando...</span>
+                </Spinner>
+              </td>
+            </tr>
+          )}
+        </tbody>
+        {/* MODAL DE MODIFICAR PRODUCTO */}
+        <ProductForm
+          show={showModifyProduct}
+          handleClose={handleCloseModifyProduct}
+          product={viewProduct}
+          isEditing={true}
+        />
+        {/* MODAL DE CREAR PRODUCTO */}
+        <ProductForm
+          show={showCreateProduct}
+          handleClose={handleCloseCreateProduct}
+        />
+        {/* MODAL PARA MODIFICAR LOS PRECIOS */}
+        <ProductPriceForm
+          show={showUpdateProductPrice}
+          handleClose={handleCloseUpdateProductPrice}
+          products={selectedProducts}
+        />
+      </Table>
+      <Row className="justify-content-center mt-4">
+        <Col xs="auto">
+          <PaginationComponent
+            itemsPerPage={productPerPage}
+            itemsDB={productsDB.length}
+            paginado={paginado}
+            currentPage={currentPage}
+          />
+        </Col>
+      </Row>
+    </div>
+  );
 };
 
 export default ProductPanel;
