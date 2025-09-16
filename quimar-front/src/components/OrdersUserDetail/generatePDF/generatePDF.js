@@ -31,6 +31,7 @@ export const generateOrderPDF = (order, user) => {
     // N° Cliente y Nombre del Cliente (Izquierda)
     doc.text(`N° Cliente: ${user.userNumber}`, 20, 60);  // Número del cliente
     doc.text(`Cliente: ${user.name}`, 20, 70);  // Nombre del cliente
+    doc.text(`Pedido N°: ${order.id}`, 20, 80);  // Id del pedido
 
     // Fecha y Hora (Derecha)
     const formattedDate = `${order.orderDate.day}/${order.orderDate.month}/${order.orderDate.year}`;
