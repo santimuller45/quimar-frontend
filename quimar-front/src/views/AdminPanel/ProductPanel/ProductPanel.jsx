@@ -38,12 +38,12 @@ const ProductPanel = () => {
   // ESTADOS DE PAGINADO ------>
   const [currentPage, setCurrentPage] = useState(1);
   const productsDB = productState.products;
-  const productPerPage = 20;
+  const productPerPage = 50;
   const indexOfLastProduct = currentPage * productPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productPerPage;
   const currentProducts = productsDB.slice(
     indexOfFirstProduct,
-    indexOfLastProduct
+    indexOfLastProduct,
   );
 
   const paginado = (pageNumber) => {
@@ -74,7 +74,7 @@ const ProductPanel = () => {
       // Deselecciona todos los productos visibles
       const updatedSelected = selectedProducts.filter(
         (selected) =>
-          !currentProducts.some((product) => product.id === selected.id)
+          !currentProducts.some((product) => product.id === selected.id),
       );
       setSelectedProducts(updatedSelected);
     } else {
@@ -82,7 +82,7 @@ const ProductPanel = () => {
       const newSelections = currentProducts
         .filter(
           (product) =>
-            !selectedProducts.some((selected) => selected.id === product.id)
+            !selectedProducts.some((selected) => selected.id === product.id),
         )
         .map((product) => ({
           id: product.id,
@@ -104,7 +104,7 @@ const ProductPanel = () => {
   const handleCheckboxChange = (product) => {
     setSelectedProducts((prevSelected) => {
       const isAlreadySelected = prevSelected.some(
-        (item) => item.id === product.id
+        (item) => item.id === product.id,
       );
 
       if (isAlreadySelected) {
@@ -132,7 +132,7 @@ const ProductPanel = () => {
 
   useEffect(() => {
     const allCurrentSelected = currentProducts.every((product) =>
-      selectedProducts.some((selected) => selected.id === product.id)
+      selectedProducts.some((selected) => selected.id === product.id),
     );
     setAllSelected(allCurrentSelected);
   }, [selectedProducts, currentProducts]);
@@ -211,7 +211,7 @@ const ProductPanel = () => {
                   <input
                     type="checkbox"
                     checked={selectedProducts.some(
-                      (item) => item.id === product.id
+                      (item) => item.id === product.id,
                     )}
                     onChange={() => handleCheckboxChange(product)}
                   />
