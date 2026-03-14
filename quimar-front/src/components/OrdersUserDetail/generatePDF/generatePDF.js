@@ -65,6 +65,27 @@ export const generateOrderPDF = (order, user) => {
     doc.setFont("helvetica", "bold");  // Negrita para el total
     doc.text(`Total: $${order.totalAmount}`, 20, yPosition); // Total en negrita
 
+    // Comentario del pedido
+    if (order.comentary) {
+        const titleY = yPosition + 12;
+
+        // Título
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("OBSERVACIONES DEL PEDIDO:", 20, titleY);
+
+        // Línea separadora
+        const lineY = titleY + 2;
+        doc.setLineWidth(0.5);
+        doc.line(20, lineY, 190, lineY);
+
+        // Comentario
+        const commentaryText = doc.splitTextToSize(order.comentary, 170);
+
+        doc.setFont("helvetica", "normal");
+        doc.text(commentaryText, 20, titleY + 8);
+    }
+
     // Guardar el PDF con un nombre basado en el ID del pedido
     doc.save(`Pedido_${order.id}.pdf`);
 };
